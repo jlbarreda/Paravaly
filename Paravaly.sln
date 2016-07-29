@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5CECB1B-01EF-4754-B38D-2126A499E65D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		tools\CodeAnalysis\CustomDictionary.xml = tools\CodeAnalysis\CustomDictionary.xml
+		global.json = global.json
+		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+		tools\CodeAnalysis\StaticCodeAnalysis.ruleset = tools\CodeAnalysis\StaticCodeAnalysis.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Paravaly", "src\Paravaly\Paravaly.xproj", "{4CD93BA0-38A9-407F-B228-12916D7397EF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Paravaly.Tests", "test\Paravaly.Tests\Paravaly.Tests.xproj", "{EE16475F-D5F1-4EE8-829C-EA951B4DD320}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CD93BA0-38A9-407F-B228-12916D7397EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD93BA0-38A9-407F-B228-12916D7397EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD93BA0-38A9-407F-B228-12916D7397EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD93BA0-38A9-407F-B228-12916D7397EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE16475F-D5F1-4EE8-829C-EA951B4DD320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE16475F-D5F1-4EE8-829C-EA951B4DD320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE16475F-D5F1-4EE8-829C-EA951B4DD320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE16475F-D5F1-4EE8-829C-EA951B4DD320}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EE16475F-D5F1-4EE8-829C-EA951B4DD320} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://jlbg.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = src\\Paravaly\\Paravaly.xproj
+		SccProjectName1 = src/Paravaly
+		SccLocalPath1 = src\\Paravaly
+		SccProjectUniqueName2 = test\\Paravaly.Tests\\Paravaly.Tests.xproj
+		SccProjectTopLevelParentUniqueName2 = Paravaly.sln
+		SccProjectName2 = test/Paravaly.Tests
+		SccLocalPath2 = test\\Paravaly.Tests
+	EndGlobalSection
+EndGlobal
