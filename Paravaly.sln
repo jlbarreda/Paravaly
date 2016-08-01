@@ -8,12 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		tools\CodeAnalysis\CustomDictionary.xml = tools\CodeAnalysis\CustomDictionary.xml
+		build.cake = build.cake
+		build.cmd = build.cmd
+		build.ps1 = build.ps1
 		global.json = global.json
 		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
-		tools\CodeAnalysis\StaticCodeAnalysis.ruleset = tools\CodeAnalysis\StaticCodeAnalysis.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}"
@@ -21,6 +22,14 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Paravaly", "src\Paravaly\Paravaly.xproj", "{4CD93BA0-38A9-407F-B228-12916D7397EF}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Paravaly.Tests", "test\Paravaly.Tests\Paravaly.Tests.xproj", "{EE16475F-D5F1-4EE8-829C-EA951B4DD320}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{5CDE6B7E-33A1-4231-BB50-B9149201317E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{C122D924-9C22-4637-8131-E2B597942A57}"
+	ProjectSection(SolutionItems) = preProject
+		tools\CodeAnalysis\CustomDictionary.xml = tools\CodeAnalysis\CustomDictionary.xml
+		tools\CodeAnalysis\StaticCodeAnalysis.ruleset = tools\CodeAnalysis\StaticCodeAnalysis.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,18 +51,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EE16475F-D5F1-4EE8-829C-EA951B4DD320} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://jlbg.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = src\\Paravaly\\Paravaly.xproj
-		SccProjectName1 = src/Paravaly
-		SccLocalPath1 = src\\Paravaly
-		SccProjectUniqueName2 = test\\Paravaly.Tests\\Paravaly.Tests.xproj
-		SccProjectTopLevelParentUniqueName2 = Paravaly.sln
-		SccProjectName2 = test/Paravaly.Tests
-		SccLocalPath2 = test\\Paravaly.Tests
+		{C122D924-9C22-4637-8131-E2B597942A57} = {5CDE6B7E-33A1-4231-BB50-B9149201317E}
 	EndGlobalSection
 EndGlobal
