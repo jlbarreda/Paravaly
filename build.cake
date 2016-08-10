@@ -7,7 +7,7 @@ var outputDir = Directory("./artifacts");
 var projectJson = File("project.json");
 
 Task("Clean")
-    .Does(() =>
+	.Does(() =>
 	{
 		CleanDirectories(new DirectoryPath[] {
 			projectDir + Directory("bin") + Directory(configuration),
@@ -24,15 +24,15 @@ Task("Clean")
 	});
 
 Task("Restore")
-    .IsDependentOn("Clean")
-    .Does(() =>
+	.IsDependentOn("Clean")
+	.Does(() =>
 	{
 		DotNetCoreRestore();
 	});
 
 Task("Build")
-    .IsDependentOn("Restore")
-    .Does(() =>
+	.IsDependentOn("Restore")
+	.Does(() =>
 	{
 		var settings = new DotNetCoreBuildSettings
 		{
@@ -44,15 +44,15 @@ Task("Build")
 	});
 
 Task("Test")
-    .IsDependentOn("Build")
-    .Does(() =>
+	.IsDependentOn("Build")
+	.Does(() =>
 	{
 			DotNetCoreTest(testsDir);
 	});
 
 Task("Pack")
-    .IsDependentOn("Test")
-    .Does(() =>
+	.IsDependentOn("Test")
+	.Does(() =>
 	{
 		var settings = new DotNetCorePackSettings
 		{
@@ -64,6 +64,6 @@ Task("Pack")
 	});
 
 Task("Default")
-    .IsDependentOn("Pack");
+	.IsDependentOn("Pack");
 
 RunTarget(target);
