@@ -1,3 +1,4 @@
+![](https://raw.github.com/jlbarreda/Paravaly/ci/ParavalyIcon.png)
 # Paravaly
 ## What is it?
 A simple but flexible parameter validation library.
