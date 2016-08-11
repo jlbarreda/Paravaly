@@ -1,5 +1,8 @@
 ![](https://raw.github.com/jlbarreda/Paravaly/ci/ParavalyIcon.png)
 # Paravaly
+
+[![Build status](https://ci.appveyor.com/api/projects/status/elwd4rq970vk9l6r?svg=true)](https://ci.appveyor.com/project/jlbarreda/paravaly)
+
 A simple but flexible parameter validation library for .NET.
 ## How do I use it?
 ### A simple example
