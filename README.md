@@ -1,7 +1,6 @@
 ![](https://raw.github.com/jlbarreda/Paravaly/ci/ParavalyIcon.png)
 # Paravaly
-## What is it?
-A simple but flexible parameter validation library.
+A simple but flexible parameter validation library for .NET.
 ## How do I use it?
 ### A simple example
 This will throw an `ArgumentException` if `text` is empty or whitespace; an `ArgumentNullException` if
