@@ -57,7 +57,7 @@ Task("Pack")
 		var settings = new DotNetCorePackSettings
 		{
 			OutputDirectory = outputDir,
-			NoBuild = true
+			NoBuild = false
 		};
 
 		DotNetCorePack(projectDir + projectJson, settings);
