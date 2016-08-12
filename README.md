@@ -1,4 +1,4 @@
-![](https://raw.github.com/jlbarreda/Paravaly/ci/ParavalyIcon.png)
+![](https://raw.github.com/jlbarreda/Paravaly/master/ParavalyIcon.png)
 # Paravaly
 
 [![Build status](https://ci.appveyor.com/api/projects/status/elwd4rq970vk9l6r?svg=true)](https://ci.appveyor.com/project/jlbarreda/paravaly)
