@@ -64,7 +64,7 @@ Task("Pack")
 
 		if (AppVeyor.IsRunningOnAppVeyor)
 		{
-			foreach (var file in GetFiles(outputDir + Directory("/**/*")))
+			foreach (var file in GetFiles(outputDir.FullPath + "/**/*"))
 			{
 				AppVeyor.UploadArtifact(file.FullPath);
 			}
