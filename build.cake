@@ -61,6 +61,14 @@ Task("Pack")
 		};
 
 		DotNetCorePack(projectDir + projectJson, settings);
+
+		if (AppVeyor.IsRunningOnAppVeyor)
+		{
+			foreach (var file in GetFiles(outputDir + Directory("**/*")))
+			{
+				AppVeyor.UploadArtifact(file.FullPath);
+			}
+		}
 	});
 
 Task("Default")
