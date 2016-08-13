@@ -3,7 +3,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/elwd4rq970vk9l6r?svg=true)](https://ci.appveyor.com/project/jlbarreda/paravaly)
 
-[![NuGet version](https://badge.fury.io/nu/Paravaly.svg)](https://badge.fury.io/nu/Paravaly)
+[![NuGet version](https://badge.fury.io/nu/Paravaly.svg)](https://www.nuget.org/packages/Paravaly)
 
 A simple but flexible parameter validation library for .NET.
 ## How do I use it?
