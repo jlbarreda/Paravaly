@@ -35,7 +35,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotNull_for_nullables_with_custom_error_message()
+		public void IsNotNull_can_be_used_for_nullables_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				(int?)null,
@@ -84,7 +84,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotNull_with_custom_error_message()
+		public void IsNotNull_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				(CultureInfo)null,
@@ -101,6 +101,112 @@ namespace Paravaly.Tests
 		public void IsNotNull_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<CultureInfo>(p => p.IsNotNull("Error"));
+		}
+
+		#endregion
+
+		#region Is
+
+		[Fact]
+		public void Is_works_with_valid_values()
+		{
+			CommonValidationTests.IsValid(
+				CultureInfo.CurrentCulture,
+				p => p.Is(typeof(CultureInfo)));
+		}
+
+		[Fact]
+		public void Is_works_with_invalid_values()
+		{
+			CommonValidationTests.IsNotValid(
+				CultureInfo.CurrentCulture,
+				p => p.Is(typeof(string)));
+		}
+
+		[Fact]
+		public void Is_adds_an_ArgumentException_if_parameter_value_type_is_not_valid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				CultureInfo.CurrentCulture,
+				typeof(ArgumentException),
+				p => p.Is(typeof(string)));
+		}
+
+		[Fact]
+		public void Is_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				CultureInfo.CurrentCulture,
+				(p, e) => p.Is(typeof(string), e));
+		}
+
+		[Fact]
+		public void Is_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<CultureInfo>(p => p.Is(typeof(CultureInfo)));
+		}
+
+		[Fact]
+		public void Is_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<CultureInfo>(p => p.Is(typeof(string), "Error"));
+		}
+
+		#endregion
+
+		#region IsAssignableTo
+
+		[Fact]
+		public void IsAssignableTo_works_when_parameter_is_of_the_specified_type()
+		{
+			CommonValidationTests.IsValid(
+				CultureInfo.CurrentCulture,
+				p => p.IsAssignableTo(typeof(CultureInfo)));
+		}
+
+		[Fact]
+		public void IsAssignableTo_works_when_parameter_is_assignable_to_the_specified_type()
+		{
+			CommonValidationTests.IsValid(
+				new InvalidTimeZoneException(),
+				p => p.IsAssignableTo(typeof(Exception)));
+		}
+
+		[Fact]
+		public void IsAssignableTo_works_with_invalid_values()
+		{
+			CommonValidationTests.IsNotValid(
+				CultureInfo.CurrentCulture,
+				p => p.IsAssignableTo(typeof(string)));
+		}
+
+		[Fact]
+		public void IsAssignableTo_adds_an_ArgumentException_if_parameter_value_type_is_not_valid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				CultureInfo.CurrentCulture,
+				typeof(ArgumentException),
+				p => p.IsAssignableTo(typeof(string)));
+		}
+
+		[Fact]
+		public void IsAssignableTo_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				CultureInfo.CurrentCulture,
+				(p, e) => p.IsAssignableTo(typeof(string), e));
+		}
+
+		[Fact]
+		public void IsAssignableTo_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<CultureInfo>(p => p.IsAssignableTo(typeof(CultureInfo)));
+		}
+
+		[Fact]
+		public void IsAssignableTo_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<CultureInfo>(p => p.IsAssignableTo(typeof(string), "Error"));
 		}
 
 		#endregion

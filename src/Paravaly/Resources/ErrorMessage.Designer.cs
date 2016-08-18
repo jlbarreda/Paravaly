@@ -38,10 +38,10 @@ namespace Paravaly.Resources {
 		public static global::System.Resources.ResourceManager ResourceManager {
 			get {
 				if (object.ReferenceEquals(resourceMan, null)) {
-#if NET40 || PORTABLE328
-					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Paravaly.Resources.ErrorMessage", typeof(ErrorMessage).Assembly);
-#else
+#if NETSTANDARD1_0
 					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Paravaly.Resources.ErrorMessage", typeof(ErrorMessage).GetTypeInfo().Assembly);
+#else
+					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Paravaly.Resources.ErrorMessage", typeof(ErrorMessage).GetType().Assembly);
 #endif
 					resourceMan = temp;
 				}
@@ -154,6 +154,15 @@ namespace Paravaly.Resources {
 		}
 
 		/// <summary>
+		///    Looks up a localized string similar to The parameter is not of type &apos;{0}&apos;. Actual type: {1}..
+		/// </summary>
+		public static string ForInvalidType {
+			get {
+				return ResourceManager.GetString("ForInvalidType", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///    Looks up a localized string similar to The parameter value is not valid. Valid Values: {0}. Actual value: {1}..
 		/// </summary>
 		public static string ForInvalidValue {
@@ -204,6 +213,15 @@ namespace Paravaly.Resources {
 		public static string ForNaN {
 			get {
 				return ResourceManager.GetString("ForNaN", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///    Looks up a localized string similar to The parameter type is not assignable to type &apos;{0}&apos;. Actual type: {1}..
+		/// </summary>
+		public static string ForNotAssignableType {
+			get {
+				return ResourceManager.GetString("ForNotAssignableType", resourceCulture);
 			}
 		}
 

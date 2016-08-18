@@ -147,6 +147,9 @@
   <data name="ForInvalidLength" xml:space="preserve">
     <value>The parameter length is not valid. Actual Length: {0}. Expected Length: {1}.</value>
   </data>
+  <data name="ForInvalidType" xml:space="preserve">
+    <value>The parameter is not of type '{0}'. Actual type: {1}.</value>
+  </data>
   <data name="ForInvalidValue" xml:space="preserve">
     <value>The parameter value is not valid. Valid Values: {0}. Actual value: {1}.</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="ForNaN" xml:space="preserve">
     <value>The parameter value is not a number.</value>
+  </data>
+  <data name="ForNotAssignableType" xml:space="preserve">
+    <value>The parameter type is not assignable to type '{0}'. Actual type: {1}.</value>
   </data>
   <data name="ForNotEqualString" xml:space="preserve">
     <value>The parameter should be different from '{0}'.</value>
