@@ -318,6 +318,71 @@ namespace Paravaly.Tests
 
 		#endregion
 
+		#region EndsWith
+
+		[Fact]
+		public void EndsWith_works_with_valid_strings()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.EndsWith("z"));
+		}
+
+		[Fact]
+		public void EndsWith_works_with_valid_strings_and_comparison_type()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.EndsWith("Z", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void EndsWith_works_with_invalid_strings()
+		{
+			CommonValidationTests.IsNotValid(
+				"XYZ",
+				p => p.EndsWith("Y"));
+		}
+
+		[Fact]
+		public void EndsWith_works_with_invalid_strings_and_comparison_type()
+		{
+			CommonValidationTests.IsNotValid(
+				"XYZ",
+				p => p.EndsWith("z", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void EndsWith_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				"XYZ",
+				typeof(ArgumentException),
+				p => p.EndsWith("y"));
+		}
+
+		[Fact]
+		public void EndsWith_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				"XYZ",
+				(p, e) => p.EndsWith("y", e));
+		}
+
+		[Fact]
+		public void EndsWith_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.EndsWith("X"));
+		}
+
+		[Fact]
+		public void EndsWith_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.EndsWith("X", "Error"));
+		}
+
+		#endregion
+
 		#region IsMatch
 
 		[Fact]
