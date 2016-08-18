@@ -24,7 +24,8 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
-		public static IValidatingParameter<T?> IsNotNull<T>(this IParameter<T?> parameter) where T : struct
+		public static IValidatingParameter<T?> IsNotNull<T>(this IParameter<T?> parameter)
+			where T : struct
 		{
 			return parameter.IsNotNull(null);
 		}
@@ -44,7 +45,8 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter" /> is null.
 		/// </exception>
-		public static IValidatingParameter<T?> IsNotNull<T>(this IParameter<T?> parameter, string errorMessage) where T : struct
+		public static IValidatingParameter<T?> IsNotNull<T>(this IParameter<T?> parameter, string errorMessage)
+			where T : struct
 		{
 			if (parameter == null)
 			{
@@ -80,7 +82,8 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
-		public static IValidatingParameter<T> IsNotNull<T>(this IParameter<T> parameter) where T : class
+		public static IValidatingParameter<T> IsNotNull<T>(this IParameter<T> parameter)
+			where T : class
 		{
 			return parameter.IsNotNull(null);
 		}
@@ -100,7 +103,8 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
-		public static IValidatingParameter<T> IsNotNull<T>(this IParameter<T> parameter, string errorMessage) where T : class
+		public static IValidatingParameter<T> IsNotNull<T>(this IParameter<T> parameter, string errorMessage)
+			where T : class
 		{
 			if (parameter == null)
 			{

@@ -3,6 +3,9 @@ using Paravaly.Resources;
 
 namespace Paravaly
 {
+	/// <content>
+	/// Double extensions.
+	/// </content>
 	public static partial class ParameterExtensions
 	{
 		#region IsNotNaN

@@ -4,12 +4,12 @@ using Xunit;
 
 namespace Paravaly.Tests
 {
-	public sealed class ParameterExtensionsTests_Float
+	public sealed partial class ParameterExtensionsTests
 	{
 		#region IsNotNaN
 
 		[Fact]
-		public void IsNotNaN_works_with_valid_values()
+		public void IsNotNaN_for_float_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid(
 				1F,
@@ -17,7 +17,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotNaN_works_with_invalid_values()
+		public void IsNotNaN_for_float_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid(
 				float.NaN,
@@ -25,7 +25,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotNaN_adds_an_ArgumentOutOfRangeException_if_parameter_value_is_invalid()
+		public void IsNotNaN_for_float_adds_an_ArgumentOutOfRangeException_if_parameter_value_is_invalid()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				float.NaN,
@@ -34,7 +34,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotNaN_with_custom_error_message()
+		public void IsNotNaN_for_float_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				float.NaN,
@@ -42,14 +42,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotNaN_throws_if_parameter_is_null()
+		public void IsNotNaN_for_float_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<float>(
 				p => p.IsNotNaN());
 		}
 
 		[Fact]
-		public void IsNotNaN_with_error_message_throws_if_parameter_is_null()
+		public void IsNotNaN_for_float_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<float>(
 				p => p.IsNotNaN("Error"));

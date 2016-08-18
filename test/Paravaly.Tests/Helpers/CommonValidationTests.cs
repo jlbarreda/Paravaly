@@ -62,7 +62,6 @@ namespace Paravaly.Tests.Helpers
 			// Given
 			var parameter = new Parameter<T>(parameterName, invalidValue, ExceptionHandlingMode.ThrowFirst);
 
-
 			// When
 			var ex = Should.Throw<Exception>(() => validation(parameter).Apply());
 

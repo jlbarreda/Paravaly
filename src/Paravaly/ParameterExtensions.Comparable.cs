@@ -5,6 +5,9 @@ using Paravaly.Resources;
 
 namespace Paravaly
 {
+	/// <content>
+	/// IComparable extensions.
+	/// </content>
 	public static partial class ParameterExtensions
 	{
 		#region IsLessThan

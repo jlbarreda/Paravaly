@@ -7,6 +7,9 @@ using Paravaly.Resources;
 
 namespace Paravaly
 {
+	/// <content>
+	/// ICollection extensions.
+	/// </content>
 	public static partial class ParameterExtensions
 	{
 		#region IsNotEmpty

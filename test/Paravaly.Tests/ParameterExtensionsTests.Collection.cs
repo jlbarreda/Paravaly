@@ -7,12 +7,12 @@ using Xunit;
 
 namespace Paravaly.Tests
 {
-	public sealed class ParameterExtensionsTests_Collection
+	public sealed partial class ParameterExtensionsTests
 	{
 		#region IsNotEmpty
 
 		[Fact]
-		public void IsNotEmpty_works_with_valid_values()
+		public void IsNotEmpty_for_ICollection_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid<ICollection<int>>(
 				Enumerable.Range(1, 1).ToList(),
@@ -20,7 +20,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_works_with_invalid_values()
+		public void IsNotEmpty_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<int>>(
 				Enumerable.Empty<int>().ToList(),
@@ -28,7 +28,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_adds_an_ArgumentException_if_parameter_value_is_empty()
+		public void IsNotEmpty_for_ICollection_adds_an_ArgumentException_if_parameter_value_is_empty()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid<ICollection<CultureInfo>>(
 				Enumerable.Empty<CultureInfo>().ToList(),
@@ -37,7 +37,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotEmpty_with_custom_error_message()
+		public void IsNotEmpty_for_ICollection_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage<ICollection<CultureInfo>>(
 				Enumerable.Empty<CultureInfo>().ToList(),
@@ -45,14 +45,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_throws_if_parameter_is_null()
+		public void IsNotEmpty_for_ICollection_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<CultureInfo>>(
 				p => p.IsNotEmpty());
 		}
 
 		[Fact]
-		public void IsNotEmpty_with_error_message_throws_if_parameter_is_null()
+		public void IsNotEmpty_for_ICollection_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<CultureInfo>>(
 				p => p.IsNotEmpty("Error"));
@@ -63,7 +63,7 @@ namespace Paravaly.Tests
 		#region All
 
 		[Fact]
-		public void All_works_with_valid_values()
+		public void All_for_ICollection_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid<ICollection<string>>(
 				new[] { "A", "B" },
@@ -71,7 +71,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void All_works_with_invalid_values()
+		public void All_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -79,7 +79,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void All_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		public void All_for_ICollection_adds_an_ArgumentException_if_parameter_value_is_invalid()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -88,7 +88,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_All_with_custom_error_message()
+		public void All_for_ICollection_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -96,14 +96,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void All_throws_if_parameter_is_null()
+		public void All_for_ICollection_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<string>>(
 				p => p.All(x => !string.IsNullOrEmpty(x)));
 		}
 
 		[Fact]
-		public void All_with_error_message_throws_if_parameter_is_null()
+		public void All_for_ICollection_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<string>>(
 				p => p.All(x => !string.IsNullOrEmpty(x), "Error"));
@@ -114,7 +114,7 @@ namespace Paravaly.Tests
 		#region Any
 
 		[Fact]
-		public void Any_works_with_valid_values()
+		public void Any_for_ICollection_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid<ICollection<string>>(
 				new[] { "A", "B" },
@@ -122,7 +122,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Any_works_with_invalid_values()
+		public void Any_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<string>>(
 				new[] { string.Empty, null },
@@ -130,7 +130,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Any_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		public void Any_for_ICollection_adds_an_ArgumentException_if_parameter_value_is_invalid()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid<ICollection<string>>(
 				new[] { string.Empty, null },
@@ -139,7 +139,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_Any_with_custom_error_message()
+		public void Any_for_ICollection_Can_use_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage<ICollection<string>>(
 				new[] { string.Empty, null },
@@ -147,14 +147,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Any_throws_if_parameter_is_null()
+		public void Any_for_ICollection_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<string>>(
 				p => p.Any(x => !string.IsNullOrEmpty(x)));
 		}
 
 		[Fact]
-		public void Any_with_error_message_throws_if_parameter_is_null()
+		public void Any_for_ICollection_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<string>>(
 				p => p.Any(x => !string.IsNullOrEmpty(x), "Error"));
@@ -165,7 +165,7 @@ namespace Paravaly.Tests
 		#region None
 
 		[Fact]
-		public void None_works_with_valid_values()
+		public void None_for_ICollection_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid<ICollection<string>>(
 				new[] { "A", "B" },
@@ -173,7 +173,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void None_works_with_invalid_values()
+		public void None_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -181,7 +181,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void None_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		public void None_for_ICollection_adds_an_ArgumentException_if_parameter_value_is_invalid()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -190,7 +190,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_None_with_custom_error_message()
+		public void None_for_ICollection_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -198,14 +198,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void None_throws_if_parameter_is_null()
+		public void None_for_ICollection_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<string>>(
 				p => p.None(x => string.IsNullOrEmpty(x)));
 		}
 
 		[Fact]
-		public void None_with_error_message_throws_if_parameter_is_null()
+		public void None_for_ICollection_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<string>>(
 				p => p.None(x => string.IsNullOrEmpty(x), "Error"));
@@ -213,10 +213,10 @@ namespace Paravaly.Tests
 
 		#endregion
 
-		#region HasNoNullElements for nullables
+		#region HasNoNullElements for collection with nullables
 
 		[Fact]
-		public void HasNoNullElements_for_nullables_works_with_valid_values()
+		public void HasNoNullElements_for_ICollection_for_nullables_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid<ICollection<int?>>(
 				new int?[] { 1, 2 },
@@ -224,7 +224,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasNoNullElements_for_nullables_works_with_invalid_values()
+		public void HasNoNullElements_for_ICollection_for_nullables_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<int?>>(
 				new int?[] { 1, null, 2 },
@@ -232,7 +232,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasNoNullElements_for_nullables_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		public void HasNoNullElements_for_ICollection_for_nullables_adds_an_ArgumentException_if_parameter_value_is_invalid()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid<ICollection<int?>>(
 				new int?[] { 1, null, 2 },
@@ -241,7 +241,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_HasNoNullElements_for_nullables_with_custom_error_message()
+		public void HasNoNullElements_for_ICollection_Can_use_for_nullables_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage<ICollection<int?>>(
 				new int?[] { 1, null, 2 },
@@ -249,14 +249,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasNoNullElements_for_nullables_throws_if_parameter_is_null()
+		public void HasNoNullElements_for_ICollection_for_nullables_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<int?>>(
 				p => p.HasNoNullElements());
 		}
 
 		[Fact]
-		public void HasNoNullElements_for_nullables_with_error_message_throws_if_parameter_is_null()
+		public void HasNoNullElements_for_ICollection_for_nullables_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<int?>>(
 				p => p.HasNoNullElements("Error"));
@@ -267,7 +267,7 @@ namespace Paravaly.Tests
 		#region HasNoNullElements
 
 		[Fact]
-		public void HasNoNullElements_works_with_valid_values()
+		public void HasNoNullElements_for_ICollection_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid<ICollection<int?>>(
 				Enumerable.Range(1, 2).Cast<int?>().ToList(),
@@ -275,7 +275,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasNoNullElements_works_with_invalid_values()
+		public void HasNoNullElements_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -283,7 +283,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasNoNullElements_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		public void HasNoNullElements_for_ICollection_adds_an_ArgumentException_if_parameter_value_is_invalid()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -292,7 +292,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_HasNoNullElements_with_custom_error_message()
+		public void HasNoNullElements_for_ICollection_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage<ICollection<string>>(
 				new[] { "A", null, "B" },
@@ -300,14 +300,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasNoNullElements_throws_if_parameter_is_null()
+		public void HasNoNullElements_for_ICollection_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<CultureInfo>>(
 				p => p.HasNoNullElements());
 		}
 
 		[Fact]
-		public void HasNoNullElements_with_error_message_throws_if_parameter_is_null()
+		public void HasNoNullElements_for_ICollection_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<CultureInfo>>(
 				p => p.HasNoNullElements("Error"));
@@ -318,7 +318,7 @@ namespace Paravaly.Tests
 		#region HasCountWithinRange
 
 		[Fact]
-		public void HasCountWithinRange_works_with_valid_values()
+		public void HasCountWithinRange_for_ICollection_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid<ICollection<int>>(
 				Enumerable.Range(1, 1).ToList(),
@@ -326,7 +326,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasCountWithinRange_works_with_invalid_values()
+		public void HasCountWithinRange_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<CultureInfo>>(
 				Enumerable.Empty<CultureInfo>().ToList(),
@@ -334,7 +334,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasCountWithinRange_adds_an_ArgumentOutOfRangeException_if_parameter_value_length_is_out_of_range()
+		public void HasCountWithinRange_for_ICollection_adds_an_ArgumentOutOfRangeException_if_parameter_value_length_is_out_of_range()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid<ICollection<CultureInfo>>(
 				Enumerable.Empty<CultureInfo>().ToList(),
@@ -343,7 +343,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_HasCountWithinRange_with_custom_error_message()
+		public void HasCountWithinRange_for_ICollection_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage<ICollection<CultureInfo>>(
 				Enumerable.Empty<CultureInfo>().ToList(),
@@ -351,14 +351,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasCountWithinRange_throws_if_parameter_is_null()
+		public void HasCountWithinRange_for_ICollection_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<CultureInfo>>(
 				p => p.HasCountWithinRange(1, 1));
 		}
 
 		[Fact]
-		public void HasCountWithinRange_with_error_message_throws_if_parameter_is_null()
+		public void HasCountWithinRange_for_ICollection_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<CultureInfo>>(
 				p => p.HasCountWithinRange(1, 1, string.Empty));

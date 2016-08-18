@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Paravaly.Tests
 {
-	public sealed class ParameterExtensionsTests_Comparable
+	public sealed partial class ParameterExtensionsTests
 	{
 		#region IsWithinRange
 
@@ -227,7 +227,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsWithinRange_with_custom_error_message()
+		public void IsWithinRange_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				0,
@@ -276,7 +276,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsLessThan_with_custom_error_message()
+		public void IsLessThan_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				2,
@@ -325,7 +325,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsLessThanOrEqualTo_with_custom_error_message()
+		public void IsLessThanOrEqualTo_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				2,
@@ -374,7 +374,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsGreaterThan_with_custom_error_message()
+		public void IsGreaterThan_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				0,
@@ -423,7 +423,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsGreaterThanOrEqualTo_with_custom_error_message()
+		public void IsGreaterThanOrEqualTo_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				0,

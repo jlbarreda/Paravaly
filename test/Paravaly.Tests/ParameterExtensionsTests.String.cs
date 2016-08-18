@@ -4,12 +4,12 @@ using Xunit;
 
 namespace Paravaly.Tests
 {
-	public sealed class ParameterExtensionsTests_String
+	public sealed partial class ParameterExtensionsTests
 	{
 		#region IsNotEmpty
 
 		[Fact]
-		public void IsNotEmpty_works_with_valid_strings()
+		public void IsNotEmpty_for_string_works_with_valid_strings()
 		{
 			CommonValidationTests.IsValid(
 				"X",
@@ -17,7 +17,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_works_with_invalid_strings()
+		public void IsNotEmpty_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
 				string.Empty,
@@ -25,7 +25,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_adds_an_ArgumentException_if_parameter_value_is_empty()
+		public void IsNotEmpty_for_string_adds_an_ArgumentException_if_parameter_value_is_empty()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				string.Empty,
@@ -34,7 +34,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotEmpty_with_custom_error_message()
+		public void IsNotEmpty_for_string_Can_use_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
@@ -42,13 +42,13 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_throws_if_parameter_is_null()
+		public void IsNotEmpty_for_string_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsNotEmpty());
 		}
 
 		[Fact]
-		public void IsNotEmpty_with_error_message_throws_if_parameter_is_null()
+		public void IsNotEmpty_for_string_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsNotEmpty("Error"));
 		}
@@ -100,7 +100,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotNullOrEmpty_with_custom_error_message()
+		public void IsNotNullOrEmpty_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
@@ -207,7 +207,7 @@ namespace Paravaly.Tests
 		#region Contains
 
 		[Fact]
-		public void Contains_works_with_valid_strings()
+		public void Contains_for_string_works_with_valid_strings()
 		{
 			CommonValidationTests.IsValid(
 				"XYZ",
@@ -215,7 +215,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Contains_works_with_invalid_strings()
+		public void Contains_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
 				string.Empty,
@@ -223,7 +223,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Contains_adds_an_ArgumentException_if_parameter_value_is_empty()
+		public void Contains_for_string_adds_an_ArgumentException_if_parameter_value_is_empty()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				"YZ",
@@ -232,7 +232,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_Contains_with_custom_error_message()
+		public void Contains_for_string_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
@@ -240,13 +240,13 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Contains_throws_if_parameter_is_null()
+		public void Contains_for_string_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.Contains("X"));
 		}
 
 		[Fact]
-		public void Contains_with_error_message_throws_if_parameter_is_null()
+		public void Contains_for_string_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.Contains("X", "Error"));
 		}
@@ -281,7 +281,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsMatch_with_custom_error_message()
+		public void IsMatch_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
@@ -305,7 +305,7 @@ namespace Paravaly.Tests
 		#region IsNotEqualTo
 
 		[Fact]
-		public void IsNotEqualTo_works_with_valid_strings()
+		public void IsNotEqualTo_for_string_works_with_valid_strings()
 		{
 			CommonValidationTests.IsValid(
 				"X",
@@ -313,7 +313,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEqualTo_works_with_invalid_strings()
+		public void IsNotEqualTo_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
 				"A",
@@ -321,7 +321,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEqualTo_adds_an_ArgumentException_if_parameter_value_is_not_valid()
+		public void IsNotEqualTo_for_string_adds_an_ArgumentException_if_parameter_value_is_not_valid()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				"A",
@@ -330,7 +330,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotEqualTo_with_custom_error_message()
+		public void IsNotEqualTo_for_string_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				"A",
@@ -338,7 +338,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotEqualTo_with_specific_comparison_type()
+		public void IsNotEqualTo_for_string_can_be_used_with_specific_comparison_type()
 		{
 			CommonValidationTests.IsNotValid(
 				"a",
@@ -346,13 +346,13 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEqualTo_throws_if_parameter_is_null()
+		public void IsNotEqualTo_for_string_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsNotEqualTo("A"));
 		}
 
 		[Fact]
-		public void IsNotEqualTo_with_error_message_throws_if_parameter_is_null()
+		public void IsNotEqualTo_for_string_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsNotEqualTo("A", "Error"));
 		}
@@ -362,7 +362,7 @@ namespace Paravaly.Tests
 		#region HasLengthWithinRange
 
 		[Fact]
-		public void HasLengthWithinRange_works_with_valid_strings()
+		public void HasLengthWithinRange_for_string_works_with_valid_strings()
 		{
 			CommonValidationTests.IsValid(
 				"X",
@@ -370,7 +370,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasLengthWithinRange_works_with_invalid_strings()
+		public void HasLengthWithinRange_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
 				string.Empty,
@@ -378,7 +378,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasLengthWithinRange_adds_an_ArgumentOutOfRangeException_if_parameter_value_length_is_out_of_range()
+		public void HasLengthWithinRange_for_string_adds_an_ArgumentOutOfRangeException_if_parameter_value_length_is_out_of_range()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				string.Empty,
@@ -387,7 +387,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_HasLengthWithinRange_with_custom_error_message()
+		public void HasLengthWithinRange_for_string_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
@@ -395,14 +395,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasLengthWithinRange_throws_if_parameter_is_null()
+		public void HasLengthWithinRange_for_string_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(
 				p => p.HasLengthWithinRange(1, 1));
 		}
 
 		[Fact]
-		public void HasLengthWithinRange_with_error_message_throws_if_parameter_is_null()
+		public void HasLengthWithinRange_for_string_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(
 				p => p.HasLengthWithinRange(1, 1, string.Empty));
@@ -413,7 +413,7 @@ namespace Paravaly.Tests
 		#region HasLength
 
 		[Fact]
-		public void HasLength_works_with_valid_strings()
+		public void HasLength_for_string_works_with_valid_strings()
 		{
 			CommonValidationTests.IsValid(
 				"X",
@@ -421,7 +421,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasLength_works_with_invalid_strings()
+		public void HasLength_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
 				string.Empty,
@@ -429,7 +429,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasLength_adds_an_ArgumentException_if_parameter_value_length_is_out_of_range()
+		public void HasLength_for_string_adds_an_ArgumentException_if_parameter_value_length_is_out_of_range()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				string.Empty,
@@ -438,7 +438,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_HasLength_with_custom_error_message()
+		public void HasLength_for_string_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
@@ -446,14 +446,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void HasLength_throws_if_parameter_is_null()
+		public void HasLength_for_string_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(
 				p => p.HasLength(1));
 		}
 
 		[Fact]
-		public void HasLength_with_error_message_throws_if_parameter_is_null()
+		public void HasLength_for_string_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(
 				p => p.HasLength(1, string.Empty));

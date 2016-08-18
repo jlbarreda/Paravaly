@@ -6,6 +6,9 @@ using Paravaly.Resources;
 
 namespace Paravaly
 {
+	/// <content>
+	/// Array extensions.
+	/// </content>
 	public static partial class ParameterExtensions
 	{
 		#region IsNotEmpty

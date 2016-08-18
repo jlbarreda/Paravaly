@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Paravaly.Tests
 {
-	public sealed class ParameterExtensionsTests
+	public sealed partial class ParameterExtensionsTests
 	{
 		#region IsNotNull for nullables
 

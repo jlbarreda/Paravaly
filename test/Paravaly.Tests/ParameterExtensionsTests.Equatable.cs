@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Paravaly.Tests
 {
-	public sealed class ParameterExtensionsTests_Equatable
+	public sealed partial class ParameterExtensionsTests
 	{
 		#region IsIn
 
@@ -50,7 +50,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsIn_with_custom_error_message()
+		public void IsIn_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				0,

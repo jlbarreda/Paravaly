@@ -4,12 +4,12 @@ using Xunit;
 
 namespace Paravaly.Tests
 {
-	public sealed class ParameterExtensionsTests_Guid
+	public sealed partial class ParameterExtensionsTests
 	{
 		#region IsNotEmpty
 
 		[Fact]
-		public void IsNotEmpty_works_with_valid_values()
+		public void IsNotEmpty_for_Guid_works_with_valid_values()
 		{
 			CommonValidationTests.IsValid(
 				Guid.NewGuid(),
@@ -17,15 +17,15 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_works_with_invalid_values()
+		public void IsNotEmpty_for_Guid_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid(
-				new Guid(),
+				default(Guid),
 				ParameterExtensions.IsNotEmpty);
 		}
 
 		[Fact]
-		public void IsNotEmpty_adds_an_ArgumentException_if_parameter_value_is_empty()
+		public void IsNotEmpty_for_Guid_adds_an_ArgumentException_if_parameter_value_is_empty()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				Guid.Empty,
@@ -34,7 +34,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Can_use_IsNotEmpty_with_custom_error_message()
+		public void IsNotEmpty_for_Guid_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				Guid.Empty,
@@ -42,13 +42,13 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_throws_if_parameter_is_null()
+		public void IsNotEmpty_for_Guid_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<Guid>(p => p.IsNotEmpty());
 		}
 
 		[Fact]
-		public void IsNotEmpty_with_error_message_throws_if_parameter_is_null()
+		public void IsNotEmpty_for_Guid_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<Guid>(p => p.IsNotEmpty("Error"));
 		}

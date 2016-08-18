@@ -28,7 +28,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{C122D924-9C22-4637-8131-E2B597942A57}"
 	ProjectSection(SolutionItems) = preProject
 		tools\CodeAnalysis\CustomDictionary.xml = tools\CodeAnalysis\CustomDictionary.xml
-		tools\CodeAnalysis\StaticCodeAnalysis.ruleset = tools\CodeAnalysis\StaticCodeAnalysis.ruleset
+		tools\CodeAnalysis\Paravaly.ruleset = tools\CodeAnalysis\Paravaly.ruleset
+		tools\CodeAnalysis\Paravaly.Tests.ruleset = tools\CodeAnalysis\Paravaly.Tests.ruleset
+		tools\CodeAnalysis\StyleCop.json = tools\CodeAnalysis\StyleCop.json
 	EndProjectSection
 EndProject
 Global

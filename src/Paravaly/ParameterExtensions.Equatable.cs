@@ -7,6 +7,9 @@ using Paravaly.Resources;
 
 namespace Paravaly
 {
+	/// <content>
+	/// IEquatable extensions.
+	/// </content>
 	public static partial class ParameterExtensions
 	{
 		#region IsIn
