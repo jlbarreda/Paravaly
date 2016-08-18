@@ -138,6 +138,9 @@
   <data name="ForEmptyCollection" xml:space="preserve">
     <value>The collection can't be empty.</value>
   </data>
+  <data name="ForEndsWith" xml:space="preserve">
+    <value>The parameter value should end with the text '{0}'. Actual value: '{1}'.</value>
+  </data>
   <data name="ForGreaterThan" xml:space="preserve">
     <value>The parameter should be greater than {0}. Actual value: {1}.</value>
   </data>
@@ -182,6 +185,9 @@
   </data>
   <data name="ForOutOfRangeLength" xml:space="preserve">
     <value>The parameter length is outside the allowable range of values. Minimum: {0}. Maximum: {1}. Actual value: {2}.</value>
+  </data>
+  <data name="ForStartsWith" xml:space="preserve">
+    <value>The parameter value should start with the text '{0}'. Actual value: '{1}'.</value>
   </data>
   <data name="ForWhiteSpace" xml:space="preserve">
     <value>The parameter should not contain white space only.</value>
