@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Paravaly.Tests.Helpers;
+using Shouldly;
 using Xunit;
 
 namespace Paravaly.Tests
@@ -116,6 +117,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void Is_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(CultureInfo)null,
+				p => p.Is(typeof(CultureInfo)));
+		}
+
+		[Fact]
 		public void Is_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid(
@@ -152,6 +161,12 @@ namespace Paravaly.Tests
 			CommonValidationTests.ThrowsIfParameterIsNull<CultureInfo>(p => p.Is(typeof(string), "Error"));
 		}
 
+		[Fact]
+		public void Is_throws_if_type_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").Is(null));
+		}
+
 		#endregion
 
 		#region IsAssignableTo
@@ -169,6 +184,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				new InvalidTimeZoneException(),
+				p => p.IsAssignableTo(typeof(Exception)));
+		}
+
+		[Fact]
+		public void IsAssignableTo_works_when_parameter_value_is_null()
+		{
+			CommonValidationTests.IsValid(
+				(Exception)null,
 				p => p.IsAssignableTo(typeof(Exception)));
 		}
 
@@ -207,6 +230,12 @@ namespace Paravaly.Tests
 		public void IsAssignableTo_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<CultureInfo>(p => p.IsAssignableTo(typeof(string), "Error"));
+		}
+
+		[Fact]
+		public void IsAssignableTo_throws_if_type_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").IsAssignableTo(null));
 		}
 
 		#endregion

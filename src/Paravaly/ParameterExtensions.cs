@@ -148,13 +148,16 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> Is<T>(this IParameter<T> parameter, Type type)
 		{
 			return parameter.Is(
 				type,
-				p => string.Format(ErrorMessage.ForInvalidType, type.FullName, p.Value?.GetType().FullName));
+				p => string.Format(
+					ErrorMessage.ForInvalidType,
+					type.FullName,
+					p.Value.GetType().FullName));
 		}
 
 		/// <summary>
@@ -171,7 +174,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> Is<T>(this IParameter<T> parameter, Type type, string errorMessage)
 		{
@@ -192,7 +195,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
 		/// </exception>
 		private static IValidatingParameter<T> Is<T>(
 			this IParameter<T> parameter,
@@ -204,10 +207,15 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (type == null)
+			{
+				throw new ArgumentNullException(nameof(type));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value?.GetType() != type)
+					if (p.Value != null && p.Value.GetType() != type)
 					{
 						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
@@ -230,7 +238,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsAssignableTo<T>(this IParameter<T> parameter, Type type)
 		{
@@ -254,7 +262,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsAssignableTo<T>(this IParameter<T> parameter, Type type, string errorMessage)
 		{
@@ -276,7 +284,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
 		/// </exception>
 		private static IValidatingParameter<T> IsAssignableTo<T>(
 			this IParameter<T> parameter,
@@ -288,13 +296,18 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (type == null)
+			{
+				throw new ArgumentNullException(nameof(type));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
 #if NETSTANDARD1_0
-					if (!type.GetTypeInfo().IsAssignableFrom(p.Value?.GetType()?.GetTypeInfo()))
+					if (p.Value != null && !type.GetTypeInfo().IsAssignableFrom(p.Value.GetType().GetTypeInfo()))
 #else
-					if (!type.IsAssignableFrom(p.Value?.GetType()))
+					if (p.Value != null && !type.IsAssignableFrom(p.Value.GetType()))
 #endif
 					{
 						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));

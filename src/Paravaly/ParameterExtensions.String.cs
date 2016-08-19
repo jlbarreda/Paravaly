@@ -57,7 +57,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && p.Value.Length < 1)
+					if (p.Value?.Length < 1)
 					{
 						p.Handle(new ArgumentException(errorMessage, p.Name));
 					}
@@ -112,8 +112,16 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (!string.IsNullOrEmpty(p.Value) && string.IsNullOrWhiteSpace(p.Value))
+					if (p.Value != null)
 					{
+						foreach (var c in p.Value)
+						{
+							if (!char.IsWhiteSpace(c))
+							{
+								return;
+							}
+						}
+
 						p.Handle(new ArgumentException(errorMessage, p.Name));
 					}
 				});
@@ -210,8 +218,7 @@ namespace Paravaly
 		#region StartsWith
 
 		/// <summary>
-		/// Validates whether the parameter value starts with the specified text using an ordinal
-		/// case-insensitive comparison.
+		/// Validates whether the parameter value starts with the specified text.
 		/// </summary>
 		/// <param name="parameter">
 		/// The parameter holding the state of the current validation.
@@ -226,9 +233,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> StartsWith(this IParameter<string> parameter, string text)
 		{
-			return parameter.StartsWith(
-				text,
-				StringComparison.OrdinalIgnoreCase);
+			return parameter.StartsWith(text, StringComparison.Ordinal);
 		}
 
 		/// <summary>
@@ -256,12 +261,15 @@ namespace Paravaly
 			return parameter.StartsWith(
 				text,
 				comparisonType,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForStartsWith, text, p.Value.ToPrettyString()));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForStartsWith,
+					text.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
-		/// Validates whether the parameter value starts with the specified text using an ordinal
-		/// case-insensitive comparison.
+		/// Validates whether the parameter value starts with the specified text.
 		/// </summary>
 		/// <param name="parameter">
 		/// The parameter holding the state of the current validation.
@@ -282,7 +290,7 @@ namespace Paravaly
 			string text,
 			string errorMessage)
 		{
-			return parameter.StartsWith(text, StringComparison.OrdinalIgnoreCase, errorMessage);
+			return parameter.StartsWith(text, StringComparison.Ordinal, errorMessage);
 		}
 
 		/// <summary>
@@ -375,7 +383,13 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> Contains(this IParameter<string> parameter, string text)
 		{
-			return parameter.Contains(text, string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForMissingText, text));
+			return parameter.Contains(
+				text,
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForMissingText,
+					text.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -397,6 +411,31 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> Contains(this IParameter<string> parameter, string text, string errorMessage)
 		{
+			return parameter.Contains(text, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value contains the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		private static IValidatingParameter<string> Contains(
+			this IParameter<string> parameter,
+			string text,
+			Func<IValidatableParameter<string>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -407,7 +446,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && !p.Value.Contains(text))
 					{
-						p.Handle(new ArgumentException(errorMessage, p.Name));
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
 		}
@@ -417,8 +456,7 @@ namespace Paravaly
 		#region EndsWith
 
 		/// <summary>
-		/// Validates whether the parameter value ends with the specified text using an ordinal
-		/// case-insensitive comparison.
+		/// Validates whether the parameter value ends with the specified text.
 		/// </summary>
 		/// <param name="parameter">
 		/// The parameter holding the state of the current validation.
@@ -433,9 +471,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> EndsWith(this IParameter<string> parameter, string text)
 		{
-			return parameter.EndsWith(
-				text,
-				StringComparison.OrdinalIgnoreCase);
+			return parameter.EndsWith(text, StringComparison.Ordinal);
 		}
 
 		/// <summary>
@@ -463,12 +499,15 @@ namespace Paravaly
 			return parameter.EndsWith(
 				text,
 				comparisonType,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForEndsWith, text, p.Value.ToPrettyString()));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForEndsWith,
+					text.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
-		/// Validates whether the parameter value ends with the specified text using an ordinal
-		/// case-insensitive comparison.
+		/// Validates whether the parameter value ends with the specified text.
 		/// </summary>
 		/// <param name="parameter">
 		/// The parameter holding the state of the current validation.
@@ -489,7 +528,7 @@ namespace Paravaly
 			string text,
 			string errorMessage)
 		{
-			return parameter.EndsWith(text, StringComparison.OrdinalIgnoreCase, errorMessage);
+			return parameter.EndsWith(text, StringComparison.Ordinal, errorMessage);
 		}
 
 		/// <summary>
@@ -577,7 +616,9 @@ namespace Paravaly
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
 		/// </returns>
-		/// <exception cref="ArgumentNullException"><paramref name="parameter" /> is null.</exception>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> or <paramref name="regex"/> is null.
+		/// </exception>
 		public static IValidatingParameter<string> IsMatch(this IParameter<string> parameter, string regex)
 		{
 			return parameter.IsMatch(new Regex(regex));
@@ -594,12 +635,18 @@ namespace Paravaly
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
 		/// </returns>
-		/// <exception cref="ArgumentNullException"><paramref name="parameter" /> is null.</exception>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> or <paramref name="regex"/> is null.
+		/// </exception>
 		public static IValidatingParameter<string> IsMatch(this IParameter<string> parameter, Regex regex)
 		{
 			return parameter.IsMatch(
 				regex,
-				string.Format(CultureInfo.InvariantCulture, ErrorMessage.ForIsNotRegexMatch, regex));
+				p => string.Format(
+					CultureInfo.InvariantCulture,
+					ErrorMessage.ForIsNotRegexMatch,
+					regex.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -616,7 +663,9 @@ namespace Paravaly
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
 		/// </returns>
-		/// <exception cref="ArgumentNullException"><paramref name="parameter" /> is null.</exception>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> or <paramref name="regex"/> is null.
+		/// </exception>
 		public static IValidatingParameter<string> IsMatch(this IParameter<string> parameter, string regex, string errorMessage)
 		{
 			return parameter.IsMatch(new Regex(regex), errorMessage);
@@ -636,15 +685,47 @@ namespace Paravaly
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
 		/// </returns>
-		/// <exception cref="ArgumentNullException"><paramref name="parameter" /> is null.</exception>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> or <paramref name="regex"/> is null.
+		/// </exception>
 		public static IValidatingParameter<string> IsMatch(
 			this IParameter<string> parameter,
 			Regex regex,
 			string errorMessage)
 		{
+			return parameter.IsMatch(regex, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value matches the specified regular expression.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="regex">The regular expression.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> or <paramref name="regex"/> is null.
+		/// </exception>
+		private static IValidatingParameter<string> IsMatch(
+			this IParameter<string> parameter,
+			Regex regex,
+			Func<IValidatableParameter<string>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (regex == null)
+			{
+				throw new ArgumentNullException(nameof(regex));
 			}
 
 			return parameter.IsValid(
@@ -652,7 +733,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && !regex.IsMatch(p.Value))
 					{
-						p.Handle(new ArgumentException(errorMessage, p.Name));
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
 		}
@@ -677,9 +758,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> IsNotEqualTo(this IParameter<string> parameter, string value)
 		{
-			return parameter.IsNotEqualTo(
-				value,
-				string.Format(CultureInfo.InvariantCulture, ErrorMessage.ForNotEqualString, value));
+			return parameter.IsNotEqualTo(value, StringComparison.Ordinal);
 		}
 
 		/// <summary>
@@ -705,7 +784,11 @@ namespace Paravaly
 			return parameter.IsNotEqualTo(
 				value,
 				comparisonType,
-				string.Format(CultureInfo.InvariantCulture, ErrorMessage.ForNotEqualString, value));
+				p => string.Format(
+					CultureInfo.InvariantCulture,
+					ErrorMessage.ForNotEqualString,
+					value.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -757,6 +840,33 @@ namespace Paravaly
 			StringComparison comparisonType,
 			string errorMessage)
 		{
+			return parameter.IsNotEqualTo(value, comparisonType, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is equal to the specified <paramref name="value"/>.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="value">The value to compare to.</param>
+		/// <param name="comparisonType">The comparison type.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null.
+		/// </exception>
+		private static IValidatingParameter<string> IsNotEqualTo(
+			this IParameter<string> parameter,
+			string value,
+			StringComparison comparisonType,
+			Func<IValidatableParameter<string>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -767,7 +877,7 @@ namespace Paravaly
 				{
 					if (string.Equals(p.Value, value, comparisonType))
 					{
-						p.Handle(new ArgumentException(errorMessage, p.Name));
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
 		}
@@ -791,12 +901,20 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
+		/// </exception>
 		public static IValidatingParameter<string> HasLengthWithinRange(this IParameter<string> parameter, int min, int max)
 		{
 			return parameter.HasLengthWithinRange(
 				min,
 				max,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForOutOfRangeLength, min, max, p.Value?.Length));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForOutOfRangeLength,
+					min,
+					max,
+					p.Value?.Length));
 		}
 
 		/// <summary>
@@ -816,6 +934,9 @@ namespace Paravaly
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
+		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
 		public static IValidatingParameter<string> HasLengthWithinRange(
 			this IParameter<string> parameter,
@@ -844,6 +965,9 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
+		/// </exception>
 		private static IValidatingParameter<string> HasLengthWithinRange(
 			this IParameter<string> parameter,
 			int min,
@@ -855,10 +979,15 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (min > max)
+			{
+				throw new ArgumentOutOfRangeException(nameof(min));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && (p.Value.Length < min || p.Value.Length > max))
+					if (p.Value?.Length < min || p.Value?.Length > max)
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
@@ -887,7 +1016,11 @@ namespace Paravaly
 		{
 			return parameter.HasLength(
 				length,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForInvalidLength, p.Value.Length, length));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForInvalidLength,
+					p.Value?.Length,
+					length));
 		}
 
 		/// <summary>

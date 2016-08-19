@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Paravaly.Tests.Helpers;
+using Shouldly;
 using Xunit;
 
 namespace Paravaly.Tests
@@ -111,6 +112,14 @@ namespace Paravaly.Tests
 			CommonValidationTests.IsValid(
 				(ushort)1,
 				p => p.IsWithinRange((ushort)1, (ushort)2));
+		}
+
+		[Fact]
+		public void IsWithinRange_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.IsWithinRange("1", "2"));
 		}
 
 		[Fact]
@@ -246,6 +255,24 @@ namespace Paravaly.Tests
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsWithinRange(1, 2, "Error"));
 		}
 
+		[Fact]
+		public void IsWithinRange_throws_if_min_is_greater_than_max()
+		{
+			Should.Throw<ArgumentOutOfRangeException>(() => Require.Parameter("x", "x").IsWithinRange("z", "a"));
+		}
+
+		[Fact]
+		public void IsWithinRange_throws_if_min_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").IsWithinRange(null, "z"));
+		}
+
+		[Fact]
+		public void IsWithinRange_throws_if_max_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").IsWithinRange("a", null));
+		}
+
 		#endregion
 
 		#region IsLessThan
@@ -256,6 +283,14 @@ namespace Paravaly.Tests
 			CommonValidationTests.IsValid(
 				0,
 				p => p.IsLessThan(1));
+		}
+
+		[Fact]
+		public void IsLessThan_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.IsLessThan("1"));
 		}
 
 		[Fact]
@@ -295,6 +330,12 @@ namespace Paravaly.Tests
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsLessThan(1, "Error"));
 		}
 
+		[Fact]
+		public void IsLessThan_throws_if_exclusiveMax_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").IsLessThan(null));
+		}
+
 		#endregion
 
 		#region IsLessThanOrEqualTo
@@ -305,6 +346,14 @@ namespace Paravaly.Tests
 			CommonValidationTests.IsValid(
 				Enumerable.Range(0, 1),
 				p => p.IsLessThanOrEqualTo(1));
+		}
+
+		[Fact]
+		public void IsLessThanOrEqualTo_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.IsLessThanOrEqualTo("1"));
 		}
 
 		[Fact]
@@ -344,6 +393,12 @@ namespace Paravaly.Tests
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsLessThanOrEqualTo(1, "Error"));
 		}
 
+		[Fact]
+		public void IsLessThanOrEqualTo_throws_if_inclusiveMax_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").IsLessThanOrEqualTo(null));
+		}
+
 		#endregion
 
 		#region IsGreaterThan
@@ -354,6 +409,14 @@ namespace Paravaly.Tests
 			CommonValidationTests.IsValid(
 				1,
 				p => p.IsGreaterThan(0));
+		}
+
+		[Fact]
+		public void IsGreaterThan_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.IsGreaterThan("0"));
 		}
 
 		[Fact]
@@ -393,6 +456,12 @@ namespace Paravaly.Tests
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsGreaterThan(1, "Error"));
 		}
 
+		[Fact]
+		public void IsGreaterThan_throws_if_exclusiveMin_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").IsGreaterThan(null));
+		}
+
 		#endregion
 
 		#region IsGreaterThanOrEqualTo
@@ -403,6 +472,14 @@ namespace Paravaly.Tests
 			CommonValidationTests.IsValid(
 				Enumerable.Range(0, 1),
 				p => p.IsGreaterThanOrEqualTo(0));
+		}
+
+		[Fact]
+		public void IsGreaterThanOrEqualTo_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.IsGreaterThanOrEqualTo("0"));
 		}
 
 		[Fact]
@@ -440,6 +517,12 @@ namespace Paravaly.Tests
 		public void IsGreaterThanOrEqualTo_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsGreaterThanOrEqualTo(1, "Error"));
+		}
+
+		[Fact]
+		public void IsGreaterThanOrEqualTo_throws_if_inclusiveMin_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").IsGreaterThanOrEqualTo(null));
 		}
 
 		#endregion

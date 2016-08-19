@@ -25,14 +25,18 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMax"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsLessThan<T>(this IParameter<T> parameter, T exclusiveMax)
 			where T : IComparable<T>
 		{
 			return parameter.IsLessThan(
 				exclusiveMax,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForLessThan, exclusiveMax, p.Value));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForLessThan,
+					exclusiveMax.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -51,7 +55,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMax"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsLessThan<T>(
 			this IParameter<T> parameter,
@@ -78,7 +82,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMax"/> is null.
 		/// </exception>
 		private static IValidatingParameter<T> IsLessThan<T>(
 			this IParameter<T> parameter,
@@ -91,10 +95,15 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (exclusiveMax == null)
+			{
+				throw new ArgumentNullException(nameof(exclusiveMax));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
-					if (SafeComparer.Compare(p.Value, exclusiveMax) >= 0)
+					if (p.Value != null && SafeComparer.Compare(p.Value, exclusiveMax) >= 0)
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
@@ -126,7 +135,11 @@ namespace Paravaly
 		{
 			return parameter.IsLessThanOrEqualTo(
 				inclusiveMax,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForLessThanOrEqualTo, inclusiveMax, p.Value));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForLessThanOrEqualTo,
+					inclusiveMax.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -174,7 +187,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="inclusiveMax"/> is null.
 		/// </exception>
 		private static IValidatingParameter<T> IsLessThanOrEqualTo<T>(
 			this IParameter<T> parameter,
@@ -187,10 +200,15 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (inclusiveMax == null)
+			{
+				throw new ArgumentNullException(nameof(inclusiveMax));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
-					if (SafeComparer.Compare(p.Value, inclusiveMax) > 0)
+					if (p.Value != null && SafeComparer.Compare(p.Value, inclusiveMax) > 0)
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
@@ -214,14 +232,18 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMin"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsGreaterThan<T>(this IParameter<T> parameter, T exclusiveMin)
 			where T : IComparable<T>
 		{
 			return parameter.IsGreaterThan(
 				exclusiveMin,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForGreaterThan, exclusiveMin, p.Value));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForGreaterThan,
+					exclusiveMin.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -240,7 +262,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMin"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsGreaterThan<T>(
 			this IParameter<T> parameter,
@@ -267,7 +289,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMin"/> is null.
 		/// </exception>
 		private static IValidatingParameter<T> IsGreaterThan<T>(
 			this IParameter<T> parameter,
@@ -280,10 +302,15 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (exclusiveMin == null)
+			{
+				throw new ArgumentNullException(nameof(exclusiveMin));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
-					if (SafeComparer.Compare(p.Value, exclusiveMin) <= 0)
+					if (p.Value != null && SafeComparer.Compare(p.Value, exclusiveMin) <= 0)
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
@@ -308,14 +335,18 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="inclusiveMin"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsGreaterThanOrEqualTo<T>(this IParameter<T> parameter, T inclusiveMin)
 			where T : IComparable<T>
 		{
 			return parameter.IsGreaterThanOrEqualTo(
 				inclusiveMin,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForGreaterThanOrEqualTo, inclusiveMin, p.Value));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForGreaterThanOrEqualTo,
+					inclusiveMin.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -335,7 +366,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="inclusiveMin"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsGreaterThanOrEqualTo<T>(
 			this IParameter<T> parameter,
@@ -363,7 +394,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="inclusiveMin"/> is null.
 		/// </exception>
 		private static IValidatingParameter<T> IsGreaterThanOrEqualTo<T>(
 			this IParameter<T> parameter,
@@ -376,10 +407,15 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (inclusiveMin == null)
+			{
+				throw new ArgumentNullException(nameof(inclusiveMin));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
-					if (SafeComparer.Compare(p.Value, inclusiveMin) < 0)
+					if (p.Value != null && SafeComparer.Compare(p.Value, inclusiveMin) < 0)
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
@@ -404,7 +440,10 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter" /> is null.
+		/// <paramref name="parameter"/> or <paramref name="min"/> or <paramref name="max"/> is null.
+		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
 		public static IValidatingParameter<T> IsWithinRange<T>(this IParameter<T> parameter, T min, T max)
 			where T : IComparable<T>
@@ -412,7 +451,12 @@ namespace Paravaly
 			return parameter.IsWithinRange(
 				min,
 				max,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForOutOfRange, min, max, p.Value));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForOutOfRange,
+					min.ToPrettyString(),
+					max.ToPrettyString(),
+					p.Value.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -432,7 +476,10 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="min"/> or <paramref name="max"/> is null.
+		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
 		public static IValidatingParameter<T> IsWithinRange<T>(
 			this IParameter<T> parameter,
@@ -461,7 +508,10 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="min"/> or <paramref name="max"/> is null.
+		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
 		private static IValidatingParameter<T> IsWithinRange<T>(
 			this IParameter<T> parameter,
@@ -475,10 +525,26 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (min == null)
+			{
+				throw new ArgumentNullException(nameof(min));
+			}
+
+			if (max == null)
+			{
+				throw new ArgumentNullException(nameof(max));
+			}
+
+			if (SafeComparer.Compare(min, max) > 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(min));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
-					if (SafeComparer.Compare(p.Value, min) < 0 || SafeComparer.Compare(p.Value, max) > 0)
+					if (p.Value != null
+						&& (SafeComparer.Compare(p.Value, min) < 0 || SafeComparer.Compare(p.Value, max) > 0))
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}

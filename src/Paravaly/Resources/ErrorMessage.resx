@@ -157,7 +157,7 @@
     <value>The parameter value is not valid. Valid Values: {0}. Actual value: {1}.</value>
   </data>
   <data name="ForIsNotRegexMatch" xml:space="preserve">
-    <value>The parameter value doesn't match the regular expression. Regular Expression: {0}.</value>
+    <value>The parameter value doesn't match the regular expression. Regular Expression: {0}. Actual value: {1}.</value>
   </data>
   <data name="ForLessThan" xml:space="preserve">
     <value>The parameter should be less than {0}. Actual value: {1}.</value>
@@ -166,7 +166,7 @@
     <value>The parameter should be less than or equal to {0}. Actual value: {1}.</value>
   </data>
   <data name="ForMissingText" xml:space="preserve">
-    <value>The parameter value should contain the text: '{0}'.</value>
+    <value>The parameter value should contain the text: '{0}'. Actual value: {1}.</value>
   </data>
   <data name="ForNaN" xml:space="preserve">
     <value>The parameter value is not a number.</value>
@@ -175,7 +175,7 @@
     <value>The parameter type is not assignable to type '{0}'. Actual type: {1}.</value>
   </data>
   <data name="ForNotEqualString" xml:space="preserve">
-    <value>The parameter should be different from '{0}'.</value>
+    <value>The parameter should be different from '{0}'. Actual type: {1}.</value>
   </data>
   <data name="ForOutOfRange" xml:space="preserve">
     <value>The parameter is outside the allowable range of values. Minimum: {0}. Maximum: {1}. Actual value: {2}.</value>

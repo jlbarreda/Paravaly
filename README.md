@@ -19,6 +19,19 @@ public void SomeMethod(string text, int x)
         .AndParameter(nameof(x), x).IsGreaterThan(0);
 }
 ```
+This does the same thing combining several validations for one parameter.
+```csharp
+public void SomeMethod(string text, int x)
+{
+    Require
+        .Parameter(nameof(text), text)
+            .IsNotNull()
+            .IsNotEmpty()
+            .IsNotWhiteSpace()
+        .AndParameter(nameof(x), x)
+		    .IsGreaterThan(0);
+}
+```
 ### But I want to get all exceptions. not just the first one!
 In that case you can use `RequireAll` for your validation, calling the `Apply` method at the end.
 If one or more rules are broken, a `Paravaly.ParameterValidationException` will get thrown. This

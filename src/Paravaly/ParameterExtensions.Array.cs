@@ -84,7 +84,9 @@ namespace Paravaly
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
 		/// </returns>
-		/// <exception cref="ArgumentNullException"><paramref name="parameter" /> is null.</exception>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> is null.
+		/// </exception>
 		public static IValidatingParameter<T[]> All<T>(
 			this IParameter<T[]> parameter,
 			Func<T, bool> predicate)
@@ -108,7 +110,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T[]> All<T>(
 			this IParameter<T[]> parameter,
@@ -118,6 +120,11 @@ namespace Paravaly
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (predicate == null)
+			{
+				throw new ArgumentNullException(nameof(predicate));
 			}
 
 			return parameter.IsValid(
@@ -146,7 +153,9 @@ namespace Paravaly
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
 		/// </returns>
-		/// <exception cref="ArgumentNullException"><paramref name="parameter" /> is null.</exception>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> is null.
+		/// </exception>
 		public static IValidatingParameter<T[]> Any<T>(
 			this IParameter<T[]> parameter,
 			Func<T, bool> predicate)
@@ -170,7 +179,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T[]> Any<T>(
 			this IParameter<T[]> parameter,
@@ -180,6 +189,11 @@ namespace Paravaly
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (predicate == null)
+			{
+				throw new ArgumentNullException(nameof(predicate));
 			}
 
 			return parameter.IsValid(
@@ -208,7 +222,9 @@ namespace Paravaly
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
 		/// </returns>
-		/// <exception cref="ArgumentNullException"><paramref name="parameter" /> is null.</exception>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> is null.
+		/// </exception>
 		public static IValidatingParameter<T[]> None<T>(
 			this IParameter<T[]> parameter,
 			Func<T, bool> predicate)
@@ -232,7 +248,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T[]> None<T>(
 			this IParameter<T[]> parameter,
@@ -242,6 +258,11 @@ namespace Paravaly
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (predicate == null)
+			{
+				throw new ArgumentNullException(nameof(predicate));
 			}
 
 			return parameter.IsValid(
@@ -368,12 +389,20 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
+		/// </exception>
 		public static IValidatingParameter<T[]> HasLengthWithinRange<T>(this IParameter<T[]> parameter, int min, int max)
 		{
 			return parameter.HasLengthWithinRange(
 				min,
 				max,
-				p => string.Format(CultureInfo.CurrentCulture, ErrorMessage.ForOutOfRangeLength, min, max, p.Value?.Length));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForOutOfRangeLength,
+					min,
+					max,
+					p.Value?.Length.ToPrettyString()));
 		}
 
 		/// <summary>
@@ -394,6 +423,9 @@ namespace Paravaly
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
+		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
 		public static IValidatingParameter<T[]> HasLengthWithinRange<T>(
 			this IParameter<T[]> parameter,
@@ -423,6 +455,9 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
+		/// </exception>
 		private static IValidatingParameter<T[]> HasLengthWithinRange<T>(
 			this IParameter<T[]> parameter,
 			int min,
@@ -434,10 +469,16 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
+			if (SafeComparer.Compare(min, max) > 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(min));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && (p.Value.Length < min || p.Value.Length > max))
+					if (p.Value != null
+						&& (p.Value.Length < min || p.Value.Length > max))
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}

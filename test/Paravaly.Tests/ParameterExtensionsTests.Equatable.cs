@@ -1,5 +1,6 @@
 ﻿using System;
 using Paravaly.Tests.Helpers;
+using Shouldly;
 using Xunit;
 
 namespace Paravaly.Tests
@@ -67,6 +68,12 @@ namespace Paravaly.Tests
 		public void IsIn_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsIn(new[] { 1, 2 }, "Error"));
+		}
+
+		[Fact]
+		public void IsIn_with_error_message_throws_if_validValues_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", "x").IsIn(null));
 		}
 
 		#endregion

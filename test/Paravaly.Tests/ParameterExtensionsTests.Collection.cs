@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Paravaly.Tests.Helpers;
+using Shouldly;
 using Xunit;
 
 namespace Paravaly.Tests
@@ -16,6 +17,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid<ICollection<int>>(
 				Enumerable.Range(1, 1).ToList(),
+				ParameterExtensions.IsNotEmpty);
+		}
+
+		[Fact]
+		public void IsNotEmpty_for_ICollection_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(ICollection<int>)null,
 				ParameterExtensions.IsNotEmpty);
 		}
 
@@ -71,6 +80,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void All_for_ICollection_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(ICollection<string>)null,
+				p => p.All(x => !string.IsNullOrEmpty(x)));
+		}
+
+		[Fact]
 		public void All_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<string>>(
@@ -109,6 +126,12 @@ namespace Paravaly.Tests
 				p => p.All(x => !string.IsNullOrEmpty(x), "Error"));
 		}
 
+		[Fact]
+		public void All_for_ICollection_throws_if_predicate_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", (ICollection<int>)null).All(null));
+		}
+
 		#endregion
 
 		#region Any
@@ -118,6 +141,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid<ICollection<string>>(
 				new[] { "A", "B" },
+				p => p.Any(x => !string.IsNullOrEmpty(x)));
+		}
+
+		[Fact]
+		public void Any_for_ICollection_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(ICollection<string>)null,
 				p => p.Any(x => !string.IsNullOrEmpty(x)));
 		}
 
@@ -160,6 +191,12 @@ namespace Paravaly.Tests
 				p => p.Any(x => !string.IsNullOrEmpty(x), "Error"));
 		}
 
+		[Fact]
+		public void Any_for_ICollection_throws_if_predicate_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", (ICollection<int>)null).Any(null));
+		}
+
 		#endregion
 
 		#region None
@@ -169,6 +206,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid<ICollection<string>>(
 				new[] { "A", "B" },
+				p => p.None(x => string.IsNullOrEmpty(x)));
+		}
+
+		[Fact]
+		public void None_for_ICollection_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(ICollection<string>)null,
 				p => p.None(x => string.IsNullOrEmpty(x)));
 		}
 
@@ -211,6 +256,12 @@ namespace Paravaly.Tests
 				p => p.None(x => string.IsNullOrEmpty(x), "Error"));
 		}
 
+		[Fact]
+		public void None_for_ICollection_throws_if_predicate_is_null()
+		{
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", (ICollection<int>)null).None(null));
+		}
+
 		#endregion
 
 		#region HasNoNullElements for collection with nullables
@@ -220,6 +271,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid<ICollection<int?>>(
 				new int?[] { 1, 2 },
+				ParameterExtensions.HasNoNullElements);
+		}
+
+		[Fact]
+		public void HasNoNullElements_for_ICollection_for_nullables_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(ICollection<int?>)null,
 				ParameterExtensions.HasNoNullElements);
 		}
 
@@ -275,6 +334,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void HasNoNullElements_for_ICollection_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(ICollection<int?>)null,
+				ParameterExtensions.HasNoNullElements);
+		}
+
+		[Fact]
 		public void HasNoNullElements_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<string>>(
@@ -326,6 +393,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void HasCountWithinRange_for_ICollection_works_with_null_values()
+		{
+			CommonValidationTests.IsValid(
+				(ICollection<int>)null,
+				p => p.HasCountWithinRange(1, 1));
+		}
+
+		[Fact]
 		public void HasCountWithinRange_for_ICollection_works_with_invalid_values()
 		{
 			CommonValidationTests.IsNotValid<ICollection<CultureInfo>>(
@@ -362,6 +437,12 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<ICollection<CultureInfo>>(
 				p => p.HasCountWithinRange(1, 1, string.Empty));
+		}
+
+		[Fact]
+		public void HasCountWithinRange_for_ICollection_throws_if_min_is_greater_than_max()
+		{
+			Should.Throw<ArgumentOutOfRangeException>(() => Require.Parameter("x", (ICollection<int>)null).HasCountWithinRange(1, 0));
 		}
 
 		#endregion

@@ -17,6 +17,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsNotEmpty_for_string_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				ParameterExtensions.IsNotEmpty);
+		}
+
+		[Fact]
 		public void IsNotEmpty_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
@@ -211,7 +219,15 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				"XYZ",
-				p => p.StartsWith("x"));
+				p => p.StartsWith("X"));
+		}
+
+		[Fact]
+		public void StartsWith_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.StartsWith("X"));
 		}
 
 		[Fact]
@@ -219,7 +235,7 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				"XYZ",
-				p => p.StartsWith("X", StringComparison.Ordinal));
+				p => p.StartsWith("x", StringComparison.OrdinalIgnoreCase));
 		}
 
 		[Fact]
@@ -280,6 +296,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void Contains_for_string_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.Contains("Y"));
+		}
+
+		[Fact]
 		public void Contains_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
@@ -325,7 +349,15 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				"XYZ",
-				p => p.EndsWith("z"));
+				p => p.EndsWith("Z"));
+		}
+
+		[Fact]
+		public void EndsWith_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.EndsWith("Z"));
 		}
 
 		[Fact]
@@ -333,7 +365,7 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				"XYZ",
-				p => p.EndsWith("Z", StringComparison.Ordinal));
+				p => p.EndsWith("z", StringComparison.OrdinalIgnoreCase));
 		}
 
 		[Fact]
@@ -394,6 +426,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsMatch_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.IsMatch("X{1}"));
+		}
+
+		[Fact]
 		public void IsMatch_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
@@ -439,6 +479,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				"X",
+				p => p.IsNotEqualTo("A"));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_for_string_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
 				p => p.IsNotEqualTo("A"));
 		}
 
@@ -500,6 +548,14 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void HasLengthWithinRange_for_string_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.HasLengthWithinRange(1, 1));
+		}
+
+		[Fact]
 		public void HasLengthWithinRange_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
@@ -547,6 +603,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				"X",
+				p => p.HasLength(1));
+		}
+
+		[Fact]
+		public void HasLength_for_string_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
 				p => p.HasLength(1));
 		}
 
