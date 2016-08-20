@@ -7,7 +7,7 @@ namespace Paravaly
 	/// Represents a parameter with no validation conditions applied to it.
 	/// </summary>
 	/// <typeparam name="T">The parameter type.</typeparam>
-	public interface IParameter<T>
+	public interface IParameter<out T>
 	{
 		/// <summary>
 		/// Determines whether the current parameter is valid.

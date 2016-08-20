@@ -6,7 +6,7 @@ namespace Paravaly
 	/// Represents a parameter that has at least one validation applied to it.
 	/// </summary>
 	/// <typeparam name="T">The parameter type.</typeparam>
-	public interface IValidatingParameter<T> : IParameter<T>
+	public interface IValidatingParameter<out T> : IParameter<T>
 	{
 		/// <summary>
 		/// Adds another parameter to the current validation.

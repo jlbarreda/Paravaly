@@ -80,6 +80,12 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void All_for_ICollection_works_with_derived_values()
+		{
+			Require.Parameter("x", new List<string> { "A", "B" }).All(x => !string.IsNullOrEmpty(x));
+		}
+
+		[Fact]
 		public void All_for_ICollection_works_with_null_values()
 		{
 			CommonValidationTests.IsValid(
@@ -129,7 +135,7 @@ namespace Paravaly.Tests
 		[Fact]
 		public void All_for_ICollection_throws_if_predicate_is_null()
 		{
-			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", (ICollection<int>)null).All(null));
+			Should.Throw<ArgumentNullException>(() => Require.Parameter("x", (List<int>)null).All(null));
 		}
 
 		#endregion

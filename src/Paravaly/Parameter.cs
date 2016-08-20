@@ -68,7 +68,7 @@ namespace Paravaly
 		/// <value>
 		/// The parameter value.
 		/// </value>
-		public T Value
+		T IValidatableParameter<T>.Value
 		{
 			get
 			{
@@ -103,7 +103,7 @@ namespace Paravaly
 		/// Adds or throws the specified exception depending on the current validation mode.
 		/// </summary>
 		/// <param name="exception">The exception to be handled.</param>
-		public void Handle(Exception exception)
+		void IValidatableParameter<T>.Handle(Exception exception)
 		{
 			if (this.throwAll)
 			{
