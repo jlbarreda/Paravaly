@@ -1,15 +1,12 @@
-﻿using System.Diagnostics;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace Paravaly
 {
 	/// <summary>
 	/// Provides methods to start parameter validation.
 	/// </summary>
-	public sealed class Require : IRequire
+	public interface IRequire
 	{
-		private static readonly IRequire require = new Require();
-
 		/// <summary>
 		/// Starts parameter validation. An exception is thrown as soon as any validation fails.
 		/// </summary>
@@ -20,11 +17,7 @@ namespace Paravaly
 		/// An object implementing <see cref="IParameter{T}"/> used to continue the validation of
 		/// the parameter in a fluent way.
 		/// </returns>
-		[DebuggerStepThrough]
-		public static IParameter<T> Parameter<T>(string name, [NoEnumeration]T value)
-		{
-			return require.Parameter(name, value);
-		}
+		IParameter<T> Parameter<T>(string name, [NoEnumeration]T value);
 
 		/// <summary>
 		/// Starts parameter validation. An exception is thrown as soon as any validation fails.
@@ -41,31 +34,6 @@ namespace Paravaly
 		/// An object implementing <see cref="IParameter{T}" /> used to continue the validation of
 		/// the parameter in a fluent way.
 		/// </returns>
-		[DebuggerStepThrough]
-		public static IParameter<T> Parameter<T, TParameterAsProperty>(
-			TParameterAsProperty parameterAsProperty,
-			[NoEnumeration]T value)
-		{
-			return require.Parameter(parameterAsProperty, value);
-		}
-
-		/// <inheritdoc />
-		[DebuggerStepThrough]
-		IParameter<T> IRequire.Parameter<T>(string name, [NoEnumeration]T value)
-		{
-			return new Parameter<T>(name, value, ExceptionHandlingMode.ThrowFirst);
-		}
-
-		/// <inheritdoc />
-		[DebuggerStepThrough]
-		IParameter<T> IRequire.Parameter<T, TParameterAsProperty>(
-			TParameterAsProperty parameterAsProperty,
-			[NoEnumeration]T value)
-		{
-			return new Parameter<T>(
-				ParameterInfoResolution.NameFromProperty(parameterAsProperty),
-				value,
-				ExceptionHandlingMode.ThrowFirst);
-		}
+		IParameter<T> Parameter<T, TParameterAsProperty>(TParameterAsProperty parameterAsProperty, [NoEnumeration]T value);
 	}
 }

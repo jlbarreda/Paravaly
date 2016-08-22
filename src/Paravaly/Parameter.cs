@@ -14,6 +14,7 @@ namespace Paravaly
 		private readonly T value;
 		private readonly List<Exception> exceptions;
 		private readonly bool throwAll;
+		private readonly bool ignore;
 
 		internal Parameter(string name, T value, ExceptionHandlingMode exceptionHandlingMode)
 			: this(name, value, exceptionHandlingMode, new List<Exception>())
@@ -46,6 +47,7 @@ namespace Paravaly
 			this.name = name;
 			this.exceptions = exceptions;
 			this.throwAll = exceptionHandlingMode == ExceptionHandlingMode.ThrowAll;
+			this.ignore = exceptionHandlingMode == ExceptionHandlingMode.Ignore;
 		}
 
 		/// <summary>
@@ -105,6 +107,11 @@ namespace Paravaly
 		/// <param name="exception">The exception to be handled.</param>
 		void IValidatableParameter<T>.Handle(Exception exception)
 		{
+			if (this.ignore)
+			{
+				return;
+			}
+
 			if (this.throwAll)
 			{
 				this.exceptions.Add(exception);
@@ -132,7 +139,41 @@ namespace Paravaly
 			return new Parameter<TParameter>(
 				parameterName,
 				parameterValue,
-				this.throwAll ? ExceptionHandlingMode.ThrowAll : ExceptionHandlingMode.ThrowFirst,
+				this.ignore
+					? ExceptionHandlingMode.Ignore
+					: this.throwAll
+						? ExceptionHandlingMode.ThrowAll
+						: ExceptionHandlingMode.ThrowFirst,
+				this.exceptions);
+		}
+
+		/// <summary>
+		/// Adds another parameter to the current validation.
+		/// </summary>
+		/// <typeparam name="TParameter">The parameter type.</typeparam>
+		/// <typeparam name="TParameterAsProperty">
+		/// The type of <paramref name="parameterAsProperty"/>.
+		/// </typeparam>
+		/// <param name="parameterAsProperty">
+		/// An anonymous object with the parameter as a property (e.g. new { parameter }).
+		/// </param>
+		/// <param name="parameterValue">The parameter value.</param>
+		/// <returns>
+		/// An object implementing <see cref="IParameter{T}"/> used to continue the validation of
+		/// the parameter in a fluent way.
+		/// </returns>
+		public IParameter<TParameter> AndParameter<TParameter, TParameterAsProperty>(
+			TParameterAsProperty parameterAsProperty,
+			[NoEnumeration]TParameter parameterValue)
+		{
+			return new Parameter<TParameter>(
+				ParameterInfoResolution.NameFromProperty(parameterAsProperty),
+				parameterValue,
+				this.ignore
+					? ExceptionHandlingMode.Ignore
+					: this.throwAll
+						? ExceptionHandlingMode.ThrowAll
+						: ExceptionHandlingMode.ThrowFirst,
 				this.exceptions);
 		}
 

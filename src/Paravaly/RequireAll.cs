@@ -6,8 +6,10 @@ namespace Paravaly
 	/// <summary>
 	/// Provides methods to start parameter validation.
 	/// </summary>
-	public static class RequireAll
+	public sealed class RequireAll : IRequire
 	{
+		private static readonly IRequire require = new RequireAll();
+
 		/// <summary>
 		/// Starts parameter validation. All validations are executed and if one or more fail,
 		/// a <see cref="ParameterValidationException"/> containing all relevant exceptions is
@@ -23,7 +25,7 @@ namespace Paravaly
 		[DebuggerStepThrough]
 		public static IParameter<T> Parameter<T>(string name, [NoEnumeration]T value)
 		{
-			return new Parameter<T>(name, value, ExceptionHandlingMode.ThrowAll);
+			return require.Parameter(name, value);
 		}
 
 		/// <summary>
@@ -36,7 +38,7 @@ namespace Paravaly
 		/// The type of <paramref name="parameterAsProperty"/>.
 		/// </typeparam>
 		/// <param name="parameterAsProperty">
-		/// An anonymous object with the parameter as a property.
+		/// An anonymous object with the parameter as a property (e.g. new { parameter }).
 		/// </param>
 		/// <param name="value">The parameter value.</param>
 		/// <returns>
@@ -48,10 +50,26 @@ namespace Paravaly
 			TParameterAsProperty parameterAsProperty,
 			T value)
 		{
+			return require.Parameter(parameterAsProperty, value);
+		}
+
+		/// <inheritdoc />
+		[DebuggerStepThrough]
+		IParameter<T> IRequire.Parameter<T>(string name, [NoEnumeration]T value)
+		{
+			return new Parameter<T>(name, value, ExceptionHandlingMode.ThrowAll);
+		}
+
+		/// <inheritdoc />
+		[DebuggerStepThrough]
+		IParameter<T> IRequire.Parameter<T, TParameterAsProperty>(
+			TParameterAsProperty parameterAsProperty,
+			T value)
+		{
 			return new Parameter<T>(
 				ParameterInfoResolution.NameFromProperty(parameterAsProperty),
 				value,
-				ExceptionHandlingMode.ThrowFirst);
+				ExceptionHandlingMode.ThrowAll);
 		}
 	}
 }

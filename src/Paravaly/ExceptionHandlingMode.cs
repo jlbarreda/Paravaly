@@ -3,6 +3,7 @@
 	internal enum ExceptionHandlingMode
 	{
 		ThrowAll,
-		ThrowFirst
+		ThrowFirst,
+		Ignore
 	}
 }
