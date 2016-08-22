@@ -132,6 +132,9 @@
   <data name="ForContains" xml:space="preserve">
     <value>The parameter value should contain the text: '{0}'. Actual value: {1}.</value>
   </data>
+  <data name="ForContainsKey" xml:space="preserve">
+    <value>The dictionary should contain the key: '{0}'.</value>
+  </data>
   <data name="ForDoesNotContain" xml:space="preserve">
     <value>The parameter value should not contain the text: '{0}'. Actual value: {1}.</value>
   </data>

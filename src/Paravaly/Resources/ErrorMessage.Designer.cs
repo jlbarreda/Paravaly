@@ -109,6 +109,15 @@ namespace Paravaly.Resources {
 		}
 
 		/// <summary>
+		///    Looks up a localized string similar to The dictionary should contain the key: &apos;{0}&apos;..
+		/// </summary>
+		public static string ForContainsKey {
+			get {
+				return ResourceManager.GetString("ForContainsKey", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///    Looks up a localized string similar to The parameter value should not contain the text: &apos;{0}&apos;. Actual value: {1}..
 		/// </summary>
 		public static string ForDoesNotContain {
