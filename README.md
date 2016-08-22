@@ -29,7 +29,7 @@ public void SomeMethod(string text, int x)
             .IsNotEmpty()
             .IsNotWhiteSpace()
         .AndParameter(nameof(x), x)
-		    .IsGreaterThan(0);
+            .IsGreaterThan(0);
 }
 ```
 ### But I want to get all exceptions. not just the first one!
@@ -43,11 +43,20 @@ public void SomeMethod(string text, int x)
     RequireAll
         .Parameter(nameof(text), text).IsNotNullOrWhiteSpace()
         .AndParameter(nameof(x), x).IsGreaterThan(0)
-        .Apply(); // Always call Apply when using Require.All.
+        .Apply(); // Always call Apply when using RequireAll.
 }
 ```
 It's very important to call the `Apply` method at the end or the exception won't get thrown and validation
 will fail silently.
+### If the `nameof` operator is not available
+You can use this syntax.
+```csharp
+public void SomeMethod(string text)
+{
+    Require.Parameter(new { text }, text).IsNotNull();
+}
+```
+Just beware that it's a lot slower, but if performance is not an issue, it's better than hardcoded strings.
 ### What if I don't like the default error message?
 You can pass custom error messages to all validations.
 ```csharp
