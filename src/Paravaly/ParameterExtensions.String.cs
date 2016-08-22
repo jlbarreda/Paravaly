@@ -365,6 +365,156 @@ namespace Paravaly
 
 		#endregion
 
+		#region DoesNotStartWith
+
+		/// <summary>
+		/// Validates that the parameter value does not start with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotStartWith(this IParameter<string> parameter, string text)
+		{
+			return parameter.DoesNotStartWith(text, StringComparison.Ordinal);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not start with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="comparisonType">
+		/// One of the enumeration values that determines how the string is compared.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotStartWith(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison comparisonType)
+		{
+			return parameter.DoesNotStartWith(
+				text,
+				comparisonType,
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForDoesNotStartWith,
+					text.ToPrettyString(),
+					p.Value.ToPrettyString()));
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not start with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotStartWith(
+			this IParameter<string> parameter,
+			string text,
+			string errorMessage)
+		{
+			return parameter.DoesNotStartWith(text, StringComparison.Ordinal, errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not start with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="comparisonType">
+		/// One of the enumeration values that determines how the string is compared.
+		/// </param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotStartWith(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison comparisonType,
+			string errorMessage)
+		{
+			return parameter.DoesNotStartWith(text, comparisonType, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not start with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="comparisonType">
+		/// One of the enumeration values that determines how the string is compared.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		private static IValidatingParameter<string> DoesNotStartWith(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison comparisonType,
+			Func<IValidatableParameter<string>, string> buildErrorMessage)
+		{
+			if (parameter == null)
+			{
+				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			return parameter.IsValid(
+				p =>
+				{
+					if (p.Value != null && p.Value.StartsWith(text, comparisonType))
+					{
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+					}
+				});
+		}
+
+		#endregion
+
 		#region Contains
 
 		/// <summary>
@@ -387,7 +537,7 @@ namespace Paravaly
 				text,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForMissingText,
+					ErrorMessage.ForContains,
 					text.ToPrettyString(),
 					p.Value.ToPrettyString()));
 		}
@@ -445,6 +595,94 @@ namespace Paravaly
 				p =>
 				{
 					if (p.Value != null && !p.Value.Contains(text))
+					{
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+					}
+				});
+		}
+
+		#endregion
+
+		#region DoesNotContain
+
+		/// <summary>
+		/// Validates that the parameter value does not contain the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotContain(this IParameter<string> parameter, string text)
+		{
+			return parameter.DoesNotContain(
+				text,
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForDoesNotContain,
+					text.ToPrettyString(),
+					p.Value.ToPrettyString()));
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not contain the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotContain(this IParameter<string> parameter, string text, string errorMessage)
+		{
+			return parameter.DoesNotContain(text, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not contain the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		private static IValidatingParameter<string> DoesNotContain(
+			this IParameter<string> parameter,
+			string text,
+			Func<IValidatableParameter<string>, string> buildErrorMessage)
+		{
+			if (parameter == null)
+			{
+				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			return parameter.IsValid(
+				p =>
+				{
+					if (p.Value != null && p.Value.Contains(text))
 					{
 						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
@@ -595,6 +833,156 @@ namespace Paravaly
 				p =>
 				{
 					if (p.Value != null && !p.Value.EndsWith(text, comparisonType))
+					{
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+					}
+				});
+		}
+
+		#endregion
+
+		#region DoesNotEndWith
+
+		/// <summary>
+		/// Validates that the parameter value does not end with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotEndWith(this IParameter<string> parameter, string text)
+		{
+			return parameter.DoesNotEndWith(text, StringComparison.Ordinal);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not end with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="comparisonType">
+		/// One of the enumeration values that determines how the string is compared.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotEndWith(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison comparisonType)
+		{
+			return parameter.DoesNotEndWith(
+				text,
+				comparisonType,
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForDoesNotEndWith,
+					text.ToPrettyString(),
+					p.Value.ToPrettyString()));
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not end with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotEndWith(
+			this IParameter<string> parameter,
+			string text,
+			string errorMessage)
+		{
+			return parameter.DoesNotEndWith(text, StringComparison.Ordinal, errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not end with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="comparisonType">
+		/// One of the enumeration values that determines how the string is compared.
+		/// </param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotEndWith(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison comparisonType,
+			string errorMessage)
+		{
+			return parameter.DoesNotEndWith(text, comparisonType, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not end with the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="comparisonType">
+		/// One of the enumeration values that determines how the string is compared.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		private static IValidatingParameter<string> DoesNotEndWith(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison comparisonType,
+			Func<IValidatableParameter<string>, string> buildErrorMessage)
+		{
+			if (parameter == null)
+			{
+				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			return parameter.IsValid(
+				p =>
+				{
+					if (p.Value != null && p.Value.EndsWith(text, comparisonType))
 					{
 						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}

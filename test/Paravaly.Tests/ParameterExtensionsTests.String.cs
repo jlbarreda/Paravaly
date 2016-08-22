@@ -285,6 +285,79 @@ namespace Paravaly.Tests
 
 		#endregion
 
+		#region DoesNotStartWith
+
+		[Fact]
+		public void DoesNotStartWith_works_with_valid_strings()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.DoesNotStartWith("y"));
+		}
+
+		[Fact]
+		public void DoesNotStartWith_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.DoesNotStartWith("X"));
+		}
+
+		[Fact]
+		public void DoesNotStartWith_works_with_valid_strings_and_comparison_type()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.DoesNotStartWith("Y", StringComparison.OrdinalIgnoreCase));
+		}
+
+		[Fact]
+		public void DoesNotStartWith_works_with_invalid_strings()
+		{
+			CommonValidationTests.IsNotValid(
+				"XYZ",
+				p => p.DoesNotStartWith("X"));
+		}
+
+		[Fact]
+		public void DoesNotStartWith_works_with_invalid_strings_and_comparison_type()
+		{
+			CommonValidationTests.IsNotValid(
+				"XYZ",
+				p => p.DoesNotStartWith("X", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void DoesNotStartWith_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				"XYZ",
+				typeof(ArgumentException),
+				p => p.DoesNotStartWith("X"));
+		}
+
+		[Fact]
+		public void DoesNotStartWith_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				"XYZ",
+				(p, e) => p.DoesNotStartWith("X", e));
+		}
+
+		[Fact]
+		public void DoesNotStartWith_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotStartWith("X"));
+		}
+
+		[Fact]
+		public void DoesNotStartWith_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotStartWith("X", "Error"));
+		}
+
+		#endregion
+
 		#region Contains
 
 		[Fact]
@@ -312,7 +385,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Contains_for_string_adds_an_ArgumentException_if_parameter_value_is_empty()
+		public void Contains_for_string_adds_an_ArgumentException_if_parameter_value_is_invalid()
 		{
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				"YZ",
@@ -338,6 +411,63 @@ namespace Paravaly.Tests
 		public void Contains_for_string_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.Contains("X", "Error"));
+		}
+
+		#endregion
+
+		#region DoesNotContain
+
+		[Fact]
+		public void DoesNotContain_for_string_works_with_valid_strings()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.DoesNotContain("A"));
+		}
+
+		[Fact]
+		public void DoesNotContain_for_string_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.DoesNotContain("Y"));
+		}
+
+		[Fact]
+		public void DoesNotContain_for_string_works_with_invalid_strings()
+		{
+			CommonValidationTests.IsNotValid(
+				"X",
+				p => p.DoesNotContain("X"));
+		}
+
+		[Fact]
+		public void DoesNotContain_for_string_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				"XYZ",
+				typeof(ArgumentException),
+				p => p.DoesNotContain("X"));
+		}
+
+		[Fact]
+		public void DoesNotContain_for_string_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				"X",
+				(p, e) => p.DoesNotContain("X", e));
+		}
+
+		[Fact]
+		public void DoesNotContain_for_string_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotContain("X"));
+		}
+
+		[Fact]
+		public void DoesNotContain_for_string_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotContain("X", "Error"));
 		}
 
 		#endregion
@@ -411,6 +541,79 @@ namespace Paravaly.Tests
 		public void EndsWith_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.EndsWith("X", "Error"));
+		}
+
+		#endregion
+
+		#region DoesNotEndWith
+
+		[Fact]
+		public void DoesNotEndWith_works_with_valid_strings()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.DoesNotEndWith("A"));
+		}
+
+		[Fact]
+		public void DoesNotEndWith_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.DoesNotEndWith("Z"));
+		}
+
+		[Fact]
+		public void DoesNotEndWith_works_with_valid_strings_and_comparison_type()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.DoesNotEndWith("y", StringComparison.OrdinalIgnoreCase));
+		}
+
+		[Fact]
+		public void DoesNotEndWith_works_with_invalid_strings()
+		{
+			CommonValidationTests.IsNotValid(
+				"XYZ",
+				p => p.DoesNotEndWith("Z"));
+		}
+
+		[Fact]
+		public void DoesNotEndWith_works_with_invalid_strings_and_comparison_type()
+		{
+			CommonValidationTests.IsNotValid(
+				"XYZ",
+				p => p.DoesNotEndWith("z", StringComparison.OrdinalIgnoreCase));
+		}
+
+		[Fact]
+		public void DoesNotEndWith_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				"XYZ",
+				typeof(ArgumentException),
+				p => p.DoesNotEndWith("Z"));
+		}
+
+		[Fact]
+		public void DoesNotEndWith_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				"XYZ",
+				(p, e) => p.DoesNotEndWith("Z", e));
+		}
+
+		[Fact]
+		public void DoesNotEndWith_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotEndWith("X"));
+		}
+
+		[Fact]
+		public void DoesNotEndWith_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotEndWith("X", "Error"));
 		}
 
 		#endregion

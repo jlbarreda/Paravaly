@@ -129,6 +129,18 @@
   <data name="ForCollectionWithNullElements" xml:space="preserve">
     <value>The collection can't contain null elements.</value>
   </data>
+  <data name="ForContains" xml:space="preserve">
+    <value>The parameter value should contain the text: '{0}'. Actual value: {1}.</value>
+  </data>
+  <data name="ForDoesNotContain" xml:space="preserve">
+    <value>The parameter value should not contain the text: '{0}'. Actual value: {1}.</value>
+  </data>
+  <data name="ForDoesNotEndWith" xml:space="preserve">
+    <value>The parameter value should not end with the text '{0}'. Actual value: '{1}'.</value>
+  </data>
+  <data name="ForDoesNotStartWith" xml:space="preserve">
+    <value>The parameter value should not start with the text '{0}'. Actual value: '{1}'.</value>
+  </data>
   <data name="ForEmpty" xml:space="preserve">
     <value>The parameter should not be empty.</value>
   </data>
@@ -153,8 +165,11 @@
   <data name="ForInvalidType" xml:space="preserve">
     <value>The parameter is not of type '{0}'. Actual type: {1}.</value>
   </data>
-  <data name="ForInvalidValue" xml:space="preserve">
+  <data name="ForIsIn" xml:space="preserve">
     <value>The parameter value is not valid. Valid Values: {0}. Actual value: {1}.</value>
+  </data>
+  <data name="ForIsNotIn" xml:space="preserve">
+    <value>The parameter value is one of a list of invalid values. Invalid Values: {0}. Actual value: {1}.</value>
   </data>
   <data name="ForIsNotRegexMatch" xml:space="preserve">
     <value>The parameter value doesn't match the regular expression. Regular Expression: {0}. Actual value: {1}.</value>
@@ -164,9 +179,6 @@
   </data>
   <data name="ForLessThanOrEqualTo" xml:space="preserve">
     <value>The parameter should be less than or equal to {0}. Actual value: {1}.</value>
-  </data>
-  <data name="ForMissingText" xml:space="preserve">
-    <value>The parameter value should contain the text: '{0}'. Actual value: {1}.</value>
   </data>
   <data name="ForNaN" xml:space="preserve">
     <value>The parameter value is not a number.</value>

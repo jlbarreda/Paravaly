@@ -100,6 +100,42 @@ namespace Paravaly.Resources {
 		}
 
 		/// <summary>
+		///    Looks up a localized string similar to The parameter value should contain the text: &apos;{0}&apos;. Actual value: {1}..
+		/// </summary>
+		public static string ForContains {
+			get {
+				return ResourceManager.GetString("ForContains", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///    Looks up a localized string similar to The parameter value should not contain the text: &apos;{0}&apos;. Actual value: {1}..
+		/// </summary>
+		public static string ForDoesNotContain {
+			get {
+				return ResourceManager.GetString("ForDoesNotContain", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///    Looks up a localized string similar to The parameter value should not end with the text &apos;{0}&apos;. Actual value: &apos;{1}&apos;..
+		/// </summary>
+		public static string ForDoesNotEndWith {
+			get {
+				return ResourceManager.GetString("ForDoesNotEndWith", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///    Looks up a localized string similar to The parameter value should not start with the text &apos;{0}&apos;. Actual value: &apos;{1}&apos;..
+		/// </summary>
+		public static string ForDoesNotStartWith {
+			get {
+				return ResourceManager.GetString("ForDoesNotStartWith", resourceCulture);
+			}
+		}
+
+		/// <summary>
 		///    Looks up a localized string similar to The parameter should not be empty..
 		/// </summary>
 		public static string ForEmpty {
@@ -174,9 +210,18 @@ namespace Paravaly.Resources {
 		/// <summary>
 		///    Looks up a localized string similar to The parameter value is not valid. Valid Values: {0}. Actual value: {1}..
 		/// </summary>
-		public static string ForInvalidValue {
+		public static string ForIsIn {
 			get {
-				return ResourceManager.GetString("ForInvalidValue", resourceCulture);
+				return ResourceManager.GetString("ForIsIn", resourceCulture);
+			}
+		}
+
+		/// <summary>
+		///    Looks up a localized string similar to The parameter value is one of a list of invalid values. Invalid Values: {0}. Actual value: {1}..
+		/// </summary>
+		public static string ForIsNotIn {
+			get {
+				return ResourceManager.GetString("ForIsNotIn", resourceCulture);
 			}
 		}
 
@@ -204,15 +249,6 @@ namespace Paravaly.Resources {
 		public static string ForLessThanOrEqualTo {
 			get {
 				return ResourceManager.GetString("ForLessThanOrEqualTo", resourceCulture);
-			}
-		}
-
-		/// <summary>
-		///    Looks up a localized string similar to The parameter value should contain the text: &apos;{0}&apos;. Actual value: {1}..
-		/// </summary>
-		public static string ForMissingText {
-			get {
-				return ResourceManager.GetString("ForMissingText", resourceCulture);
 			}
 		}
 

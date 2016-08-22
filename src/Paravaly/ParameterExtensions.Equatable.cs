@@ -34,7 +34,7 @@ namespace Paravaly
 				validValues,
 				p => string.Format(
 					CultureInfo.InvariantCulture,
-					ErrorMessage.ForInvalidValue,
+					ErrorMessage.ForIsIn,
 					string.Join(", ", validValues?.Select(v => v.ToPrettyString())?.ToArray() ?? new string[0]),
 					p.Value.ToPrettyString()));
 		}
@@ -102,6 +102,102 @@ namespace Paravaly
 					if (!validValues.Any(x => Equals(x, p.Value)))
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+					}
+				});
+		}
+
+		#endregion
+
+		#region IsNotIn
+
+		/// <summary>
+		/// Validates whether the parameter value is not one of a list of invalid values.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="invalidValues">The list of invalid values.</param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="invalidValues"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotIn<T>(this IParameter<T> parameter, params T[] invalidValues)
+			where T : IEquatable<T>
+		{
+			return parameter.IsNotIn(
+				invalidValues,
+				p => string.Format(
+					CultureInfo.InvariantCulture,
+					ErrorMessage.ForIsNotIn,
+					string.Join(", ", invalidValues?.Select(v => v.ToPrettyString())?.ToArray() ?? new string[0]),
+					p.Value.ToPrettyString()));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not one of a list of invalid values.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="invalidValues">The list of invalid values.</param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="invalidValues"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotIn<T>(
+			this IParameter<T> parameter,
+			IEnumerable<T> invalidValues,
+			string errorMessage)
+			where T : IEquatable<T>
+		{
+			return parameter.IsNotIn(invalidValues, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not one of a list of invalid values.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="invalidValues">The list of invalid values.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="invalidValues"/> is null.
+		/// </exception>
+		private static IValidatingParameter<T> IsNotIn<T>(
+			this IParameter<T> parameter,
+			IEnumerable<T> invalidValues,
+			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			where T : IEquatable<T>
+		{
+			if (parameter == null)
+			{
+				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (invalidValues == null)
+			{
+				throw new ArgumentNullException(nameof(invalidValues));
+			}
+
+			return parameter.IsValid(
+				p =>
+				{
+					if (invalidValues.Any(x => Equals(x, p.Value)))
+					{
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
