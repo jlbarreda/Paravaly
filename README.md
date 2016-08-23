@@ -110,5 +110,22 @@ public void SomeMethod(int x)
                 });
 }
 ```
+### What if I want to disable validation (e.g. for unit testing) or I simply don't like using static methods?
+You can inject one of the `IRequire` implementations instead of using the static methods. You can use
+`Require` or `RequireAll` as you prefer for runtime, and the special class `RequireNothing` to disable validation.
+```csharp
+public MyClass(IRequire require)
+{
+    this.require = require;
+}
+
+private readonly IRequire require;
+
+public void SomeMethod(string text)
+{
+    this.require.Parameter(nameof(text), text).IsNotNull();
+}
+```
+All `IRequire` implementations are stateless, so it's safe to make them singletons.
 ## License
 Licensed under the [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0).
