@@ -1,5 +1,4 @@
-﻿using System;
-using Paravaly.Extensibility;
+﻿using Paravaly.Extensibility;
 using Shouldly;
 using Xunit;
 
