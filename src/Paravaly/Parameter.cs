@@ -13,8 +13,7 @@ namespace Paravaly
 		private readonly string name;
 		private readonly T value;
 		private readonly List<Exception> exceptions;
-		private readonly bool throwAll;
-		private readonly bool ignore;
+		private readonly ExceptionHandlingMode exceptionHandlingMode;
 
 		internal Parameter(string name, T value, ExceptionHandlingMode exceptionHandlingMode)
 			: this(name, value, exceptionHandlingMode, new List<Exception>())
@@ -46,8 +45,7 @@ namespace Paravaly
 			this.value = value;
 			this.name = name;
 			this.exceptions = exceptions;
-			this.throwAll = exceptionHandlingMode == ExceptionHandlingMode.ThrowAll;
-			this.ignore = exceptionHandlingMode == ExceptionHandlingMode.Ignore;
+			this.exceptionHandlingMode = exceptionHandlingMode;
 		}
 
 		/// <summary>
@@ -107,12 +105,12 @@ namespace Paravaly
 		/// <param name="exception">The exception to be handled.</param>
 		void IValidatableParameter<T>.Handle(Exception exception)
 		{
-			if (this.ignore)
+			if (this.exceptionHandlingMode == ExceptionHandlingMode.Ignore)
 			{
 				return;
 			}
 
-			if (this.throwAll)
+			if (this.exceptionHandlingMode == ExceptionHandlingMode.ThrowAll)
 			{
 				this.exceptions.Add(exception);
 			}
@@ -139,11 +137,7 @@ namespace Paravaly
 			return new Parameter<TParameter>(
 				parameterName,
 				parameterValue,
-				this.ignore
-					? ExceptionHandlingMode.Ignore
-					: this.throwAll
-						? ExceptionHandlingMode.ThrowAll
-						: ExceptionHandlingMode.ThrowFirst,
+				this.exceptionHandlingMode,
 				this.exceptions);
 		}
 
@@ -166,15 +160,9 @@ namespace Paravaly
 			TParameterAsProperty parameterAsProperty,
 			[NoEnumeration]TParameter parameterValue)
 		{
-			return new Parameter<TParameter>(
+			return this.AndParameter(
 				ParameterInfoResolution.NameFromProperty(parameterAsProperty),
-				parameterValue,
-				this.ignore
-					? ExceptionHandlingMode.Ignore
-					: this.throwAll
-						? ExceptionHandlingMode.ThrowAll
-						: ExceptionHandlingMode.ThrowFirst,
-				this.exceptions);
+				parameterValue);
 		}
 
 		/// <summary>
