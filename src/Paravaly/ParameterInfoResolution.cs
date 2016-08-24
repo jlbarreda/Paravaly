@@ -37,11 +37,7 @@ namespace Paravaly
 		private static class FirstPropertyCache<T>
 		{
 #pragma warning disable RECS0108 // Warns about static fields in generic types
-#if NETSTANDARD1_0
-			public static readonly PropertyInfo Property = typeof(T).GetTypeInfo().DeclaredProperties.First();
-#else
-			public static readonly PropertyInfo Property = typeof(T).GetProperties().First();
-#endif
+			public static readonly PropertyInfo Property = typeof(T).GetProps().First();
 			public static readonly string Name = Property.Name;
 #pragma warning restore RECS0108 // Warns about static fields in generic types
 		}

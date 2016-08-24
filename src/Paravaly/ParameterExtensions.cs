@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-#if NETSTANDARD1_0
-using System.Reflection;
-#endif
 using Paravaly.Extensibility;
 using Paravaly.Resources;
 
@@ -304,11 +301,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-#if NETSTANDARD1_0
-					if (p.Value != null && !type.GetTypeInfo().IsAssignableFrom(p.Value.GetType().GetTypeInfo()))
-#else
-					if (p.Value != null && !type.IsAssignableFrom(p.Value.GetType()))
-#endif
+					if (p.Value != null && !type.GetInfo().IsAssignableFrom(p.Value.GetType().GetInfo()))
 					{
 						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}

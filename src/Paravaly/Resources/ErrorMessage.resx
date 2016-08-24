@@ -168,14 +168,38 @@
   <data name="ForInvalidType" xml:space="preserve">
     <value>The parameter is not of type '{0}'. Actual type: {1}.</value>
   </data>
+  <data name="ForIsClass" xml:space="preserve">
+    <value>The parameter value is not a class type.</value>
+  </data>
+  <data name="ForIsEnum" xml:space="preserve">
+    <value>The parameter value is not an enumeration.</value>
+  </data>
   <data name="ForIsIn" xml:space="preserve">
     <value>The parameter value is not valid. Valid Values: {0}. Actual value: {1}.</value>
+  </data>
+  <data name="ForIsInterface" xml:space="preserve">
+    <value>The parameter value is not an interface type.</value>
+  </data>
+  <data name="ForIsNotClass" xml:space="preserve">
+    <value>The parameter value is a class type.</value>
+  </data>
+  <data name="ForIsNotEnum" xml:space="preserve">
+    <value>The parameter value is an enumeration.</value>
   </data>
   <data name="ForIsNotIn" xml:space="preserve">
     <value>The parameter value is one of a list of invalid values. Invalid Values: {0}. Actual value: {1}.</value>
   </data>
+  <data name="ForIsNotInterface" xml:space="preserve">
+    <value>The parameter value is an interface type.</value>
+  </data>
   <data name="ForIsNotRegexMatch" xml:space="preserve">
     <value>The parameter value doesn't match the regular expression. Regular Expression: {0}. Actual value: {1}.</value>
+  </data>
+  <data name="ForIsNotValueType" xml:space="preserve">
+    <value>The parameter value is a value type.</value>
+  </data>
+  <data name="ForIsValueType" xml:space="preserve">
+    <value>The parameter value is not a value type.</value>
   </data>
   <data name="ForLessThan" xml:space="preserve">
     <value>The parameter should be less than {0}. Actual value: {1}.</value>
