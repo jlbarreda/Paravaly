@@ -189,8 +189,17 @@
   <data name="ForIsNotIn" xml:space="preserve">
     <value>The parameter value is one of a list of invalid values. Invalid Values: {0}. Actual value: {1}.</value>
   </data>
+  <data name="ForIsNotInfinity" xml:space="preserve">
+    <value>The parameter value is infinity.</value>
+  </data>
   <data name="ForIsNotInterface" xml:space="preserve">
     <value>The parameter value is an interface type.</value>
+  </data>
+  <data name="ForIsNotNegativeInfinity" xml:space="preserve">
+    <value>The parameter value is negative infinity.</value>
+  </data>
+  <data name="ForIsNotPositiveInfinity" xml:space="preserve">
+    <value>The parameter value is positive infinity.</value>
   </data>
   <data name="ForIsNotRegexMatch" xml:space="preserve">
     <value>The parameter value doesn't match the regular expression. Regular Expression: {0}. Actual value: {1}.</value>

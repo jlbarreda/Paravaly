@@ -276,11 +276,38 @@ namespace Paravaly.Resources {
         }
 
         /// <summary>
+        ///    Looks up a localized string similar to The parameter value is infinity..
+        /// </summary>
+        public static string ForIsNotInfinity {
+            get {
+                return ResourceManager.GetString("ForIsNotInfinity", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to The parameter value is an interface type..
         /// </summary>
         public static string ForIsNotInterface {
             get {
                 return ResourceManager.GetString("ForIsNotInterface", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///    Looks up a localized string similar to The parameter value is negative infinity..
+        /// </summary>
+        public static string ForIsNotNegativeInfinity {
+            get {
+                return ResourceManager.GetString("ForIsNotNegativeInfinity", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///    Looks up a localized string similar to The parameter value is positive infinity..
+        /// </summary>
+        public static string ForIsNotPositiveInfinity {
+            get {
+                return ResourceManager.GetString("ForIsNotPositiveInfinity", resourceCulture);
             }
         }
 
