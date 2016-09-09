@@ -166,6 +166,33 @@ namespace Paravaly
 		}
 
 		/// <summary>
+		/// Adds a generic type parameter named 'T' to the current validation.
+		/// </summary>
+		/// <typeparam name="TParameter">The generic type parameter to validate.</typeparam>
+		/// <returns>
+		/// An object implementing <see cref="IParameter{T}"/> used to continue the validation of
+		/// the parameter in a fluent way.
+		/// </returns>
+		public IParameter<Type> AndTypeParameter<TParameter>()
+		{
+			return this.AndTypeParameter<TParameter>(Invariants.DefaultTypeParameterName);
+		}
+
+		/// <summary>
+		/// Adds a generic type parameter to the current validation.
+		/// </summary>
+		/// <typeparam name="TParameter">The generic type parameter to validate.</typeparam>
+		/// <param name="parameterName">The generic type parameter name.</param>
+		/// <returns>
+		/// An object implementing <see cref="IParameter{T}"/> used to continue the validation of
+		/// the parameter in a fluent way.
+		/// </returns>
+		public IParameter<Type> AndTypeParameter<TParameter>(string parameterName)
+		{
+			return this.AndParameter(parameterName, typeof(TParameter));
+		}
+
+		/// <summary>
 		/// Applies rules and throws a <see cref="ParameterValidationException" /> containing all
 		/// exceptions corresponding to all failed validation conditions, if any.
 		/// </summary>

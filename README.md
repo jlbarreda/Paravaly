@@ -6,6 +6,7 @@
 [![NuGet version](https://badge.fury.io/nu/Paravaly.svg)](https://www.nuget.org/packages/Paravaly)
 
 A simple but flexible parameter validation library for .NET.
+
 ## How do I use it?
 ### A simple example
 This will throw an `ArgumentException` if `text` is empty or whitespace; an `ArgumentNullException` if
@@ -32,6 +33,7 @@ public void SomeMethod(string text, int x)
             .IsGreaterThan(0);
 }
 ```
+
 ### But I want to get all exceptions. not just the first one!
 In that case you can use `RequireAll` for your validation, calling the `Apply` method at the end.
 If one or more rules are broken, a `Paravaly.ParameterValidationException` will get thrown. This
@@ -48,6 +50,7 @@ public void SomeMethod(string text, int x)
 ```
 It's very important to call the `Apply` method at the end or the exception won't get thrown and validation
 will fail silently.
+
 ### If the `nameof` operator is not available
 You can use this syntax.
 ```csharp
@@ -57,6 +60,7 @@ public void SomeMethod(string text)
 }
 ```
 Just beware that it's a lot slower, but if performance is not an issue, it's better than hardcoded strings.
+
 ### What if I don't like the default error message?
 You can pass custom error messages to all validations.
 ```csharp
@@ -65,6 +69,7 @@ public void SomeMethod(string text)
     Require.Parameter(nameof(text), text).IsNotNull("Some custom error message.");
 }
 ```
+
 ### Can I add my own custom validations?
 Yes you can. You can create a new extension if you plan on reusing your validation logic. This is
 a sample custom rule for integer types.
@@ -91,7 +96,7 @@ public void SomeMethod(int x)
     Require.Parameter(nameof(x), x).IsLessThan100();
 }
 ```
-If you need something quick for a one time thing, you can use the IsValid method directly.
+If you need something quick for a one time thing, you can use the `IsValid` method directly.
 ```csharp
 public void SomeMethod(int x)
 {
@@ -110,6 +115,25 @@ public void SomeMethod(int x)
                 });
 }
 ```
+
+### Can I validate type parameters?
+Yes, just use the `TypeParameter` method.
+```csharp
+public void SomeMethod<T>()
+{
+    Require.TypeParameter<T>().IsInterface();
+}
+```
+If your type parameter's name is not 'T', you can specify the actual name.
+```csharp
+public void SomeMethod<TInterface, TEnum>()
+{
+    Require
+		.TypeParameter<TInterface>(nameof(TInterface)).IsInterface()
+		.AndTypeParameter<TEnum>(nameof(TEnum)).IsEnum();
+}
+```
+
 ### What if I want to disable validation (e.g. for unit testing) or I simply don't like using static methods?
 You can inject one of the `IRequire` implementations instead of using the static methods. You can use
 `Require` or `RequireAll` as you prefer for runtime, and the special class `RequireNothing` to disable validation.
@@ -127,5 +151,6 @@ public void SomeMethod(string text)
 }
 ```
 All `IRequire` implementations are stateless, so it's safe to make them singletons.
+
 ## License
 Licensed under the [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0).

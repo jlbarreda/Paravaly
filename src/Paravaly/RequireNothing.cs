@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using JetBrains.Annotations;
 
 namespace Paravaly
@@ -25,6 +26,20 @@ namespace Paravaly
 				ParameterInfoResolution.NameFromProperty(parameterAsProperty),
 				value,
 				ExceptionHandlingMode.Ignore);
+		}
+
+		/// <inheritdoc />
+		[DebuggerStepThrough]
+		public IParameter<Type> TypeParameter<T>()
+		{
+			return new Parameter<Type>(Invariants.DefaultTypeParameterName, typeof(T), ExceptionHandlingMode.Ignore);
+		}
+
+		/// <inheritdoc />
+		[DebuggerStepThrough]
+		public IParameter<Type> TypeParameter<T>(string name)
+		{
+			return new Parameter<Type>(name, typeof(T), ExceptionHandlingMode.Ignore);
 		}
 	}
 }
