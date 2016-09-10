@@ -142,30 +142,6 @@ namespace Paravaly
 		}
 
 		/// <summary>
-		/// Adds another parameter to the current validation.
-		/// </summary>
-		/// <typeparam name="TParameter">The parameter type.</typeparam>
-		/// <typeparam name="TParameterAsProperty">
-		/// The type of <paramref name="parameterAsProperty"/>.
-		/// </typeparam>
-		/// <param name="parameterAsProperty">
-		/// An anonymous object with the parameter as a property (e.g. new { parameter }).
-		/// </param>
-		/// <param name="parameterValue">The parameter value.</param>
-		/// <returns>
-		/// An object implementing <see cref="IParameter{T}"/> used to continue the validation of
-		/// the parameter in a fluent way.
-		/// </returns>
-		public IParameter<TParameter> AndParameter<TParameter, TParameterAsProperty>(
-			TParameterAsProperty parameterAsProperty,
-			[NoEnumeration]TParameter parameterValue)
-		{
-			return this.AndParameter(
-				ParameterInfoResolution.NameFromProperty(parameterAsProperty),
-				parameterValue);
-		}
-
-		/// <summary>
 		/// Adds a generic type parameter named 'T' to the current validation.
 		/// </summary>
 		/// <typeparam name="TParameter">The generic type parameter to validate.</typeparam>
@@ -175,7 +151,7 @@ namespace Paravaly
 		/// </returns>
 		public IParameter<Type> AndTypeParameter<TParameter>()
 		{
-			return this.AndTypeParameter<TParameter>(Invariants.DefaultTypeParameterName);
+			return this.AndParameter(Invariants.DefaultTypeParameterName, typeof(TParameter));
 		}
 
 		/// <summary>
