@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace Paravaly
@@ -41,6 +42,36 @@ namespace Paravaly
 		/// the parameter in a fluent way.
 		/// </returns>
 		IParameter<Type> AndTypeParameter<TParameter>(string parameterName);
+
+		/// <summary>
+		/// If any validation failed, returns a <see cref="ParameterValidationException" />
+		/// containing all related exceptions; otherwise null;
+		/// </summary>
+		/// <returns>
+		/// A <see cref="ParameterValidationException" /> containing all validation exceptions;
+		/// otherwise null;
+		/// </returns>
+		/// <remarks>
+		/// This method will never be executed when exceptions are thrown as soon as validations
+		/// fail (e.g. when using <see cref="Require" />), making it useless in those cases. It
+		/// works fine with <see cref="RequireAll" />. When using <see cref="RequireNothing"/> null
+		/// is always returned.
+		/// </remarks>
+		ParameterValidationException ThenGetException();
+
+		/// <summary>
+		/// Gets all failed validation exceptions, if any.
+		/// </summary>
+		/// <returns>
+		/// All failed validation exceptions
+		/// </returns>
+		/// <remarks>
+		/// This method will never be executed when exceptions are thrown as soon as validations
+		/// fail (e.g. when using <see cref="Require"/>), making it useless in those cases. It
+		/// works fine with <see cref="RequireAll" />. When using <see cref="RequireNothing"/> an
+		/// empty collection is always returned.
+		/// </remarks>
+		IEnumerable<Exception> ThenGetExceptions();
 
 		/// <summary>
 		/// Throws a <see cref="ParameterValidationException" /> containing all exceptions

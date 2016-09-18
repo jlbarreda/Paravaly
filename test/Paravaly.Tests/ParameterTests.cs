@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Paravaly.Extensibility;
 using Shouldly;
 using Xunit;
@@ -209,6 +210,124 @@ namespace Paravaly.Tests
 
 			// When/Then
 			Should.NotThrow(() => sut.AndTypeParameter<string>(name).IsInterface().Apply());
+		}
+
+		[Fact]
+		public void ThenGetException_for_RequireNothing_returns_null_when_validation_fails()
+		{
+			// Given
+			var value = 1;
+			var sut = new RequireNothing().Parameter(nameof(value), value);
+
+			// When
+			var result = sut.Is(typeof(string)).ThenGetException();
+
+			// Then
+			result.ShouldBeNull();
+		}
+
+		[Fact]
+		public void ThenGetException_for_RequireNothing_returns_null_when_validation_succeeds()
+		{
+			// Given
+			var value = 1;
+			var sut = new RequireNothing().Parameter(nameof(value), value);
+
+			// When
+			var result = sut.Is(typeof(int)).ThenGetException();
+
+			// Then
+			result.ShouldBeNull();
+		}
+
+		[Fact]
+		public void ThenGetExceptions_for_RequireNothing_returns_empty_when_validation_fails()
+		{
+			// Given
+			var value = 1;
+			var sut = new RequireNothing().Parameter(nameof(value), value);
+
+			// When
+			var result = sut.Is(typeof(string)).ThenGetExceptions();
+
+			// Then
+			result.ShouldNotBeNull();
+			result.ShouldBeEmpty();
+		}
+
+		[Fact]
+		public void ThenGetExceptions_for_RequireNothing_returns_empty_when_validation_succeeds()
+		{
+			// Given
+			var value = 1;
+			var sut = new RequireNothing().Parameter(nameof(value), value);
+
+			// When
+			var result = sut.Is(typeof(int)).ThenGetExceptions();
+
+			// Then
+			result.ShouldNotBeNull();
+			result.ShouldBeEmpty();
+		}
+
+		[Fact]
+		public void ThenGetException_for_RequireAll_returns_exception_when_validation_fails()
+		{
+			// Given
+			var value = 1;
+			var sut = RequireAll.Parameter(nameof(value), value);
+
+			// When
+			var result = sut.Is(typeof(string)).ThenGetException();
+
+			// Then
+			result.ShouldNotBeNull();
+			result.InnerExceptions.ShouldNotBeEmpty();
+		}
+
+		[Fact]
+		public void ThenGetException_for_RequireAll_returns_null_when_validation_succeeds()
+		{
+			// Given
+			var value = 1;
+			var sut = RequireAll.Parameter(nameof(value), value);
+
+			// When
+			var result = sut.Is(typeof(int)).ThenGetException();
+
+			// Then
+			result.ShouldBeNull();
+		}
+
+		[Fact]
+		public void ThenGetExceptions_for_RequireAll_returns_exceptions_when_validation_fails()
+		{
+			// Given
+			var value = 1;
+			var sut = RequireAll.Parameter(nameof(value), value);
+
+			// When
+			var result = sut.Is(typeof(string)).ThenGetExceptions();
+
+			// Then
+			result.ShouldNotBeEmpty();
+			result.ShouldHaveSingleItem();
+			result.FirstOrDefault().ShouldNotBeNull();
+		}
+
+		[Fact]
+		public void ThenGetExceptions_for_RequireAll_returns_empty_when_validation_succeeds()
+		{
+			// Given
+			var value = 1;
+			var sut = RequireAll.Parameter(nameof(value), value);
+
+			// When
+			var result = sut.Is(typeof(int)).ThenGetExceptions();
+
+			// Then
+			result.ShouldNotBeNull();
+			result.ShouldBeEmpty();
 		}
 	}
 }
