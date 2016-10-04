@@ -28,7 +28,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> IsNotEmpty(this IParameter<string> parameter)
 		{
-			return parameter.IsNotEmpty(ErrorMessage.ForEmpty);
+			return parameter.IsNotEmpty(ErrorMsg.ForEmpty);
 		}
 
 		/// <summary>
@@ -83,7 +83,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> IsNotWhiteSpace(this IParameter<string> parameter)
 		{
-			return parameter.IsNotWhiteSpace(ErrorMessage.ForWhiteSpace);
+			return parameter.IsNotWhiteSpace(ErrorMsg.ForWhiteSpace);
 		}
 
 		/// <summary>

@@ -26,6 +26,7 @@ indent_size = 2
 
 # Json files
 [*.json]
+indent_style = space
 indent_size = 2
 
 # Scripts

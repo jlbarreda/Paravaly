@@ -23,7 +23,8 @@
   "buildOptions": {
     "additionalArguments": [ "/ruleset:../../tools/CodeAnalysis/Paravaly.ruleset", "/additionalfile:../../tools/CodeAnalysis/StyleCop.json" ],
     "xmlDoc": true,
-    "warningsAsErrors": true
+    "warningsAsErrors": true,
+    "optimize": true
   },
 
   "configurations": {

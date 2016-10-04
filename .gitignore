@@ -303,3 +303,4 @@ $RECYCLE.BIN/
 *.lnk
 
 /build-tools
+ErrorMsg.cs
