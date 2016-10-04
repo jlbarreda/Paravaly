@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Paravaly.Extensibility;
@@ -28,7 +28,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> IsNotEmpty(this IParameter<string> parameter)
 		{
-			return parameter.IsNotEmpty(ErrorMsg.ForEmpty);
+			return parameter.IsNotEmpty(ErrorMessage.ForEmpty);
 		}
 
 		/// <summary>
@@ -83,7 +83,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> IsNotWhiteSpace(this IParameter<string> parameter)
 		{
-			return parameter.IsNotWhiteSpace(ErrorMsg.ForWhiteSpace);
+			return parameter.IsNotWhiteSpace(ErrorMessage.ForWhiteSpace);
 		}
 
 		/// <summary>
