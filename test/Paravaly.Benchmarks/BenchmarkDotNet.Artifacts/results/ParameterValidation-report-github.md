@@ -14,11 +14,10 @@ Type=ParameterValidation  Mode=Throughput
 ```
           Method |      Median |    StdDev |
 ---------------- |------------ |---------- |
- IsNotWhiteSpace | 126.3322 ns | 0.4504 ns |
-      IsNotEmpty | 146.2557 ns | 1.3683 ns |
- |
-erValidation_IsNotWhiteSpace
-  ParameterValidation_IsNotEmpty
+ IsNotWhiteSpace | 311.3071 ns | 2.5425 ns |
+      IsNotEmpty | 295.8326 ns | 1.6656 ns |
+ LocalIsNotEmpty |  79.8310 ns | 0.3608 ns |
+alidation_IsNotEmpty
       NA |        NA |
 
 Benchmarks with issues:

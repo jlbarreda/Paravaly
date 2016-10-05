@@ -20,11 +20,11 @@ namespace Paravaly.Benchmarks
 			return this.DoIsNotEmpty("Some test");
 		}
 
-		//[Benchmark]
-		//public bool LocalIsNotEmpty()
-		//{
-		//	return this.DoLocalIsNotEmpty("Some test");
-		//}
+		[Benchmark]
+		public bool LocalIsNotEmpty()
+		{
+			return this.DoLocalIsNotEmpty("Some test");
+		}
 
 		//[Benchmark]
 		//public bool RawIsNotEmpty()

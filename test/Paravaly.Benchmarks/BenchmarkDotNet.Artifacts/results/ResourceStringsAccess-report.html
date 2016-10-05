@@ -1,0 +1,18 @@
+<pre><code>
+Host Process Environment Information:
+BenchmarkDotNet.Core=v0.9.9.0
+OS=Windows
+Processor=?, ProcessorCount=16
+Frequency=2539062 ticks, Resolution=393.8462 ns, Timer=TSC
+CLR=CORE, Arch=64-bit ? [RyuJIT]
+GC=Concurrent Workstation
+dotnet cli version: 1.0.0-preview2-003131
+</code></pre>
+<pre><code>Type=ResourceStringsAccess  Mode=Throughput  
+</code></pre>
+
+<table>
+<tr><th>        Method</th><th>Median</th><th>StdDev</th>
+</tr><tr><td>StandardErrorMessage</td><td>156.0498 ns</td><td>0.5012 ns</td>
+</tr><tr><td>CachedErrorMessage</td><td>101.2649 ns</td><td>1.9415 ns</td>
+</tr></table>
