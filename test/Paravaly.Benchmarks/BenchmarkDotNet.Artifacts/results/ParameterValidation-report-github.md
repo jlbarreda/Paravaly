@@ -12,13 +12,7 @@ dotnet cli version: 1.0.0-preview2-003131
 Type=ParameterValidation  Mode=Throughput  
 
 ```
-          Method |      Median |    StdDev |
----------------- |------------ |---------- |
- IsNotWhiteSpace | 311.3071 ns | 2.5425 ns |
-      IsNotEmpty | 295.8326 ns | 1.6656 ns |
- LocalIsNotEmpty |  79.8310 ns | 0.3608 ns |
-alidation_IsNotEmpty
-      NA |        NA |
-
-Benchmarks with issues:
-  ParameterValidation_RawIsNotEmpty
+          Method |      Median |     StdDev |
+---------------- |------------ |----------- |
+      IsNotEmpty | 126.3836 ns | 17.9519 ns |
+ IsNotWhiteSpace | 114.7710 ns |  0.3318 ns |

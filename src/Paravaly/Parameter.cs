@@ -54,7 +54,7 @@ namespace Paravaly
 		/// <value>
 		/// The parameter name.
 		/// </value>
-		string IValidatableParameter<T>.Name
+		string IParameterInfo<T>.Name
 		{
 			get
 			{
@@ -68,7 +68,7 @@ namespace Paravaly
 		/// <value>
 		/// The parameter value.
 		/// </value>
-		T IValidatableParameter<T>.Value
+		T IParameterInfo<T>.Value
 		{
 			get
 			{

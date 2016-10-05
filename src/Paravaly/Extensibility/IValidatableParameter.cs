@@ -7,24 +7,8 @@ namespace Paravaly.Extensibility
 	/// methods.
 	/// </summary>
 	/// <typeparam name="T">The parameter type.</typeparam>
-	public interface IValidatableParameter<out T>
+	public interface IValidatableParameter<out T> : IParameterInfo<T>
 	{
-		/// <summary>
-		/// Gets the parameter name.
-		/// </summary>
-		/// <value>
-		/// The parameter name.
-		/// </value>
-		string Name { get; }
-
-		/// <summary>
-		/// Gets the parameter value.
-		/// </summary>
-		/// <value>
-		/// The parameter value.
-		/// </value>
-		T Value { get; }
-
 		/// <summary>
 		/// Adds or throws the specified exception depending on the current validation mode.
 		/// </summary>
