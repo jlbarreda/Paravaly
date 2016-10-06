@@ -1,4 +1,5 @@
 ﻿using System;
+using Paravaly.Extensibility;
 using Paravaly.Resources;
 
 namespace Paravaly
@@ -25,7 +26,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Type> IsClass(this IParameter<Type> parameter)
 		{
-			return parameter.IsClass(ErrorMessage.ForIsClass);
+			return parameter.IsClass(p => ErrorMessage.ForIsClass);
 		}
 
 		/// <summary>
@@ -48,9 +49,37 @@ namespace Paravaly
 			this IParameter<Type> parameter,
 			string errorMessage)
 		{
+			return parameter.IsClass(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter is a class type.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<Type> IsClass(
+			this IParameter<Type> parameter,
+			Func<IParameterInfo<Type>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -58,7 +87,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && !p.Value.GetInfo().IsClass)
 					{
-						p.Handle(new ArgumentException(p.Name, errorMessage));
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -82,7 +111,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Type> IsNotClass(this IParameter<Type> parameter)
 		{
-			return parameter.IsNotClass(ErrorMessage.ForIsNotClass);
+			return parameter.IsNotClass(p => ErrorMessage.ForIsNotClass);
 		}
 
 		/// <summary>
@@ -105,9 +134,37 @@ namespace Paravaly
 			this IParameter<Type> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotClass(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter is not a class type.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<Type> IsNotClass(
+			this IParameter<Type> parameter,
+			Func<IParameterInfo<Type>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -115,7 +172,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && p.Value.GetInfo().IsClass)
 					{
-						p.Handle(new ArgumentException(p.Name, errorMessage));
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -139,7 +196,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Type> IsInterface(this IParameter<Type> parameter)
 		{
-			return parameter.IsInterface(ErrorMessage.ForIsInterface);
+			return parameter.IsInterface(p => ErrorMessage.ForIsInterface);
 		}
 
 		/// <summary>
@@ -162,9 +219,37 @@ namespace Paravaly
 			this IParameter<Type> parameter,
 			string errorMessage)
 		{
+			return parameter.IsInterface(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter is an interface type.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<Type> IsInterface(
+			this IParameter<Type> parameter,
+			Func<IParameterInfo<Type>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -172,7 +257,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && !p.Value.GetInfo().IsInterface)
 					{
-						p.Handle(new ArgumentException(p.Name, errorMessage));
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -196,7 +281,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Type> IsNotInterface(this IParameter<Type> parameter)
 		{
-			return parameter.IsNotInterface(ErrorMessage.ForIsNotInterface);
+			return parameter.IsNotInterface(p => ErrorMessage.ForIsNotInterface);
 		}
 
 		/// <summary>
@@ -219,9 +304,37 @@ namespace Paravaly
 			this IParameter<Type> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotInterface(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter is not an interface type.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<Type> IsNotInterface(
+			this IParameter<Type> parameter,
+			Func<IParameterInfo<Type>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -229,7 +342,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && p.Value.GetInfo().IsInterface)
 					{
-						p.Handle(new ArgumentException(p.Name, errorMessage));
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -253,7 +366,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Type> IsValueType(this IParameter<Type> parameter)
 		{
-			return parameter.IsValueType(ErrorMessage.ForIsValueType);
+			return parameter.IsValueType(p => ErrorMessage.ForIsValueType);
 		}
 
 		/// <summary>
@@ -276,9 +389,37 @@ namespace Paravaly
 			this IParameter<Type> parameter,
 			string errorMessage)
 		{
+			return parameter.IsValueType(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter is a value type.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<Type> IsValueType(
+			this IParameter<Type> parameter,
+			Func<IParameterInfo<Type>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -286,7 +427,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && !p.Value.GetInfo().IsValueType)
 					{
-						p.Handle(new ArgumentException(p.Name, errorMessage));
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -310,7 +451,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Type> IsNotValueType(this IParameter<Type> parameter)
 		{
-			return parameter.IsNotValueType(ErrorMessage.ForIsNotValueType);
+			return parameter.IsNotValueType(p => ErrorMessage.ForIsNotValueType);
 		}
 
 		/// <summary>
@@ -333,9 +474,37 @@ namespace Paravaly
 			this IParameter<Type> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotValueType(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter is not a value type.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<Type> IsNotValueType(
+			this IParameter<Type> parameter,
+			Func<IParameterInfo<Type>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -343,7 +512,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && p.Value.GetInfo().IsValueType)
 					{
-						p.Handle(new ArgumentException(p.Name, errorMessage));
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -367,7 +536,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Type> IsEnum(this IParameter<Type> parameter)
 		{
-			return parameter.IsEnum(ErrorMessage.ForIsEnum);
+			return parameter.IsEnum(p => ErrorMessage.ForIsEnum);
 		}
 
 		/// <summary>
@@ -390,9 +559,37 @@ namespace Paravaly
 			this IParameter<Type> parameter,
 			string errorMessage)
 		{
+			return parameter.IsEnum(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter is an enumeration.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<Type> IsEnum(
+			this IParameter<Type> parameter,
+			Func<IParameterInfo<Type>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -400,7 +597,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && !p.Value.GetInfo().IsEnum)
 					{
-						p.Handle(new ArgumentException(p.Name, errorMessage));
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -424,7 +621,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Type> IsNotEnum(this IParameter<Type> parameter)
 		{
-			return parameter.IsNotEnum(ErrorMessage.ForIsNotEnum);
+			return parameter.IsNotEnum(p => ErrorMessage.ForIsNotEnum);
 		}
 
 		/// <summary>
@@ -447,9 +644,37 @@ namespace Paravaly
 			this IParameter<Type> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotEnum(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter is not an enumeration.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<Type> IsNotEnum(
+			this IParameter<Type> parameter,
+			Func<IParameterInfo<Type>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -457,7 +682,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && p.Value.GetInfo().IsEnum)
 					{
-						p.Handle(new ArgumentException(p.Name, errorMessage));
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
