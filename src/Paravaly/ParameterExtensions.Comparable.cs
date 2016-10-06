@@ -34,7 +34,7 @@ namespace Paravaly
 				exclusiveMax,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForLessThan,
+					ErrorMessage.ForIsLessThan,
 					exclusiveMax.ToPrettyString(),
 					p.Value.ToPrettyString()));
 		}
@@ -137,7 +137,7 @@ namespace Paravaly
 				inclusiveMax,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForLessThanOrEqualTo,
+					ErrorMessage.ForIsLessThanOrEqualTo,
 					inclusiveMax.ToPrettyString(),
 					p.Value.ToPrettyString()));
 		}
@@ -241,7 +241,7 @@ namespace Paravaly
 				exclusiveMin,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForGreaterThan,
+					ErrorMessage.ForIsGreaterThan,
 					exclusiveMin.ToPrettyString(),
 					p.Value.ToPrettyString()));
 		}
@@ -344,7 +344,7 @@ namespace Paravaly
 				inclusiveMin,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForGreaterThanOrEqualTo,
+					ErrorMessage.ForIsGreaterThanOrEqualTo,
 					inclusiveMin.ToPrettyString(),
 					p.Value.ToPrettyString()));
 		}
@@ -453,7 +453,7 @@ namespace Paravaly
 				max,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForOutOfRange,
+					ErrorMessage.ForIsWithinRange,
 					min.ToPrettyString(),
 					max.ToPrettyString(),
 					p.Value.ToPrettyString()));

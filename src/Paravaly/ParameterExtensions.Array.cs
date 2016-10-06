@@ -29,7 +29,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<T[]> IsNotEmpty<T>(this IParameter<T[]> parameter)
 		{
-			return parameter.IsNotEmpty(ErrorMessage.ForEmptyArray);
+			return parameter.IsNotEmpty(ErrorMessage.ForArrayIsNotEmpty);
 		}
 
 		/// <summary>
@@ -91,7 +91,7 @@ namespace Paravaly
 			this IParameter<T[]> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.All(predicate, ErrorMessage.ForArrayWithInvalidElements);
+			return parameter.All(predicate, ErrorMessage.ForArrayAll);
 		}
 
 		/// <summary>
@@ -160,7 +160,7 @@ namespace Paravaly
 			this IParameter<T[]> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.Any(predicate, ErrorMessage.ForArrayWithInvalidElements);
+			return parameter.Any(predicate, ErrorMessage.ForArrayAny);
 		}
 
 		/// <summary>
@@ -229,7 +229,7 @@ namespace Paravaly
 			this IParameter<T[]> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.None(predicate, ErrorMessage.ForArrayWithInvalidElements);
+			return parameter.None(predicate, ErrorMessage.ForArrayNone);
 		}
 
 		/// <summary>
@@ -296,7 +296,7 @@ namespace Paravaly
 		public static IValidatingParameter<T?[]> HasNoNullElements<T>(this IParameter<T?[]> parameter)
 			where T : struct
 		{
-			return parameter.None(x => !x.HasValue, ErrorMessage.ForArrayWithNullElements);
+			return parameter.None(x => !x.HasValue, ErrorMessage.ForArrayHasNoNullElements);
 		}
 
 		/// <summary>
@@ -341,7 +341,7 @@ namespace Paravaly
 		public static IValidatingParameter<T[]> HasNoNullElements<T>(this IParameter<T[]> parameter)
 			where T : class
 		{
-			return parameter.None(x => x == null, ErrorMessage.ForArrayWithNullElements);
+			return parameter.None(x => x == null, ErrorMessage.ForArrayHasNoNullElements);
 		}
 
 		/// <summary>
@@ -399,7 +399,7 @@ namespace Paravaly
 				max,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForOutOfRangeLength,
+					ErrorMessage.ForHasLengthWithinRange,
 					min,
 					max,
 					p.Value?.Length.ToPrettyString()));

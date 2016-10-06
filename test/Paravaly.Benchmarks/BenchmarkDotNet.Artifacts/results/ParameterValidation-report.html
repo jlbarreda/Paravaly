@@ -1,0 +1,20 @@
+<pre><code>
+Host Process Environment Information:
+BenchmarkDotNet.Core=v0.9.9.0
+OS=Windows
+Processor=?, ProcessorCount=16
+Frequency=2539062 ticks, Resolution=393.8462 ns, Timer=TSC
+CLR=CORE, Arch=64-bit ? [RyuJIT]
+GC=Concurrent Workstation
+dotnet cli version: 1.0.0-preview2-003131
+</code></pre>
+<pre><code>Type=ParameterValidation  Mode=Throughput  
+</code></pre>
+
+<table>
+<tr><th>         Method</th><th>Median</th><th>StdDev</th>
+</tr><tr><td>     IsNotEmpty</td><td>107.8067 ns</td><td>1.1202 ns</td>
+</tr><tr><td>IsNotWhiteSpace</td><td>112.1737 ns</td><td>0.6278 ns</td>
+</tr><tr><td>IsNotNullOrEmpty</td><td>138.5465 ns</td><td>6.8998 ns</td>
+</tr><tr><td>IsNotNullOrWhiteSpace</td><td>171.0733 ns</td><td>0.7358 ns</td>
+</tr></table>

@@ -12,4 +12,4 @@ using System.Runtime.CompilerServices;
 
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: InternalsVisibleTo("Paravaly.Tests")]
-[assembly: InternalsVisibleTo("Paravaly.Tests.NetCore")]
+[assembly: InternalsVisibleTo("Paravaly.Benchmarks")]

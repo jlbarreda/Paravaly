@@ -1,0 +1,5 @@
+Type;Method;Mode;Platform;Jit;Toolchain;Runtime;GcMode;LaunchCount;WarmupCount;TargetCount;Affinity;Median;StdDev
+ParameterValidation;IsNotEmpty;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;107.8067 ns;1.1202 ns
+ParameterValidation;IsNotWhiteSpace;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;112.1737 ns;0.6278 ns
+ParameterValidation;IsNotNullOrEmpty;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;138.5465 ns;6.8998 ns
+ParameterValidation;IsNotNullOrWhiteSpace;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;171.0733 ns;0.7358 ns

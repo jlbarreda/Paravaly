@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysi
 		tools\CodeAnalysis\StyleCop.json = tools\CodeAnalysis\StyleCop.json
 	EndProjectSection
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Paravaly.Benchmarks", "test\Paravaly.Benchmarks\Paravaly.Benchmarks.xproj", "{F5796C80-F403-4320-BB37-29C550B3B66E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{EE16475F-D5F1-4EE8-829C-EA951B4DD320}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE16475F-D5F1-4EE8-829C-EA951B4DD320}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE16475F-D5F1-4EE8-829C-EA951B4DD320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5796C80-F403-4320-BB37-29C550B3B66E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5796C80-F403-4320-BB37-29C550B3B66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5796C80-F403-4320-BB37-29C550B3B66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5796C80-F403-4320-BB37-29C550B3B66E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +60,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EE16475F-D5F1-4EE8-829C-EA951B4DD320} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
 		{C122D924-9C22-4637-8131-E2B597942A57} = {5CDE6B7E-33A1-4231-BB50-B9149201317E}
+		{F5796C80-F403-4320-BB37-29C550B3B66E} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
 	EndGlobalSection
 EndGlobal

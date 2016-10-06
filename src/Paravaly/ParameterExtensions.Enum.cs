@@ -35,7 +35,7 @@ namespace Paravaly
 			return parameter.IsValidEnumValue(
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForIsValidEnum,
+					ErrorMessage.ForIsValidEnumValue,
 					typeof(T).FullName,
 					p.Value));
 		}

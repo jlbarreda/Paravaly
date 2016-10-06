@@ -27,14 +27,14 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(name));
 			}
 
-			if (string.IsNullOrWhiteSpace(name))
+			if (name.Length < 1)
 			{
-				if (string.IsNullOrEmpty(name))
-				{
-					throw new ArgumentException(ErrorMessage.ForEmpty, nameof(name));
-				}
+				throw new ArgumentException(ErrorMessage.ForIsNotEmpty, nameof(name));
+			}
 
-				throw new ArgumentException(ErrorMessage.ForWhiteSpace, nameof(name));
+			if (name.IsWhiteSpace())
+			{
+				throw new ArgumentException(ErrorMessage.ForIsNotWhiteSpace, nameof(name));
 			}
 
 			if (exceptions == null)
@@ -54,7 +54,7 @@ namespace Paravaly
 		/// <value>
 		/// The parameter name.
 		/// </value>
-		string IValidatableParameter<T>.Name
+		string IParameterInfo<T>.Name
 		{
 			get
 			{
@@ -68,7 +68,7 @@ namespace Paravaly
 		/// <value>
 		/// The parameter value.
 		/// </value>
-		T IValidatableParameter<T>.Value
+		T IParameterInfo<T>.Value
 		{
 			get
 			{
