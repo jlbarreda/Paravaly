@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ForArrayWithInvalidElements" xml:space="preserve">
+  <data name="ForArrayAll" xml:space="preserve">
     <value>The array contains one or more invalid elements.</value>
   </data>
-  <data name="ForArrayWithNullElements" xml:space="preserve">
+  <data name="ForArrayHasNoNullElements" xml:space="preserve">
     <value>The array can't contain null elements.</value>
   </data>
-  <data name="ForCollectionWithInvalidElements" xml:space="preserve">
+  <data name="ForICollectionAll" xml:space="preserve">
     <value>The collection contains one or more invalid elements.</value>
   </data>
-  <data name="ForCollectionWithNullElements" xml:space="preserve">
+  <data name="ForICollectionHasNoNullElements" xml:space="preserve">
     <value>The collection can't contain null elements.</value>
   </data>
   <data name="ForContains" xml:space="preserve">
@@ -144,25 +144,25 @@
   <data name="ForDoesNotStartWith" xml:space="preserve">
     <value>The parameter value should not start with the text '{0}'. Actual value: '{1}'.</value>
   </data>
-  <data name="ForEmpty" xml:space="preserve">
+  <data name="ForIsNotEmpty" xml:space="preserve">
     <value>The parameter should not be empty.</value>
   </data>
-  <data name="ForEmptyArray" xml:space="preserve">
+  <data name="ForArrayIsNotEmpty" xml:space="preserve">
     <value>The array can't be empty.</value>
   </data>
-  <data name="ForEmptyCollection" xml:space="preserve">
+  <data name="ForICollectionIsNotEmpty" xml:space="preserve">
     <value>The collection can't be empty.</value>
   </data>
   <data name="ForEndsWith" xml:space="preserve">
     <value>The parameter value should end with the text '{0}'. Actual value: '{1}'.</value>
   </data>
-  <data name="ForGreaterThan" xml:space="preserve">
+  <data name="ForIsGreaterThan" xml:space="preserve">
     <value>The parameter should be greater than {0}. Actual value: {1}.</value>
   </data>
-  <data name="ForGreaterThanOrEqualTo" xml:space="preserve">
+  <data name="ForIsGreaterThanOrEqualTo" xml:space="preserve">
     <value>The parameter should be greater than or equal to {0}. Actual value: {1}.</value>
   </data>
-  <data name="ForInvalidLength" xml:space="preserve">
+  <data name="ForStringHasLength" xml:space="preserve">
     <value>The parameter length is not valid. Actual Length: {0}. Expected Length: {1}.</value>
   </data>
   <data name="ForInvalidType" xml:space="preserve">
@@ -201,46 +201,58 @@
   <data name="ForIsNotPositiveInfinity" xml:space="preserve">
     <value>The parameter value is positive infinity.</value>
   </data>
-  <data name="ForIsNotRegexMatch" xml:space="preserve">
+  <data name="ForIsMatch" xml:space="preserve">
     <value>The parameter value doesn't match the regular expression. Regular Expression: {0}. Actual value: {1}.</value>
   </data>
   <data name="ForIsNotValueType" xml:space="preserve">
     <value>The parameter value is a value type.</value>
   </data>
-  <data name="ForIsValidEnum" xml:space="preserve">
+  <data name="ForIsValidEnumValue" xml:space="preserve">
     <value>The parameter value is not valid for enumeration type '{0}'. Actual value: {1}.</value>
   </data>
   <data name="ForIsValueType" xml:space="preserve">
     <value>The parameter value is not a value type.</value>
   </data>
-  <data name="ForLessThan" xml:space="preserve">
+  <data name="ForIsLessThan" xml:space="preserve">
     <value>The parameter should be less than {0}. Actual value: {1}.</value>
   </data>
-  <data name="ForLessThanOrEqualTo" xml:space="preserve">
+  <data name="ForIsLessThanOrEqualTo" xml:space="preserve">
     <value>The parameter should be less than or equal to {0}. Actual value: {1}.</value>
   </data>
-  <data name="ForNaN" xml:space="preserve">
+  <data name="ForIsNotNaN" xml:space="preserve">
     <value>The parameter value is not a number.</value>
   </data>
   <data name="ForNotAssignableType" xml:space="preserve">
     <value>The parameter type is not assignable to type '{0}'. Actual type: {1}.</value>
   </data>
-  <data name="ForNotEqualString" xml:space="preserve">
+  <data name="ForStringIsNotEqualTo" xml:space="preserve">
     <value>The parameter should be different from '{0}'. Actual type: {1}.</value>
   </data>
-  <data name="ForOutOfRange" xml:space="preserve">
+  <data name="ForIsWithinRange" xml:space="preserve">
     <value>The parameter is outside the allowable range of values. Minimum: {0}. Maximum: {1}. Actual value: {2}.</value>
   </data>
-  <data name="ForOutOfRangeCount" xml:space="preserve">
+  <data name="ForHasCountWithinRange" xml:space="preserve">
     <value>The parameter count is outside the allowable range of values. Minimum: {0}. Maximum: {1}. Actual value: {2}.</value>
   </data>
-  <data name="ForOutOfRangeLength" xml:space="preserve">
+  <data name="ForHasLengthWithinRange" xml:space="preserve">
     <value>The parameter length is outside the allowable range of values. Minimum: {0}. Maximum: {1}. Actual value: {2}.</value>
   </data>
   <data name="ForStartsWith" xml:space="preserve">
     <value>The parameter value should start with the text '{0}'. Actual value: '{1}'.</value>
   </data>
-  <data name="ForWhiteSpace" xml:space="preserve">
+  <data name="ForIsNotWhiteSpace" xml:space="preserve">
     <value>The parameter should not contain white space only.</value>
+  </data>
+  <data name="ForICollectionAny" xml:space="preserve">
+    <value>The collection contains one or more invalid elements.</value>
+  </data>
+  <data name="ForICollectionNone" xml:space="preserve">
+    <value>The collection contains one or more invalid elements.</value>
+  </data>
+  <data name="ForArrayAny" xml:space="preserve">
+    <value>The array contains one or more invalid elements.</value>
+  </data>
+  <data name="ForArrayNone" xml:space="preserve">
+    <value>The array contains one or more invalid elements.</value>
   </data>
 </root>

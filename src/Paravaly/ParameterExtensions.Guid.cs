@@ -25,7 +25,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<Guid> IsNotEmpty(this IParameter<Guid> parameter)
 		{
-			return parameter.IsNotEmpty(ErrorMessage.ForEmpty);
+			return parameter.IsNotEmpty(ErrorMessage.ForIsNotEmpty);
 		}
 
 		/// <summary>

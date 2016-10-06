@@ -25,7 +25,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<double> IsNotNaN(this IParameter<double> parameter)
 		{
-			return parameter.IsNotNaN(ErrorMessage.ForNaN);
+			return parameter.IsNotNaN(ErrorMessage.ForIsNotNaN);
 		}
 
 		/// <summary>

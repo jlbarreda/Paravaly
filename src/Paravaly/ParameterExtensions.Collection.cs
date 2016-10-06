@@ -30,7 +30,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<ICollection<T>> IsNotEmpty<T>(this IParameter<ICollection<T>> parameter)
 		{
-			return parameter.IsNotEmpty(ErrorMessage.ForEmptyCollection);
+			return parameter.IsNotEmpty(ErrorMessage.ForICollectionIsNotEmpty);
 		}
 
 		/// <summary>
@@ -92,7 +92,7 @@ namespace Paravaly
 			this IParameter<ICollection<T>> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.All(predicate, ErrorMessage.ForCollectionWithInvalidElements);
+			return parameter.All(predicate, ErrorMessage.ForICollectionAll);
 		}
 
 		/// <summary>
@@ -161,7 +161,7 @@ namespace Paravaly
 			this IParameter<ICollection<T>> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.Any(predicate, ErrorMessage.ForCollectionWithInvalidElements);
+			return parameter.Any(predicate, ErrorMessage.ForICollectionAny);
 		}
 
 		/// <summary>
@@ -230,7 +230,7 @@ namespace Paravaly
 			this IParameter<ICollection<T>> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.None(predicate, ErrorMessage.ForCollectionWithInvalidElements);
+			return parameter.None(predicate, ErrorMessage.ForICollectionNone);
 		}
 
 		/// <summary>
@@ -297,7 +297,7 @@ namespace Paravaly
 		public static IValidatingParameter<ICollection<T?>> HasNoNullElements<T>(this IParameter<ICollection<T?>> parameter)
 			where T : struct
 		{
-			return parameter.None(x => !x.HasValue, ErrorMessage.ForCollectionWithNullElements);
+			return parameter.None(x => !x.HasValue, ErrorMessage.ForICollectionHasNoNullElements);
 		}
 
 		/// <summary>
@@ -342,7 +342,7 @@ namespace Paravaly
 		public static IValidatingParameter<ICollection<T>> HasNoNullElements<T>(this IParameter<ICollection<T>> parameter)
 			where T : class
 		{
-			return parameter.None(x => x == null, ErrorMessage.ForCollectionWithNullElements);
+			return parameter.None(x => x == null, ErrorMessage.ForICollectionHasNoNullElements);
 		}
 
 		/// <summary>
@@ -400,7 +400,7 @@ namespace Paravaly
 				max,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForOutOfRangeCount,
+					ErrorMessage.ForHasCountWithinRange,
 					min,
 					max,
 					p.Value?.Count.ToPrettyString()));

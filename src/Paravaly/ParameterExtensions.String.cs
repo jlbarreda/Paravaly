@@ -28,7 +28,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> IsNotEmpty(this IParameter<string> parameter)
 		{
-			return parameter.IsNotEmpty(p => ErrorMessage.ForEmpty);
+			return parameter.IsNotEmpty(p => ErrorMessage.ForIsNotEmpty);
 		}
 
 		/// <summary>
@@ -111,7 +111,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> IsNotWhiteSpace(this IParameter<string> parameter)
 		{
-			return parameter.IsNotWhiteSpace(p => ErrorMessage.ForWhiteSpace);
+			return parameter.IsNotWhiteSpace(p => ErrorMessage.ForIsNotWhiteSpace);
 		}
 
 		/// <summary>
@@ -168,16 +168,8 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null)
+					if (p.Value.IsWhiteSpace())
 					{
-						foreach (var c in p.Value)
-						{
-							if (!char.IsWhiteSpace(c))
-							{
-								return;
-							}
-						}
-
 						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
@@ -1088,7 +1080,7 @@ namespace Paravaly
 				regex,
 				p => string.Format(
 					CultureInfo.InvariantCulture,
-					ErrorMessage.ForIsNotRegexMatch,
+					ErrorMessage.ForIsMatch,
 					regex.ToPrettyString(),
 					p.Value.ToPrettyString()));
 		}
@@ -1230,7 +1222,7 @@ namespace Paravaly
 				comparisonType,
 				p => string.Format(
 					CultureInfo.InvariantCulture,
-					ErrorMessage.ForNotEqualString,
+					ErrorMessage.ForStringIsNotEqualTo,
 					value.ToPrettyString(),
 					p.Value.ToPrettyString()));
 		}
@@ -1355,7 +1347,7 @@ namespace Paravaly
 				max,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForOutOfRangeLength,
+					ErrorMessage.ForHasLengthWithinRange,
 					min,
 					max,
 					p.Value?.Length));
@@ -1462,7 +1454,7 @@ namespace Paravaly
 				length,
 				p => string.Format(
 					CultureInfo.CurrentCulture,
-					ErrorMessage.ForInvalidLength,
+					ErrorMessage.ForStringHasLength,
 					p.Value?.Length,
 					length));
 		}
