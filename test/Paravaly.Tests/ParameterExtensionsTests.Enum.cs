@@ -13,7 +13,8 @@ namespace Paravaly.Tests
 			First = 1,
 			Second = 2,
 			Third = 4,
-			All = First | Second | Third
+			All = First | Second | Third,
+			Negative = -4
 		}
 
 		#region IsValidEnumValue
@@ -23,6 +24,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				StringComparison.OrdinalIgnoreCase,
+				ParameterExtensions.IsValidEnumValue);
+		}
+
+		[Fact]
+		public void IsValidEnumValue_works_with_valid_negative_values()
+		{
+			CommonValidationTests.IsValid(
+				FlagsEnum.Negative,
 				ParameterExtensions.IsValidEnumValue);
 		}
 
@@ -51,6 +60,14 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsNotValid(
 				(StringComparison)1313,
+				ParameterExtensions.IsValidEnumValue);
+		}
+
+		[Fact]
+		public void IsValidEnumValue_works_with_invalid_negative_values()
+		{
+			CommonValidationTests.IsNotValid(
+				(StringComparison)(-1313),
 				ParameterExtensions.IsValidEnumValue);
 		}
 

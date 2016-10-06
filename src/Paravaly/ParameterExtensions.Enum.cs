@@ -106,11 +106,16 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					var value = p.Value.ToString();
-
-					if (value.Length < 1 || char.IsDigit(value[0]))
+					// Slow!
+					if (!Enum.IsDefined(typeof(T), p.Value))
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						// Slower!
+						var value = p.Value.ToString();
+
+						if (value.Length < 1 || char.IsDigit(value[0]) || value[0] == '-')
+						{
+							p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						}
 					}
 				});
 		}
