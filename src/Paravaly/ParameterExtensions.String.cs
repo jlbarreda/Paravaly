@@ -218,6 +218,29 @@ namespace Paravaly
 			return parameter.IsNotNull(errorMessage).IsNotEmpty(errorMessage);
 		}
 
+		/// <summary>
+		/// Validates whether the parameter value is null or empty.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<string> IsNotNullOrEmpty(
+			this IParameter<string> parameter,
+			Func<IParameterInfo<string>, string> buildErrorMessage)
+		{
+			return parameter.IsNotNull(buildErrorMessage).IsNotEmpty(buildErrorMessage);
+		}
+
 		#endregion
 
 		#region IsNotNullOrWhiteSpace
@@ -259,6 +282,32 @@ namespace Paravaly
 		public static IValidatingParameter<string> IsNotNullOrWhiteSpace(this IParameter<string> parameter, string errorMessage)
 		{
 			return parameter.IsNotNull(errorMessage).IsNotEmpty(errorMessage).IsNotWhiteSpace(errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is null, empty or white space.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<string> IsNotNullOrWhiteSpace(
+			this IParameter<string> parameter,
+			Func<IParameterInfo<string>, string> buildErrorMessage)
+		{
+			return parameter
+				.IsNotNull(buildErrorMessage)
+				.IsNotEmpty(buildErrorMessage)
+				.IsNotWhiteSpace(buildErrorMessage);
 		}
 
 		#endregion
@@ -388,17 +437,22 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter" /> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> StartsWith(
+		public static IValidatingParameter<string> StartsWith(
 			this IParameter<string> parameter,
 			string text,
 			StringComparison comparisonType,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -538,17 +592,22 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter" /> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> DoesNotStartWith(
+		public static IValidatingParameter<string> DoesNotStartWith(
 			this IParameter<string> parameter,
 			string text,
 			StringComparison comparisonType,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -627,16 +686,21 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter" /> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> Contains(
+		public static IValidatingParameter<string> Contains(
 			this IParameter<string> parameter,
 			string text,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -715,16 +779,21 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter" /> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> DoesNotContain(
+		public static IValidatingParameter<string> DoesNotContain(
 			this IParameter<string> parameter,
 			string text,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -814,7 +883,7 @@ namespace Paravaly
 			string text,
 			string errorMessage)
 		{
-			return parameter.EndsWith(text, StringComparison.Ordinal, errorMessage);
+			return parameter.EndsWith(text, StringComparison.Ordinal, p => errorMessage);
 		}
 
 		/// <summary>
@@ -864,17 +933,22 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter" /> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> EndsWith(
+		public static IValidatingParameter<string> EndsWith(
 			this IParameter<string> parameter,
 			string text,
 			StringComparison comparisonType,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -964,7 +1038,7 @@ namespace Paravaly
 			string text,
 			string errorMessage)
 		{
-			return parameter.DoesNotEndWith(text, StringComparison.Ordinal, errorMessage);
+			return parameter.DoesNotEndWith(text, StringComparison.Ordinal, p => errorMessage);
 		}
 
 		/// <summary>
@@ -1014,17 +1088,22 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter" /> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> DoesNotEndWith(
+		public static IValidatingParameter<string> DoesNotEndWith(
 			this IParameter<string> parameter,
 			string text,
 			StringComparison comparisonType,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -1104,7 +1183,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<string> IsMatch(this IParameter<string> parameter, string regex, string errorMessage)
 		{
-			return parameter.IsMatch(new Regex(regex), errorMessage);
+			return parameter.IsMatch(new Regex(regex), p => errorMessage);
 		}
 
 		/// <summary>
@@ -1147,12 +1226,13 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter" /> or <paramref name="regex"/> is null.
+		/// <paramref name="parameter" /> or <paramref name="regex"/> is null
+		/// or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> IsMatch(
+		public static IValidatingParameter<string> IsMatch(
 			this IParameter<string> parameter,
 			Regex regex,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
@@ -1162,6 +1242,11 @@ namespace Paravaly
 			if (regex == null)
 			{
 				throw new ArgumentNullException(nameof(regex));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -1249,7 +1334,7 @@ namespace Paravaly
 			string value,
 			string errorMessage)
 		{
-			return parameter.IsNotEqualTo(value, StringComparison.Ordinal, errorMessage);
+			return parameter.IsNotEqualTo(value, StringComparison.Ordinal, p => errorMessage);
 		}
 
 		/// <summary>
@@ -1295,17 +1380,22 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> IsNotEqualTo(
+		public static IValidatingParameter<string> IsNotEqualTo(
 			this IParameter<string> parameter,
 			string value,
 			StringComparison comparisonType,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -1399,20 +1489,25 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		/// <exception cref="ArgumentOutOfRangeException">
 		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
-		private static IValidatingParameter<string> HasLengthWithinRange(
+		public static IValidatingParameter<string> HasLengthWithinRange(
 			this IParameter<string> parameter,
 			int min,
 			int max,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			if (min > max)
@@ -1499,16 +1594,21 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<string> HasLength(
+		public static IValidatingParameter<string> HasLength(
 			this IParameter<string> parameter,
 			int length,
-			Func<IValidatableParameter<string>, string> buildErrorMessage)
+			Func<IParameterInfo<string>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
