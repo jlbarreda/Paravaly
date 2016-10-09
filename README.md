@@ -10,7 +10,7 @@ A simple but flexible parameter validation library for .NET.
 ## How do I use it?
 ### A simple example
 This will throw an `ArgumentException` if `text` is empty or whitespace; an `ArgumentNullException` if
-`text` is null; and an `ArgumentOutOfRangeException` if `x` is not greater than zero. In this case,
+`text` is null; or an `ArgumentOutOfRangeException` if `x` is not greater than zero. In this case,
 validation stops at the first broken rule and the corresponding exception gets thrown.
 ```csharp
 public void SomeMethod(string text, int x)
@@ -59,7 +59,8 @@ public void SomeMethod(string text)
     Require.Parameter(new { text }, text).IsNotNull();
 }
 ```
-Just beware that it's a lot slower, but if performance is not an issue, it's better than hardcoded strings.
+Just beware that it's a lot slower than using the string parameter (still a lot faster than using an
+`Expression` though), but if performance is not an issue, it's better than hardcoded strings.
 
 ### What if I don't like the default error message?
 You can pass custom error messages to all validations.
@@ -69,7 +70,16 @@ public void SomeMethod(string text)
     Require.Parameter(nameof(text), text).IsNotNull("Some custom error message.");
 }
 ```
-
+You may use the following overload to improve performance when your error message is not a constant
+value (e.g. it comes from a resource file, you're concatenating strings, formatting, etc.).
+```csharp
+public void SomeMethod(string text)
+{
+    Require
+        .Parameter(nameof(text), text)
+        .IsNotNull(p => string.Format(Resources.SomeCustomErrorMessage, p.Name, p.Value));
+}
+```
 ### Can I add my own custom validations?
 Yes you can. You can create a new extension if you plan on reusing your validation logic. This is
 a sample custom rule for integer types.
@@ -129,8 +139,8 @@ If your type parameter's name is not 'T', you can specify the actual name.
 public void SomeMethod<TInterface, TEnum>()
 {
     Require
-		.TypeParameter<TInterface>(nameof(TInterface)).IsInterface()
-		.AndTypeParameter<TEnum>(nameof(TEnum)).IsEnum();
+        .TypeParameter<TInterface>(nameof(TInterface)).IsInterface()
+        .AndTypeParameter<TEnum>(nameof(TEnum)).IsEnum();
 }
 ```
 
@@ -147,10 +157,10 @@ private readonly IRequire require;
 
 public void SomeMethod(string text)
 {
-    this.require.Parameter(nameof(text), text).IsNotNull();
+	this.require.Parameter(nameof(text), text).IsNotNull().Apply();
 }
 ```
-All `IRequire` implementations are stateless, so it's safe to make them singletons.
+All `IRequire` implementations are thread-safe, so it's safe to make them singletons.
 
 ## License
 Licensed under the [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0).
