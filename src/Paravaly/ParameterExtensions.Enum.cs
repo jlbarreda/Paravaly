@@ -83,19 +83,24 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		/// <exception cref="InvalidOperationException">
 		/// <typeparamref name="T"/> is not an enumeration type.
 		/// </exception>
-		private static IValidatingParameter<T> IsValidEnumValue<T>(
+		public static IValidatingParameter<T> IsValidEnumValue<T>(
 			this IParameter<T> parameter,
-			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : struct, IComparable, IFormattable
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			if (!typeof(T).GetInfo().IsEnum)

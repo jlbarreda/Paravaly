@@ -30,7 +30,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<ICollection<T>> IsNotEmpty<T>(this IParameter<ICollection<T>> parameter)
 		{
-			return parameter.IsNotEmpty(ErrorMessage.ForICollectionIsNotEmpty);
+			return parameter.IsNotEmpty(p => ErrorMessage.ForICollectionIsNotEmpty);
 		}
 
 		/// <summary>
@@ -54,9 +54,38 @@ namespace Paravaly
 			this IParameter<ICollection<T>> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotEmpty(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is empty.
+		/// </summary>
+		/// <typeparam name="T">The type of the collection elements.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<ICollection<T>> IsNotEmpty<T>(
+			this IParameter<ICollection<T>> parameter,
+			Func<IParameterInfo<ICollection<T>>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -64,7 +93,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && p.Value.Count < 1)
 					{
-						p.Handle(new ArgumentException(errorMessage, p.Name));
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
 		}
@@ -92,7 +121,7 @@ namespace Paravaly
 			this IParameter<ICollection<T>> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.All(predicate, ErrorMessage.ForICollectionAll);
+			return parameter.All(predicate, p => ErrorMessage.ForICollectionAll);
 		}
 
 		/// <summary>
@@ -118,6 +147,33 @@ namespace Paravaly
 			Func<T, bool> predicate,
 			string errorMessage)
 		{
+			return parameter.All(predicate, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value matches the predicate in all its elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the collection elements.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="predicate">The predicate.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<ICollection<T>> All<T>(
+			this IParameter<ICollection<T>> parameter,
+			Func<T, bool> predicate,
+			Func<IParameterInfo<ICollection<T>>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -128,12 +184,17 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
 					if (p.Value != null && p.Value.Any(x => !predicate(x)))
 					{
-						p.Handle(new ArgumentException(errorMessage, p.Name));
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
 		}
@@ -161,7 +222,7 @@ namespace Paravaly
 			this IParameter<ICollection<T>> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.Any(predicate, ErrorMessage.ForICollectionAny);
+			return parameter.Any(predicate, p => ErrorMessage.ForICollectionAny);
 		}
 
 		/// <summary>
@@ -187,6 +248,33 @@ namespace Paravaly
 			Func<T, bool> predicate,
 			string errorMessage)
 		{
+			return parameter.Any(predicate, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value matches the predicate in any of its elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the collection elements.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="predicate">The predicate.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<ICollection<T>> Any<T>(
+			this IParameter<ICollection<T>> parameter,
+			Func<T, bool> predicate,
+			Func<IParameterInfo<ICollection<T>>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -197,12 +285,17 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
 					if (p.Value != null && !p.Value.Any(predicate))
 					{
-						p.Handle(new ArgumentException(errorMessage, p.Name));
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
 		}
@@ -230,7 +323,7 @@ namespace Paravaly
 			this IParameter<ICollection<T>> parameter,
 			Func<T, bool> predicate)
 		{
-			return parameter.None(predicate, ErrorMessage.ForICollectionNone);
+			return parameter.None(predicate, p => ErrorMessage.ForICollectionNone);
 		}
 
 		/// <summary>
@@ -256,6 +349,33 @@ namespace Paravaly
 			Func<T, bool> predicate,
 			string errorMessage)
 		{
+			return parameter.None(predicate, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value matches the predicate in any of its elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the collection elements.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="predicate">The predicate.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<ICollection<T>> None<T>(
+			this IParameter<ICollection<T>> parameter,
+			Func<T, bool> predicate,
+			Func<IParameterInfo<ICollection<T>>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -266,12 +386,17 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
 					if (p.Value != null && p.Value.Any(predicate))
 					{
-						p.Handle(new ArgumentException(errorMessage, p.Name));
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
 		}
@@ -297,7 +422,7 @@ namespace Paravaly
 		public static IValidatingParameter<ICollection<T?>> HasNoNullElements<T>(this IParameter<ICollection<T?>> parameter)
 			where T : struct
 		{
-			return parameter.None(x => !x.HasValue, ErrorMessage.ForICollectionHasNoNullElements);
+			return parameter.None(x => !x.HasValue, p => ErrorMessage.ForICollectionHasNoNullElements);
 		}
 
 		/// <summary>
@@ -332,6 +457,31 @@ namespace Paravaly
 		/// <param name="parameter">
 		/// The parameter holding the state of the current validation.
 		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<ICollection<T?>> HasNoNullElements<T>(
+			this IParameter<ICollection<T?>> parameter,
+			Func<IParameterInfo<ICollection<T?>>, string> buildErrorMessage)
+			where T : struct
+		{
+			return parameter.None(x => !x.HasValue, buildErrorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value has null elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the collection elements.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
 		/// <returns>
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
@@ -342,7 +492,7 @@ namespace Paravaly
 		public static IValidatingParameter<ICollection<T>> HasNoNullElements<T>(this IParameter<ICollection<T>> parameter)
 			where T : class
 		{
-			return parameter.None(x => x == null, ErrorMessage.ForICollectionHasNoNullElements);
+			return parameter.None(x => x == null, p => ErrorMessage.ForICollectionHasNoNullElements);
 		}
 
 		/// <summary>
@@ -368,6 +518,31 @@ namespace Paravaly
 			where T : class
 		{
 			return parameter.None(x => x == null, errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value has null elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the collection elements.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<ICollection<T>> HasNoNullElements<T>(
+			this IParameter<ICollection<T>> parameter,
+			Func<IParameterInfo<ICollection<T>>, string> buildErrorMessage)
+			where T : class
+		{
+			return parameter.None(x => x == null, buildErrorMessage);
 		}
 
 		#endregion
@@ -454,20 +629,25 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		/// <exception cref="ArgumentOutOfRangeException">
 		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
-		private static IValidatingParameter<ICollection<T>> HasCountWithinRange<T>(
+		public static IValidatingParameter<ICollection<T>> HasCountWithinRange<T>(
 			this IParameter<ICollection<T>> parameter,
 			int min,
 			int max,
-			Func<IValidatableParameter<ICollection<T>>, string> buildErrorMessage)
+			Func<IParameterInfo<ICollection<T>>, string> buildErrorMessage)
 		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			if (SafeComparer.Compare(min, max) > 0)

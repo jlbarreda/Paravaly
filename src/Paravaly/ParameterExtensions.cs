@@ -66,7 +66,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T?> IsNotNull<T>(
 			this IParameter<T?> parameter,
@@ -154,7 +154,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsNotNull<T>(
 			this IParameter<T> parameter,

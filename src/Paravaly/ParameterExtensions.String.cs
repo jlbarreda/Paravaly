@@ -66,7 +66,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> IsNotEmpty(
 			this IParameter<string> parameter,
@@ -149,7 +149,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> IsNotWhiteSpace(
 			this IParameter<string> parameter,
@@ -232,7 +232,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> IsNotNullOrEmpty(
 			this IParameter<string> parameter,
@@ -298,7 +298,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> IsNotNullOrWhiteSpace(
 			this IParameter<string> parameter,
@@ -437,7 +437,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> StartsWith(
 			this IParameter<string> parameter,
@@ -592,7 +592,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> DoesNotStartWith(
 			this IParameter<string> parameter,
@@ -686,7 +686,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> Contains(
 			this IParameter<string> parameter,
@@ -779,7 +779,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> DoesNotContain(
 			this IParameter<string> parameter,
@@ -933,7 +933,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> EndsWith(
 			this IParameter<string> parameter,
@@ -1088,7 +1088,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> DoesNotEndWith(
 			this IParameter<string> parameter,
@@ -1380,7 +1380,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> IsNotEqualTo(
 			this IParameter<string> parameter,
@@ -1489,7 +1489,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		/// <exception cref="ArgumentOutOfRangeException">
 		/// <paramref name="min"/> is greater than <paramref name="max"/>.
@@ -1594,7 +1594,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<string> HasLength(
 			this IParameter<string> parameter,

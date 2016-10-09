@@ -82,12 +82,13 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMax"/> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMax"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<T> IsLessThan<T>(
+		public static IValidatingParameter<T> IsLessThan<T>(
 			this IParameter<T> parameter,
 			T exclusiveMax,
-			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IComparable<T>
 		{
 			if (parameter == null)
@@ -98,6 +99,11 @@ namespace Paravaly
 			if (exclusiveMax == null)
 			{
 				throw new ArgumentNullException(nameof(exclusiveMax));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -187,12 +193,13 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> or <paramref name="inclusiveMax"/> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="inclusiveMax"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<T> IsLessThanOrEqualTo<T>(
+		public static IValidatingParameter<T> IsLessThanOrEqualTo<T>(
 			this IParameter<T> parameter,
 			T inclusiveMax,
-			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IComparable<T>
 		{
 			if (parameter == null)
@@ -203,6 +210,11 @@ namespace Paravaly
 			if (inclusiveMax == null)
 			{
 				throw new ArgumentNullException(nameof(inclusiveMax));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -289,12 +301,13 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMin"/> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="exclusiveMin"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<T> IsGreaterThan<T>(
+		public static IValidatingParameter<T> IsGreaterThan<T>(
 			this IParameter<T> parameter,
 			T exclusiveMin,
-			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IComparable<T>
 		{
 			if (parameter == null)
@@ -305,6 +318,11 @@ namespace Paravaly
 			if (exclusiveMin == null)
 			{
 				throw new ArgumentNullException(nameof(exclusiveMin));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -394,12 +412,13 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// The parameter <paramref name="parameter" /> or <paramref name="inclusiveMin"/> is null.
+		/// The parameter <paramref name="parameter" /> or <paramref name="inclusiveMin"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<T> IsGreaterThanOrEqualTo<T>(
+		public static IValidatingParameter<T> IsGreaterThanOrEqualTo<T>(
 			this IParameter<T> parameter,
 			T inclusiveMin,
-			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IComparable<T>
 		{
 			if (parameter == null)
@@ -410,6 +429,11 @@ namespace Paravaly
 			if (inclusiveMin == null)
 			{
 				throw new ArgumentNullException(nameof(inclusiveMin));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -508,16 +532,17 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> or <paramref name="min"/> or <paramref name="max"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="min"/> or <paramref name="max"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		/// <exception cref="ArgumentOutOfRangeException">
 		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
-		private static IValidatingParameter<T> IsWithinRange<T>(
+		public static IValidatingParameter<T> IsWithinRange<T>(
 			this IParameter<T> parameter,
 			T min,
 			T max,
-			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IComparable<T>
 		{
 			if (parameter == null)
@@ -533,6 +558,11 @@ namespace Paravaly
 			if (max == null)
 			{
 				throw new ArgumentNullException(nameof(max));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			if (SafeComparer.Compare(min, max) > 0)

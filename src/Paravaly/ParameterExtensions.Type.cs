@@ -66,7 +66,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<Type> IsClass(
 			this IParameter<Type> parameter,
@@ -151,7 +151,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<Type> IsNotClass(
 			this IParameter<Type> parameter,
@@ -236,7 +236,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<Type> IsInterface(
 			this IParameter<Type> parameter,
@@ -321,7 +321,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<Type> IsNotInterface(
 			this IParameter<Type> parameter,
@@ -406,7 +406,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<Type> IsValueType(
 			this IParameter<Type> parameter,
@@ -491,7 +491,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<Type> IsNotValueType(
 			this IParameter<Type> parameter,
@@ -576,7 +576,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<Type> IsEnum(
 			this IParameter<Type> parameter,
@@ -661,7 +661,7 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null or <paramref name="buildErrorMessage"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<Type> IsNotEnum(
 			this IParameter<Type> parameter,

@@ -78,12 +78,13 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> or <paramref name="validValues"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="validValues"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<T> IsIn<T>(
+		public static IValidatingParameter<T> IsIn<T>(
 			this IParameter<T> parameter,
 			IEnumerable<T> validValues,
-			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IEquatable<T>
 		{
 			if (parameter == null)
@@ -94,6 +95,11 @@ namespace Paravaly
 			if (validValues == null)
 			{
 				throw new ArgumentNullException(nameof(validValues));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -174,12 +180,13 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> or <paramref name="invalidValues"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="invalidValues"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		private static IValidatingParameter<T> IsNotIn<T>(
+		public static IValidatingParameter<T> IsNotIn<T>(
 			this IParameter<T> parameter,
 			IEnumerable<T> invalidValues,
-			Func<IValidatableParameter<T>, string> buildErrorMessage)
+			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IEquatable<T>
 		{
 			if (parameter == null)
@@ -190,6 +197,11 @@ namespace Paravaly
 			if (invalidValues == null)
 			{
 				throw new ArgumentNullException(nameof(invalidValues));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(

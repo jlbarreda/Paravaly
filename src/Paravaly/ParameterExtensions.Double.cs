@@ -1,4 +1,5 @@
 ﻿using System;
+using Paravaly.Extensibility;
 using Paravaly.Resources;
 
 namespace Paravaly
@@ -25,7 +26,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<double> IsNotNaN(this IParameter<double> parameter)
 		{
-			return parameter.IsNotNaN(ErrorMessage.ForIsNotNaN);
+			return parameter.IsNotNaN(p => ErrorMessage.ForIsNotNaN);
 		}
 
 		/// <summary>
@@ -48,9 +49,37 @@ namespace Paravaly
 			this IParameter<double> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotNaN(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is NaN (Not a Number).
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<double> IsNotNaN(
+			this IParameter<double> parameter,
+			Func<IParameterInfo<double>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -58,7 +87,7 @@ namespace Paravaly
 				{
 					if (double.IsNaN(p.Value))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, errorMessage));
+						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -82,7 +111,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<double> IsNotInfinity(this IParameter<double> parameter)
 		{
-			return parameter.IsNotInfinity(ErrorMessage.ForIsNotInfinity);
+			return parameter.IsNotInfinity(p => ErrorMessage.ForIsNotInfinity);
 		}
 
 		/// <summary>
@@ -105,9 +134,37 @@ namespace Paravaly
 			this IParameter<double> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotInfinity(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value is not infinity.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<double> IsNotInfinity(
+			this IParameter<double> parameter,
+			Func<IParameterInfo<double>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -115,7 +172,7 @@ namespace Paravaly
 				{
 					if (double.IsInfinity(p.Value))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, errorMessage));
+						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -139,7 +196,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<double> IsNotNegativeInfinity(this IParameter<double> parameter)
 		{
-			return parameter.IsNotNegativeInfinity(ErrorMessage.ForIsNotNegativeInfinity);
+			return parameter.IsNotNegativeInfinity(p => ErrorMessage.ForIsNotNegativeInfinity);
 		}
 
 		/// <summary>
@@ -162,9 +219,37 @@ namespace Paravaly
 			this IParameter<double> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotNegativeInfinity(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value is not negative infinity.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<double> IsNotNegativeInfinity(
+			this IParameter<double> parameter,
+			Func<IParameterInfo<double>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -172,7 +257,7 @@ namespace Paravaly
 				{
 					if (double.IsNegativeInfinity(p.Value))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, errorMessage));
+						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
@@ -196,7 +281,7 @@ namespace Paravaly
 		/// </exception>
 		public static IValidatingParameter<double> IsNotPositiveInfinity(this IParameter<double> parameter)
 		{
-			return parameter.IsNotPositiveInfinity(ErrorMessage.ForIsNotPositiveInfinity);
+			return parameter.IsNotPositiveInfinity(p => ErrorMessage.ForIsNotPositiveInfinity);
 		}
 
 		/// <summary>
@@ -219,9 +304,37 @@ namespace Paravaly
 			this IParameter<double> parameter,
 			string errorMessage)
 		{
+			return parameter.IsNotPositiveInfinity(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value is not positive infinity.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<double> IsNotPositiveInfinity(
+			this IParameter<double> parameter,
+			Func<IParameterInfo<double>, string> buildErrorMessage)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
 			return parameter.IsValid(
@@ -229,7 +342,7 @@ namespace Paravaly
 				{
 					if (double.IsPositiveInfinity(p.Value))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, errorMessage));
+						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
 				});
 		}
