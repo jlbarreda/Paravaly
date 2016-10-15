@@ -148,5 +148,119 @@ namespace Paravaly.Tests
 		}
 
 		#endregion
+
+		#region IsNotDefault
+
+		[Fact]
+		public void IsNotDefault_works_with_valid_values()
+		{
+			CommonValidationTests.IsValid(
+				1,
+				p => p.IsNotDefault());
+		}
+
+		[Fact]
+		public void IsNotDefault_works_with_invalid_values()
+		{
+			CommonValidationTests.IsNotValid(
+				0,
+				p => p.IsNotDefault());
+		}
+
+		[Fact]
+		public void IsNotDefault_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				0,
+				typeof(ArgumentException),
+				p => p.IsNotDefault());
+		}
+
+		[Fact]
+		public void IsNotDefault_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				0,
+				(p, e) => p.IsNotDefault(e));
+		}
+
+		[Fact]
+		public void IsNotDefault_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsNotDefault());
+		}
+
+		[Fact]
+		public void IsNotDefault_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsNotDefault("Error"));
+		}
+
+		#endregion
+
+		#region IsNotEqualTo
+
+		[Fact]
+		public void IsNotEqualTo_works_with_valid_values()
+		{
+			CommonValidationTests.IsValid(
+				3,
+				p => p.IsNotEqualTo(1));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_works_with_null_valid_values()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.IsNotEqualTo("A"));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_works_with_null_invalid_values()
+		{
+			CommonValidationTests.IsNotValid(
+				(string)null,
+				p => p.IsNotEqualTo(null));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_works_with_invalid_values()
+		{
+			CommonValidationTests.IsNotValid(
+				1,
+				p => p.IsNotEqualTo(1));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				1,
+				typeof(ArgumentException),
+				p => p.IsNotEqualTo(1));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				1,
+				(p, e) => p.IsNotEqualTo(1, e));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsNotEqualTo(1));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsNotEqualTo(1, "Error"));
+		}
+
+		#endregion
 	}
 }

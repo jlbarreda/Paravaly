@@ -321,6 +321,15 @@ namespace Paravaly.Resources {
         }
 
         /// <summary>
+        ///    Looks up a localized string similar to The parameter should be different from its default value &apos;{0}&apos;. Actual value: {1}..
+        /// </summary>
+        public static string ForIsNotDefault {
+            get {
+                return ResourceManager.GetString("ForIsNotDefault", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to The parameter should not be empty..
         /// </summary>
         public static string ForIsNotEmpty {
@@ -335,6 +344,15 @@ namespace Paravaly.Resources {
         public static string ForIsNotEnum {
             get {
                 return ResourceManager.GetString("ForIsNotEnum", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///    Looks up a localized string similar to The parameter should be different from &apos;{0}&apos;. Actual value: {1}..
+        /// </summary>
+        public static string ForIsNotEqualTo {
+            get {
+                return ResourceManager.GetString("ForIsNotEqualTo", resourceCulture);
             }
         }
 
@@ -465,7 +483,7 @@ namespace Paravaly.Resources {
         }
 
         /// <summary>
-        ///    Looks up a localized string similar to The parameter should be different from &apos;{0}&apos;. Actual type: {1}..
+        ///    Looks up a localized string similar to The parameter should be different from &apos;{0}&apos;. Actual value: {1}..
         /// </summary>
         public static string ForStringIsNotEqualTo {
             get {

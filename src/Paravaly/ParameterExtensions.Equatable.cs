@@ -215,5 +215,191 @@ namespace Paravaly
 		}
 
 		#endregion
+
+		#region IsNotDefault
+
+		/// <summary>
+		/// Validates whether the parameter value is not equal to its default value.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotDefault<T>(this IParameter<T> parameter)
+			where T : struct, IEquatable<T>
+		{
+			return parameter.IsNotDefault(
+				p => string.Format(
+					CultureInfo.InvariantCulture,
+					ErrorMessage.ForIsNotDefault,
+					default(T).ToPrettyString(),
+					p.Value.ToPrettyString()));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not equal to its default value.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotDefault<T>(
+			this IParameter<T> parameter,
+			string errorMessage)
+			where T : struct, IEquatable<T>
+		{
+			return parameter.IsNotDefault(p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not equal to its default value.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotDefault<T>(
+			this IParameter<T> parameter,
+			Func<IParameterInfo<T>, string> buildErrorMessage)
+			where T : struct, IEquatable<T>
+		{
+			if (parameter == null)
+			{
+				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsValid(
+				p =>
+				{
+					if (Equals(p.Value, default(T)))
+					{
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
+					}
+				});
+		}
+
+		#endregion
+
+		#region IsNotEqualTo
+
+		/// <summary>
+		/// Validates whether the parameter value is not equal to the specified value.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="invalidValue">The invalid value.</param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotEqualTo<T>(this IParameter<T> parameter, T invalidValue)
+			where T : IEquatable<T>
+		{
+			return parameter.IsNotEqualTo(
+				invalidValue,
+				p => string.Format(
+					CultureInfo.InvariantCulture,
+					ErrorMessage.ForIsNotEqualTo,
+					invalidValue.ToPrettyString(),
+					p.Value.ToPrettyString()));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not equal to the specified value.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="invalidValue">The invalid value.</param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotEqualTo<T>(
+			this IParameter<T> parameter,
+			T invalidValue,
+			string errorMessage)
+			where T : IEquatable<T>
+		{
+			return parameter.IsNotEqualTo(invalidValue, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not equal to the specified value.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="invalidValue">The invalid value.</param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotEqualTo<T>(
+			this IParameter<T> parameter,
+			T invalidValue,
+			Func<IParameterInfo<T>, string> buildErrorMessage)
+			where T : IEquatable<T>
+		{
+			if (parameter == null)
+			{
+				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsValid(
+				p =>
+				{
+					if (Equals(p.Value, invalidValue))
+					{
+						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
+					}
+				});
+		}
+
+		#endregion
 	}
 }
