@@ -11,8 +11,8 @@
 namespace Paravaly.Resources {
     using System;
     using System.Reflection;
-
-
+    
+    
     /// <summary>
     ///    A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,14 +23,14 @@ namespace Paravaly.Resources {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ErrorMessage {
-
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         internal ErrorMessage() {
         }
-
+        
         /// <summary>
         ///    Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -38,13 +38,13 @@ namespace Paravaly.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Paravaly.Resources.ErrorMessage", typeof(ErrorMessage).GetInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Paravaly.Resources.ErrorMessage", typeof(ErrorMessage).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///    Overrides the current thread's CurrentUICulture property for all
         ///    resource lookups using this strongly typed resource class.
@@ -58,7 +58,7 @@ namespace Paravaly.Resources {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The array contains one or more invalid elements..
         /// </summary>
@@ -67,7 +67,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForArrayAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The array contains one or more invalid elements..
         /// </summary>
@@ -76,7 +76,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForArrayAny", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The array can&apos;t contain null elements..
         /// </summary>
@@ -85,7 +85,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForArrayHasNoNullElements", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The array can&apos;t be empty..
         /// </summary>
@@ -94,7 +94,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForArrayIsNotEmpty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The array contains one or more invalid elements..
         /// </summary>
@@ -103,7 +103,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForArrayNone", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value should contain the text: &apos;{0}&apos;. Actual value: {1}..
         /// </summary>
@@ -112,7 +112,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForContains", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The dictionary should contain the key: &apos;{0}&apos;..
         /// </summary>
@@ -121,7 +121,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForContainsKey", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value should not contain the text: &apos;{0}&apos;. Actual value: {1}..
         /// </summary>
@@ -130,7 +130,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForDoesNotContain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value should not end with the text &apos;{0}&apos;. Actual value: &apos;{1}&apos;..
         /// </summary>
@@ -139,7 +139,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForDoesNotEndWith", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value should not start with the text &apos;{0}&apos;. Actual value: &apos;{1}&apos;..
         /// </summary>
@@ -148,7 +148,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForDoesNotStartWith", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value should end with the text &apos;{0}&apos;. Actual value: &apos;{1}&apos;..
         /// </summary>
@@ -157,7 +157,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForEndsWith", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter count is outside the allowable range of values. Minimum: {0}. Maximum: {1}. Actual value: {2}..
         /// </summary>
@@ -166,7 +166,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForHasCountWithinRange", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter length is outside the allowable range of values. Minimum: {0}. Maximum: {1}. Actual value: {2}..
         /// </summary>
@@ -175,7 +175,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForHasLengthWithinRange", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The collection contains one or more invalid elements..
         /// </summary>
@@ -184,7 +184,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForICollectionAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The collection contains one or more invalid elements..
         /// </summary>
@@ -193,7 +193,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForICollectionAny", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The collection can&apos;t contain null elements..
         /// </summary>
@@ -202,7 +202,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForICollectionHasNoNullElements", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The collection can&apos;t be empty..
         /// </summary>
@@ -211,7 +211,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForICollectionIsNotEmpty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The collection contains one or more invalid elements..
         /// </summary>
@@ -220,7 +220,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForICollectionNone", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter is not of type &apos;{0}&apos;. Actual type: {1}..
         /// </summary>
@@ -229,7 +229,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForInvalidType", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is not a class type..
         /// </summary>
@@ -238,7 +238,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsClass", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is not an enumeration..
         /// </summary>
@@ -247,7 +247,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsEnum", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should be greater than {0}. Actual value: {1}..
         /// </summary>
@@ -256,7 +256,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsGreaterThan", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should be greater than or equal to {0}. Actual value: {1}..
         /// </summary>
@@ -265,7 +265,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsGreaterThanOrEqualTo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is not valid. Valid Values: {0}. Actual value: {1}..
         /// </summary>
@@ -274,7 +274,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsIn", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is not an interface type..
         /// </summary>
@@ -283,7 +283,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsInterface", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should be less than {0}. Actual value: {1}..
         /// </summary>
@@ -292,7 +292,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsLessThan", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should be less than or equal to {0}. Actual value: {1}..
         /// </summary>
@@ -301,7 +301,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsLessThanOrEqualTo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value doesn&apos;t match the regular expression. Regular Expression: {0}. Actual value: {1}..
         /// </summary>
@@ -310,7 +310,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsMatch", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is a class type..
         /// </summary>
@@ -319,7 +319,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotClass", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should be different from its default value &apos;{0}&apos;. Actual value: {1}..
         /// </summary>
@@ -328,7 +328,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotDefault", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should not be empty..
         /// </summary>
@@ -337,7 +337,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotEmpty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is an enumeration..
         /// </summary>
@@ -346,7 +346,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotEnum", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should be different from &apos;{0}&apos;. Actual value: {1}..
         /// </summary>
@@ -355,7 +355,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotEqualTo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is one of a list of invalid values. Invalid Values: {0}. Actual value: {1}..
         /// </summary>
@@ -364,7 +364,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotIn", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is infinity..
         /// </summary>
@@ -373,7 +373,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotInfinity", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is an interface type..
         /// </summary>
@@ -382,7 +382,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotInterface", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is not a number..
         /// </summary>
@@ -391,7 +391,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotNaN", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is negative infinity..
         /// </summary>
@@ -400,7 +400,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotNegativeInfinity", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is positive infinity..
         /// </summary>
@@ -409,7 +409,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotPositiveInfinity", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is a value type..
         /// </summary>
@@ -418,7 +418,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotValueType", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should not contain white space only..
         /// </summary>
@@ -427,7 +427,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsNotWhiteSpace", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is not valid for enumeration type &apos;{0}&apos;. Actual value: {1}..
         /// </summary>
@@ -436,7 +436,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsValidEnumValue", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value is not a value type..
         /// </summary>
@@ -445,7 +445,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsValueType", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter is outside the allowable range of values. Minimum: {0}. Maximum: {1}. Actual value: {2}..
         /// </summary>
@@ -454,7 +454,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForIsWithinRange", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter type is not assignable to type &apos;{0}&apos;. Actual type: {1}..
         /// </summary>
@@ -463,7 +463,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForNotAssignableType", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter value should start with the text &apos;{0}&apos;. Actual value: &apos;{1}&apos;..
         /// </summary>
@@ -472,7 +472,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForStartsWith", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter length is not valid. Actual Length: {0}. Expected Length: {1}..
         /// </summary>
@@ -481,7 +481,7 @@ namespace Paravaly.Resources {
                 return ResourceManager.GetString("ForStringHasLength", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The parameter should be different from &apos;{0}&apos;. Actual value: {1}..
         /// </summary>

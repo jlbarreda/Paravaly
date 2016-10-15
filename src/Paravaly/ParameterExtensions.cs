@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using Paravaly.Extensibility;
 using Paravaly.Resources;
 
@@ -361,7 +362,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && !type.GetInfo().IsAssignableFrom(p.Value.GetType().GetInfo()))
+					if (p.Value != null && !type.GetTypeInfo().IsAssignableFrom(p.Value.GetType().GetTypeInfo()))
 					{
 						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Paravaly.Extensibility;
 using Paravaly.Resources;
 
@@ -85,7 +86,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && !p.Value.GetInfo().IsClass)
+					if (p.Value != null && !p.Value.GetTypeInfo().IsClass)
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -170,7 +171,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && p.Value.GetInfo().IsClass)
+					if (p.Value != null && p.Value.GetTypeInfo().IsClass)
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -255,7 +256,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && !p.Value.GetInfo().IsInterface)
+					if (p.Value != null && !p.Value.GetTypeInfo().IsInterface)
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -340,7 +341,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && p.Value.GetInfo().IsInterface)
+					if (p.Value != null && p.Value.GetTypeInfo().IsInterface)
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -425,7 +426,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && !p.Value.GetInfo().IsValueType)
+					if (p.Value != null && !p.Value.GetTypeInfo().IsValueType)
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -510,7 +511,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && p.Value.GetInfo().IsValueType)
+					if (p.Value != null && p.Value.GetTypeInfo().IsValueType)
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -595,7 +596,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && !p.Value.GetInfo().IsEnum)
+					if (p.Value != null && !p.Value.GetTypeInfo().IsEnum)
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -680,7 +681,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && p.Value.GetInfo().IsEnum)
+					if (p.Value != null && p.Value.GetTypeInfo().IsEnum)
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}

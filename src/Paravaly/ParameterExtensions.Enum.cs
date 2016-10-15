@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Reflection;
 using Paravaly.Extensibility;
 using Paravaly.Resources;
 
@@ -103,7 +104,7 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
-			if (!typeof(T).GetInfo().IsEnum)
+			if (!typeof(T).GetTypeInfo().IsEnum)
 			{
 				throw new InvalidOperationException(ErrorMessage.ForIsEnum);
 			}
