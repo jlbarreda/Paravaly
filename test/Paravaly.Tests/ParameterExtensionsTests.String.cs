@@ -681,8 +681,8 @@ namespace Paravaly.Tests
 		public void IsNotEqualTo_for_string_works_with_valid_strings()
 		{
 			CommonValidationTests.IsValid(
-				"X",
-				p => p.IsNotEqualTo("A"));
+				new[] { "X", "a" },
+				p => p.IsNotEqualTo("A", StringComparison.Ordinal));
 		}
 
 		[Fact]
@@ -690,15 +690,15 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.IsValid(
 				(string)null,
-				p => p.IsNotEqualTo("A"));
+				p => p.IsNotEqualTo("A", StringComparison.Ordinal));
 		}
 
 		[Fact]
 		public void IsNotEqualTo_for_string_works_with_invalid_strings()
 		{
 			CommonValidationTests.IsNotValid(
-				"A",
-				p => p.IsNotEqualTo("A"));
+				new[] { "A", "a" },
+				p => p.IsNotEqualTo("A", StringComparison.OrdinalIgnoreCase));
 		}
 
 		[Fact]
@@ -707,7 +707,7 @@ namespace Paravaly.Tests
 			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
 				"A",
 				typeof(ArgumentException),
-				p => p.IsNotEqualTo("A"));
+				p => p.IsNotEqualTo("A", StringComparison.Ordinal));
 		}
 
 		[Fact]
@@ -715,27 +715,20 @@ namespace Paravaly.Tests
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				"A",
-				(p, e) => p.IsNotEqualTo("A", e));
-		}
-
-		[Fact]
-		public void IsNotEqualTo_for_string_can_be_used_with_specific_comparison_type()
-		{
-			CommonValidationTests.IsNotValid(
-				"a",
-				p => p.IsNotEqualTo("A", StringComparison.OrdinalIgnoreCase));
+				(p, e) => p.IsNotEqualTo("A", StringComparison.Ordinal, e));
 		}
 
 		[Fact]
 		public void IsNotEqualTo_for_string_throws_if_parameter_is_null()
 		{
-			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsNotEqualTo("A"));
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsNotEqualTo("A", StringComparison.Ordinal));
 		}
 
 		[Fact]
 		public void IsNotEqualTo_for_string_with_error_message_throws_if_parameter_is_null()
 		{
-			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsNotEqualTo("A", "Error"));
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(
+				p => p.IsNotEqualTo("A", StringComparison.Ordinal, "Error"));
 		}
 
 		#endregion

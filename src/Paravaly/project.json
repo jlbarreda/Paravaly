@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.6.0-*",
+  "version": "0.6.1-*",
   "language": "en-US",
   "title": "Paravaly",
   "description": "A simple but flexible parameter validation library.",

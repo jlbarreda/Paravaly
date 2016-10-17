@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "0.6.1-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
@@ -10,7 +10,7 @@
       "version": "1.0.1"
     },
       "BenchmarkDotNet": "0.9.9",
-      "Paravaly": "0.6.0-*"
+      "Paravaly": "0.6.1-*"
   },
 
   "frameworks": {

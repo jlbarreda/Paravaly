@@ -1270,25 +1270,6 @@ namespace Paravaly
 		/// The parameter holding the state of the current validation.
 		/// </param>
 		/// <param name="value">The value to compare to.</param>
-		/// <returns>
-		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
-		/// validation of the parameter in a fluent way.
-		/// </returns>
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
-		/// </exception>
-		public static IValidatingParameter<string> IsNotEqualTo(this IParameter<string> parameter, string value)
-		{
-			return parameter.IsNotEqualTo(value, StringComparison.Ordinal);
-		}
-
-		/// <summary>
-		/// Validates whether the parameter value is equal to the specified <paramref name="value"/>.
-		/// </summary>
-		/// <param name="parameter">
-		/// The parameter holding the state of the current validation.
-		/// </param>
-		/// <param name="value">The value to compare to.</param>
 		/// <param name="comparisonType">The comparison type.</param>
 		/// <returns>
 		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
@@ -1310,31 +1291,6 @@ namespace Paravaly
 					ErrorMessage.ForStringIsNotEqualTo,
 					value.ToPrettyString(),
 					p.Value.ToPrettyString()));
-		}
-
-		/// <summary>
-		/// Validates whether the parameter value is equal to the specified <paramref name="value"/>.
-		/// </summary>
-		/// <param name="parameter">
-		/// The parameter holding the state of the current validation.
-		/// </param>
-		/// <param name="value">The value to compare to.</param>
-		/// <param name="errorMessage">
-		/// The error message used for the exception thrown if the validation fails.
-		/// </param>
-		/// <returns>
-		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
-		/// validation of the parameter in a fluent way.
-		/// </returns>
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> is null.
-		/// </exception>
-		public static IValidatingParameter<string> IsNotEqualTo(
-			this IParameter<string> parameter,
-			string value,
-			string errorMessage)
-		{
-			return parameter.IsNotEqualTo(value, StringComparison.Ordinal, p => errorMessage);
 		}
 
 		/// <summary>
