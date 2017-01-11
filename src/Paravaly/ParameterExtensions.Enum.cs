@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using Paravaly.Extensibility;
@@ -112,16 +113,9 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					// Slow!
-					if (!Enum.IsDefined(typeof(T), p.Value))
+					if (!EnumValidationWithCache<T>.IsValid(p.Value))
 					{
-						// Slower!
-						var value = p.Value.ToString();
-
-						if (value.Length < 1 || char.IsDigit(value[0]) || value[0] == '-')
-						{
-							p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
-						}
+						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
 					}
 				});
 		}

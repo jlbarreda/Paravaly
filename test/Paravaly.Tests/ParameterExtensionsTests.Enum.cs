@@ -38,8 +38,6 @@ namespace Paravaly.Tests
 		[Fact]
 		public void IsValidEnumValue_works_with_valid_FlagsEnum_values()
 		{
-			Console.WriteLine(FlagsEnum.First | FlagsEnum.Second);
-
 			CommonValidationTests.IsValid<FlagsEnum>(
 				new FlagsEnum[]
 				{
