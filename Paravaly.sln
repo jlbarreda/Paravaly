@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5CECB1B-01EF-4754-B38D-2126A499E65D}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,16 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.cake = build.cake
 		build.cmd = build.cmd
 		build.ps1 = build.ps1
-		global.json = global.json
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Paravaly", "src\Paravaly\Paravaly.xproj", "{4CD93BA0-38A9-407F-B228-12916D7397EF}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Paravaly.Tests", "test\Paravaly.Tests\Paravaly.Tests.xproj", "{EE16475F-D5F1-4EE8-829C-EA951B4DD320}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{5CDE6B7E-33A1-4231-BB50-B9149201317E}"
 EndProject
@@ -33,7 +28,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysi
 		tools\CodeAnalysis\StyleCop.json = tools\CodeAnalysis\StyleCop.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Paravaly.Benchmarks", "test\Paravaly.Benchmarks\Paravaly.Benchmarks.xproj", "{F5796C80-F403-4320-BB37-29C550B3B66E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paravaly", "src\Paravaly\Paravaly.csproj", "{4CD93BA0-38A9-407F-B228-12916D7397EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paravaly.Tests", "test\Paravaly.Tests\Paravaly.Tests.csproj", "{EE16475F-D5F1-4EE8-829C-EA951B4DD320}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paravaly.Benchmarks", "test\Paravaly.Benchmarks\Paravaly.Benchmarks.csproj", "{F5796C80-F403-4320-BB37-29C550B3B66E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,8 +57,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EE16475F-D5F1-4EE8-829C-EA951B4DD320} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
 		{C122D924-9C22-4637-8131-E2B597942A57} = {5CDE6B7E-33A1-4231-BB50-B9149201317E}
+		{EE16475F-D5F1-4EE8-829C-EA951B4DD320} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
 		{F5796C80-F403-4320-BB37-29C550B3B66E} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
 	EndGlobalSection
 EndGlobal

@@ -4,7 +4,8 @@ var configuration = Argument("configuration", "Release");
 var projectDir = Directory("./src/Paravaly");
 var testsDir = Directory("./test/Paravaly.Tests");
 var outputDir = Directory("./artifacts");
-var projectJson = File("project.json");
+var project = File("Paravaly.csproj");
+var testProject = File("Paravaly.Tests.csproj");
 
 Task("Clean")
 	.Does(() =>
@@ -39,15 +40,15 @@ Task("Build")
 			Configuration = configuration
 		};
 
-		DotNetCoreBuild(projectDir + projectJson, settings);
-		DotNetCoreBuild(testsDir + projectJson, settings);
+		DotNetCoreBuild(projectDir + project, settings);
+		DotNetCoreBuild(testsDir + testProject, settings);
 	});
 
 Task("Test")
 	.IsDependentOn("Build")
 	.Does(() =>
 	{
-			DotNetCoreTest(testsDir);
+			DotNetCoreTest(testsDir + testProject);
 	});
 
 Task("Pack")
@@ -60,7 +61,7 @@ Task("Pack")
 			NoBuild = false
 		};
 
-		DotNetCorePack(projectDir + projectJson, settings);
+		DotNetCorePack(projectDir + project, settings);
 
 		if (AppVeyor.IsRunningOnAppVeyor)
 		{
