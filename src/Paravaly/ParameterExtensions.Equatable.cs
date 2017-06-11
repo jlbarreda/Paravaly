@@ -105,7 +105,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (!validValues.Any(x => Equals(x, p.Value)))
+					if (!validValues.Any(x => EqualityComparer<T>.Default.Equals(x, p.Value)))
 					{
 						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
 					}
@@ -207,7 +207,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (invalidValues.Any(x => Equals(x, p.Value)))
+					if (invalidValues.Any(x => EqualityComparer<T>.Default.Equals(x, p.Value)))
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -297,7 +297,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (Equals(p.Value, default(T)))
+					if (EqualityComparer<T>.Default.Equals(p.Value, default(T)))
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}
@@ -393,7 +393,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (Equals(p.Value, invalidValue))
+					if (EqualityComparer<T>.Default.Equals(p.Value, invalidValue))
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}

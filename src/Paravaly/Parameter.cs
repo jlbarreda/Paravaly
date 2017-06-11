@@ -37,14 +37,9 @@ namespace Paravaly
 				throw new ArgumentException(ErrorMessage.ForIsNotWhiteSpace, nameof(name));
 			}
 
-			if (exceptions == null)
-			{
-				throw new ArgumentNullException(nameof(exceptions));
-			}
-
 			this.value = value;
 			this.name = name;
-			this.exceptions = exceptions;
+			this.exceptions = exceptions ?? throw new ArgumentNullException(nameof(exceptions));
 			this.exceptionHandlingMode = exceptionHandlingMode;
 		}
 
