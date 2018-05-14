@@ -38,7 +38,7 @@ namespace Paravaly.Tests
 		[Fact]
 		public void IsValidEnumValue_works_with_valid_FlagsEnum_values()
 		{
-			CommonValidationTests.IsValid<FlagsEnum>(
+			CommonValidationTests.IsValid(
 				new FlagsEnum[]
 				{
 					FlagsEnum.None,
@@ -72,7 +72,7 @@ namespace Paravaly.Tests
 		[Fact]
 		public void IsValidEnumValue_works_with_invalid_FlagsEnum_values()
 		{
-			CommonValidationTests.IsNotValid<FlagsEnum>(
+			CommonValidationTests.IsNotValid(
 				new FlagsEnum[]
 				{
 					(FlagsEnum)1313,

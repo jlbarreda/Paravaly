@@ -55,7 +55,7 @@ namespace Paravaly.Tests
 			result.Value.ShouldBe(typeof(int));
 		}
 
-		private static List<object[]> GetRequireInstances()
+		public static List<object[]> GetRequireInstances()
 		{
 			return new List<object[]>(3)
 			{

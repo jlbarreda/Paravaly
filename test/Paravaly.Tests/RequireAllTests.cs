@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Paravaly.Extensibility;
 using Shouldly;
 using Xunit;

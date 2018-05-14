@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Paravaly
 {
 	internal static class EnumValidationWithCache<T>
-				where T : struct, IComparable, IFormattable
+				where T : Enum
 	{
 		private static readonly Dictionary<T, bool> validValues = new Dictionary<T, bool>();
 

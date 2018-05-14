@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Reflection;
 using Paravaly.Extensibility;
 using Paravaly.Resources;
 
@@ -28,11 +26,8 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
-		/// <exception cref="InvalidOperationException">
-		/// <typeparamref name="T"/> is not an enumeration type.
-		/// </exception>
 		public static IValidatingParameter<T> IsValidEnumValue<T>(this IParameter<T> parameter)
-			where T : struct, IComparable, IFormattable
+			where T : Enum
 		{
 			return parameter.IsValidEnumValue(
 				p => string.Format(
@@ -59,13 +54,10 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> is null.
 		/// </exception>
-		/// <exception cref="InvalidOperationException">
-		/// <typeparamref name="T"/> is not an enumeration type.
-		/// </exception>
 		public static IValidatingParameter<T> IsValidEnumValue<T>(
 			this IParameter<T> parameter,
 			string errorMessage)
-			where T : struct, IComparable, IFormattable
+			where T : Enum
 		{
 			return parameter.IsValidEnumValue(p => errorMessage);
 		}
@@ -87,13 +79,10 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
-		/// <exception cref="InvalidOperationException">
-		/// <typeparamref name="T"/> is not an enumeration type.
-		/// </exception>
 		public static IValidatingParameter<T> IsValidEnumValue<T>(
 			this IParameter<T> parameter,
 			Func<IParameterInfo<T>, string> buildErrorMessage)
-			where T : struct, IComparable, IFormattable
+			where T : Enum
 		{
 			if (parameter == null)
 			{
@@ -103,11 +92,6 @@ namespace Paravaly
 			if (buildErrorMessage == null)
 			{
 				throw new ArgumentNullException(nameof(buildErrorMessage));
-			}
-
-			if (!typeof(T).GetTypeInfo().IsEnum)
-			{
-				throw new InvalidOperationException(ErrorMessage.ForIsEnum);
 			}
 
 			return parameter.IsValid(
