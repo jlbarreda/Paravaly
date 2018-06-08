@@ -297,7 +297,7 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (EqualityComparer<T>.Default.Equals(p.Value, default(T)))
+					if (EqualityComparer<T>.Default.Equals(p.Value, default))
 					{
 						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
 					}

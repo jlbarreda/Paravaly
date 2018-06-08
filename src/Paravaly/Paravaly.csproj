@@ -5,7 +5,7 @@
     <Copyright>Copyright © Jose Luis Barreda Guerena. All rights reserved.</Copyright>
     <AssemblyTitle>Paravaly</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>0.7.0</VersionPrefix>
+    <VersionPrefix>0.8.0</VersionPrefix>
     <Authors>Jose Luis Barreda Guerena</Authors>
     <TargetFrameworks>portable40-net40+sl5+win8+wp8+wpa81;net45;netstandard1.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

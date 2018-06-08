@@ -5,7 +5,7 @@
     <Copyright>Copyright © Jose Luis Barreda Guerena. All rights reserved.</Copyright>
     <AssemblyTitle>Paravaly.Tests</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>0.7.0</VersionPrefix>
+    <VersionPrefix>0.8.0</VersionPrefix>
     <Authors>Jose Luis Barreda Guerena</Authors>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
