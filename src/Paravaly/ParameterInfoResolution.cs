@@ -20,26 +20,20 @@ namespace Paravaly
 			return (T)((FieldInfo)memberExpression.Member).GetValue(constantExpression.Value);
 		}
 
-#pragma warning disable RECS0154 // Parameter is never used
 		public static string NameFromProperty<T>(T anonymousObject)
-#pragma warning restore RECS0154 // Parameter is never used
 		{
 			return FirstPropertyCache<T>.Name;
 		}
 
-#pragma warning disable RECS0154 // Parameter is never used
 		public static T ValueFromProperty<T, TAnonymous>(T typeInferenceHelper, TAnonymous anonymousObject)
-#pragma warning restore RECS0154 // Parameter is never used
 		{
 			return (T)FirstPropertyCache<TAnonymous>.Property.GetValue(anonymousObject, null);
 		}
 
 		private static class FirstPropertyCache<T>
 		{
-#pragma warning disable RECS0108 // Warns about static fields in generic types
 			public static readonly PropertyInfo Property = typeof(T).GetProps().First();
 			public static readonly string Name = Property.Name;
-#pragma warning restore RECS0108 // Warns about static fields in generic types
 		}
 	}
 }

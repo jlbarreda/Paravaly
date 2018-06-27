@@ -35,7 +35,9 @@ namespace Paravaly
 				p => string.Format(
 					CultureInfo.InvariantCulture,
 					ErrorMessage.ForIsIn,
-					string.Join(", ", validValues?.Select(v => v.ToPrettyString())?.ToArray() ?? new string[0]),
+					string.Join(
+						", ",
+						validValues?.Select(v => v.ToPrettyString())?.ToArray() ?? ArrayHelper.Empty<string>()),
 					p.Value.ToPrettyString()));
 		}
 
@@ -137,7 +139,9 @@ namespace Paravaly
 				p => string.Format(
 					CultureInfo.InvariantCulture,
 					ErrorMessage.ForIsNotIn,
-					string.Join(", ", invalidValues?.Select(v => v.ToPrettyString())?.ToArray() ?? new string[0]),
+					string.Join(
+						", ",
+						invalidValues?.Select(v => v.ToPrettyString())?.ToArray() ?? ArrayHelper.Empty<string>()),
 					p.Value.ToPrettyString()));
 		}
 

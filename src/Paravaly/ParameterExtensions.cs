@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using Paravaly.Extensibility;
 using Paravaly.Resources;
@@ -213,6 +214,7 @@ namespace Paravaly
 			return parameter.Is(
 				type,
 				p => string.Format(
+					CultureInfo.CurrentCulture,
 					ErrorMessage.ForInvalidType,
 					type.FullName,
 					p.Value.GetType().FullName));
@@ -302,7 +304,11 @@ namespace Paravaly
 		{
 			return parameter.IsAssignableTo(
 				type,
-				p => string.Format(ErrorMessage.ForNotAssignableType, type.FullName, p.Value?.GetType().FullName));
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForNotAssignableType,
+					type.FullName,
+					p.Value?.GetType().FullName));
 		}
 
 		/// <summary>

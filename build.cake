@@ -24,15 +24,8 @@ Task("Clean")
 		}
 	});
 
-Task("Restore")
-	.IsDependentOn("Clean")
-	.Does(() =>
-	{
-		DotNetCoreRestore();
-	});
-
 Task("Build")
-	.IsDependentOn("Restore")
+	.IsDependentOn("Clean")
 	.Does(() =>
 	{
 		var settings = new DotNetCoreBuildSettings

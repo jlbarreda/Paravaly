@@ -6,31 +6,39 @@
       "tabSize": 4,
       "useTabs": true
     },
-    "namingRules": {
-      "allowCommonHungarianPrefixes": true,
-      "allowedHungarianPrefixes": []
-    },
     "orderingRules": {
+      "elementOrder": [ "kind", "accessibility", "constant", "static", "readonly" ],
       "systemUsingDirectivesFirst": true,
       "usingDirectivesPlacement": "outsideNamespace",
-      "blankLinesBetweenUsingGroups": "require",
-      "elementOrder": [ "kind", "accessibility", "constant", "static", "readonly" ]
+      "blankLinesBetweenUsingGroups": "omit"
+    },
+    "maintainabilityRules": {
+      "topLevelTypes": [ "class", "interface", "struct", "enum", "delegate" ]
     },
     "layoutRules": {
       "newlineAtEndOfFile": "omit",
       "allowConsecutiveUsings": true
     },
-    "maintainabilityRules": {
-      "topLevelTypes": [ "class", "enum", "interface", "struct" ]
-    },
     "documentationRules": {
-      "documentationCulture": "en-US",
       "documentExposedElements": true,
-      "documentInterfaces": true,
+      "documentInterfaces": false,
       "documentInternalElements": false,
       "documentPrivateElements": false,
       "documentPrivateFields": false,
       "fileNamingConvention": "stylecop"
+    },
+    "namingRules": {
+      "allowCommonHungarianPrefixes": true,
+      "allowedHungarianPrefixes": [
+        "db",
+        "on",
+        "is",
+        "do",
+        "as",
+        "id",
+        "if",
+        "in"
+      ]
     }
   }
 }

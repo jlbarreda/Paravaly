@@ -7,7 +7,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <VersionPrefix>0.8.0</VersionPrefix>
     <Authors>Jose Luis Barreda Guerena</Authors>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AssemblyName>Paravaly.Tests</AssemblyName>
     <OutputType>Library</OutputType>
@@ -40,6 +40,17 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="Shouldly" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
+      <version>2.6.1</version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <!--<PackageReference Include="StyleCop">
+      <Version>5.0.0</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>-->
   </ItemGroup>
 
   <ItemGroup>
