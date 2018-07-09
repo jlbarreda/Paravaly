@@ -31,7 +31,7 @@ namespace Paravaly
 		public static IValidatingParameter<T?> IsNotNull<T>(this IParameter<T?> parameter)
 			where T : struct
 		{
-			return parameter.IsNotNull(p => null);
+			return parameter.IsNotNull(p => (string)null);
 		}
 
 		/// <summary>
@@ -155,7 +155,7 @@ namespace Paravaly
 		public static IValidatingParameter<T> IsNotNull<T>(this IParameter<T> parameter)
 			where T : class
 		{
-			return parameter.IsNotNull(p => null);
+			return parameter.IsNotNull(p => (string)null);
 		}
 
 		/// <summary>
