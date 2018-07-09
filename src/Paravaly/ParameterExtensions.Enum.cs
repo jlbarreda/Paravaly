@@ -84,14 +84,45 @@ namespace Paravaly
 			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : Enum
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsValidEnumValue(
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is defined in the enumeration.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsValidEnumValue<T>(
+			this IParameter<T> parameter,
+			Func<IParameterInfo<T>, Exception> buildException)
+			where T : Enum
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -99,7 +130,7 @@ namespace Paravaly
 				{
 					if (!EnumValidationWithCache<T>.IsValid(p.Value))
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						p.Handle(buildException(p));
 					}
 				});
 		}

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Paravaly Tests Code Analysis Rules" Description="Paravaly code analysis rules for tests." ToolsVersion="14.0">
+<RuleSet Name="Paravaly Tests Code Analysis Rules" Description="Paravaly code analysis rules for tests." ToolsVersion="15.0">
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1001" Action="Error" />
     <Rule Id="CA1002" Action="Error" />
@@ -16,7 +16,6 @@
     <Rule Id="CA1018" Action="Error" />
     <Rule Id="CA1019" Action="Error" />
     <Rule Id="CA1023" Action="Error" />
-    <Rule Id="CA1024" Action="None" />
     <Rule Id="CA1026" Action="Error" />
     <Rule Id="CA1027" Action="Error" />
     <Rule Id="CA1028" Action="Error" />
@@ -60,7 +59,6 @@
     <Rule Id="CA1304" Action="Error" />
     <Rule Id="CA1305" Action="Error" />
     <Rule Id="CA1306" Action="Error" />
-    <Rule Id="CA1307" Action="None" />
     <Rule Id="CA1308" Action="Error" />
     <Rule Id="CA1309" Action="Error" />
     <Rule Id="CA1400" Action="Error" />
@@ -92,7 +90,6 @@
     <Rule Id="CA1702" Action="Error" />
     <Rule Id="CA1703" Action="Error" />
     <Rule Id="CA1704" Action="Error" />
-    <Rule Id="CA1707" Action="None" />
     <Rule Id="CA1708" Action="Error" />
     <Rule Id="CA1709" Action="Error" />
     <Rule Id="CA1710" Action="Error" />
@@ -181,7 +178,6 @@
     <Rule Id="CA2149" Action="Error" />
     <Rule Id="CA2151" Action="Error" />
     <Rule Id="CA2200" Action="Error" />
-    <Rule Id="CA2201" Action="Error" />
     <Rule Id="CA2202" Action="Error" />
     <Rule Id="CA2204" Action="Error" />
     <Rule Id="CA2205" Action="Error" />
@@ -390,6 +386,13 @@
   <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.Features" RuleNamespace="Microsoft.CodeAnalysis.CSharp.Features">
     <Rule Id="IDE0003" Action="None" />
   </Rules>
+  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+    <Rule Id="CA1024" Action="None" />
+    <Rule Id="CA1707" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.NetCore.Analyzers" RuleNamespace="Microsoft.NetCore.Analyzers">
+    <Rule Id="CA1307" Action="None" />
+  </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="SA0001" Action="None" />
     <Rule Id="SA1000" Action="Error" />
@@ -559,12 +562,5 @@
     <Rule Id="SA1649" Action="None" />
     <Rule Id="SA1651" Action="None" />
     <Rule Id="SA1652" Action="None" />
-  </Rules>
-  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
-    <Rule Id="CA1707" Action="None" />
-    <Rule Id="CA1024" Action="None" />
-  </Rules>
-  <Rules AnalyzerId="Microsoft.NetCore.Analyzers" RuleNamespace="Microsoft.NetCore.Analyzers">
-    <Rule Id="CA1307" Action="None" />
   </Rules>
 </RuleSet>

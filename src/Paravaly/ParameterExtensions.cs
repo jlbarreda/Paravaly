@@ -14,7 +14,7 @@ namespace Paravaly
 	[DebuggerStepThrough]
 	public static partial class ParameterExtensions
 	{
-		#region IsNotNull
+		#region IsNotNull for nullables
 
 		/// <summary>
 		/// Validates whether the parameter value is null.
@@ -75,14 +75,55 @@ namespace Paravaly
 			Func<IParameterInfo<T?>, string> buildErrorMessage)
 			where T : struct
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotNull(
+				p =>
+				{
+					string errorMessage = buildErrorMessage(p);
+
+					if (errorMessage == null)
+					{
+						return new ArgumentNullException(p.Name);
+					}
+					else
+					{
+						return new ArgumentNullException(p.Name, errorMessage);
+					}
+				});
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is null.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T?> IsNotNull<T>(
+			this IParameter<T?> parameter,
+			Func<IParameterInfo<T?>, Exception> buildException)
+			where T : struct
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -90,19 +131,14 @@ namespace Paravaly
 				{
 					if (!p.Value.HasValue)
 					{
-						string errorMessage = buildErrorMessage(p);
-
-						if (errorMessage == null)
-						{
-							p.Handle(new ArgumentNullException(p.Name));
-						}
-						else
-						{
-							p.Handle(new ArgumentNullException(p.Name, errorMessage));
-						}
+						p.Handle(buildException(p));
 					}
 				});
 		}
+
+		#endregion
+
+		#region IsNotNull
 
 		/// <summary>
 		/// Validates whether the parameter value is null.
@@ -163,14 +199,55 @@ namespace Paravaly
 			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : class
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotNull(
+				p =>
+				{
+					string errorMessage = buildErrorMessage(p);
+
+					if (errorMessage == null)
+					{
+						return new ArgumentNullException(p.Name);
+					}
+					else
+					{
+						return new ArgumentNullException(p.Name, errorMessage);
+					}
+				});
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is null.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotNull<T>(
+			this IParameter<T> parameter,
+			Func<IParameterInfo<T>, Exception> buildException)
+			where T : class
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -178,16 +255,7 @@ namespace Paravaly
 				{
 					if (p.Value == null)
 					{
-						string errorMessage = buildErrorMessage(p);
-
-						if (errorMessage == null)
-						{
-							p.Handle(new ArgumentNullException(p.Name));
-						}
-						else
-						{
-							p.Handle(new ArgumentNullException(p.Name, errorMessage));
-						}
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -255,12 +323,45 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="type"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> Is<T>(
 			this IParameter<T> parameter,
 			Type type,
 			Func<IParameterInfo<T>, string> buildErrorMessage)
+		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.Is(
+				type,
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is of the specified type.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="type">The type to compare to.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="type"/> or
+		/// <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> Is<T>(
+			this IParameter<T> parameter,
+			Type type,
+			Func<IParameterInfo<T>, Exception> buildException)
 		{
 			if (parameter == null)
 			{
@@ -272,12 +373,17 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(type));
 			}
 
+			if (buildException == null)
+			{
+				throw new ArgumentNullException(nameof(buildException));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
 					if (p.Value != null && p.Value.GetType() != type)
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -328,7 +434,10 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
 		/// </exception>
-		public static IValidatingParameter<T> IsAssignableTo<T>(this IParameter<T> parameter, Type type, string errorMessage)
+		public static IValidatingParameter<T> IsAssignableTo<T>(
+			this IParameter<T> parameter,
+			Type type,
+			string errorMessage)
 		{
 			return parameter.IsAssignableTo(type, p => errorMessage);
 		}
@@ -348,12 +457,46 @@ namespace Paravaly
 		/// validation of the parameter in a fluent way.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parameter"/> or <paramref name="type"/> is null.
+		/// <paramref name="parameter"/> or <paramref name="type"/> or
+		/// <paramref name="buildErrorMessage"/> is null.
 		/// </exception>
 		public static IValidatingParameter<T> IsAssignableTo<T>(
 			this IParameter<T> parameter,
 			Type type,
 			Func<IParameterInfo<T>, string> buildErrorMessage)
+		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsAssignableTo(
+				type,
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is assignable to an instance of the specified
+		/// type.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="type">The type to compare to.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="type"/> or
+		/// <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsAssignableTo<T>(
+			this IParameter<T> parameter,
+			Type type,
+			Func<IParameterInfo<T>, Exception> buildException)
 		{
 			if (parameter == null)
 			{
@@ -365,12 +508,17 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(type));
 			}
 
+			if (buildException == null)
+			{
+				throw new ArgumentNullException(nameof(buildException));
+			}
+
 			return parameter.IsValid(
 				p =>
 				{
 					if (p.Value != null && !type.GetTypeInfo().IsAssignableFrom(p.Value.GetType().GetTypeInfo()))
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						p.Handle(buildException(p));
 					}
 				});
 		}

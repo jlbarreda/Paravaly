@@ -72,14 +72,43 @@ namespace Paravaly
 			this IParameter<float> parameter,
 			Func<IParameterInfo<float>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotNaN(
+				p => new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is NaN (Not a Number).
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<float> IsNotNaN(
+			this IParameter<float> parameter,
+			Func<IParameterInfo<float>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -87,7 +116,7 @@ namespace Paravaly
 				{
 					if (float.IsNaN(p.Value))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -157,14 +186,43 @@ namespace Paravaly
 			this IParameter<float> parameter,
 			Func<IParameterInfo<float>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotInfinity(
+				p => new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates that the parameter value is not infinity.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<float> IsNotInfinity(
+			this IParameter<float> parameter,
+			Func<IParameterInfo<float>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -172,7 +230,7 @@ namespace Paravaly
 				{
 					if (float.IsInfinity(p.Value))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -242,14 +300,43 @@ namespace Paravaly
 			this IParameter<float> parameter,
 			Func<IParameterInfo<float>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotNegativeInfinity(
+				p => new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates that the parameter value is not negative infinity.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<float> IsNotNegativeInfinity(
+			this IParameter<float> parameter,
+			Func<IParameterInfo<float>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -257,7 +344,7 @@ namespace Paravaly
 				{
 					if (float.IsNegativeInfinity(p.Value))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -327,14 +414,43 @@ namespace Paravaly
 			this IParameter<float> parameter,
 			Func<IParameterInfo<float>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotPositiveInfinity(
+				p => new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates that the parameter value is not positive infinity.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<float> IsNotPositiveInfinity(
+			this IParameter<float> parameter,
+			Func<IParameterInfo<float>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -342,7 +458,7 @@ namespace Paravaly
 				{
 					if (float.IsPositiveInfinity(p.Value))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p));
 					}
 				});
 		}

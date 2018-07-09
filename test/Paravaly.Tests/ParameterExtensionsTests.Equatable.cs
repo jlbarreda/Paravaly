@@ -59,6 +59,23 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsIn_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = 0;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsIn(new[] { 1, 2 }, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsIn_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsIn(1, 2));
@@ -130,6 +147,23 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsNotIn_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = 1;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsNotIn(new[] { 1, 2 }, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsNotIn_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsNotIn(1, 2));
@@ -182,6 +216,23 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				0,
 				(p, e) => p.IsNotDefault(e));
+		}
+
+		[Fact]
+		public void IsNotDefault_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = default;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsNotDefault(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -247,6 +298,23 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				1,
 				(p, e) => p.IsNotEqualTo(1, e));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = 1;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsNotEqualTo(1, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]

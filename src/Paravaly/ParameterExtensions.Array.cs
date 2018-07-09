@@ -77,14 +77,43 @@ namespace Paravaly
 			this IParameter<T[]> parameter,
 			Func<IParameterInfo<T[]>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotEmpty(p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is empty.
+		/// </summary>
+		/// <typeparam name="T">The type of the array.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T[]> IsNotEmpty<T>(
+			this IParameter<T[]> parameter,
+			Func<IParameterInfo<T[]>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -92,7 +121,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && p.Value.Length < 1)
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -173,6 +202,40 @@ namespace Paravaly
 			Func<T, bool> predicate,
 			Func<IParameterInfo<T[]>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.All(
+				predicate,
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value matches the predicate in all its elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the array.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="predicate">The predicate.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> or
+		/// <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T[]> All<T>(
+			this IParameter<T[]> parameter,
+			Func<T, bool> predicate,
+			Func<IParameterInfo<T[]>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -183,9 +246,9 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -193,7 +256,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && p.Value.Any(x => !predicate(x)))
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -274,6 +337,40 @@ namespace Paravaly
 			Func<T, bool> predicate,
 			Func<IParameterInfo<T[]>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.Any(
+				predicate,
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value matches the predicate in any of its elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the array.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="predicate">The predicate.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> or
+		/// <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T[]> Any<T>(
+			this IParameter<T[]> parameter,
+			Func<T, bool> predicate,
+			Func<IParameterInfo<T[]>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -284,9 +381,9 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -294,7 +391,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && !p.Value.Any(predicate))
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -375,6 +472,40 @@ namespace Paravaly
 			Func<T, bool> predicate,
 			Func<IParameterInfo<T[]>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.None(
+				predicate,
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value matches the predicate in any of its elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the array.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="predicate">The predicate.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="predicate"/> or
+		/// <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T[]> None<T>(
+			this IParameter<T[]> parameter,
+			Func<T, bool> predicate,
+			Func<IParameterInfo<T[]>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -385,9 +516,9 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(predicate));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -395,14 +526,14 @@ namespace Paravaly
 				{
 					if (p.Value != null && p.Value.Any(predicate))
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						p.Handle(buildException(p));
 					}
 				});
 		}
 
 		#endregion
 
-		#region HasNoNullElements
+		#region HasNoNullElements for nullables
 
 		/// <summary>
 		/// Validates whether the parameter value has null elements.
@@ -481,6 +612,35 @@ namespace Paravaly
 		/// <param name="parameter">
 		/// The parameter holding the state of the current validation.
 		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T?[]> HasNoNullElements<T>(
+			this IParameter<T?[]> parameter,
+			Func<IParameterInfo<T?[]>, Exception> buildException)
+			where T : struct
+		{
+			return parameter.None(x => !x.HasValue, buildException);
+		}
+
+		#endregion
+
+		#region HasNoNullElements
+
+		/// <summary>
+		/// Validates whether the parameter value has null elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the array.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
 		/// <returns>
 		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
 		/// validation of the parameter in a fluent way.
@@ -544,6 +704,31 @@ namespace Paravaly
 			return parameter.None(x => x == null, buildErrorMessage);
 		}
 
+		/// <summary>
+		/// Validates whether the parameter value has null elements.
+		/// </summary>
+		/// <typeparam name="T">The type of the array.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T[]> HasNoNullElements<T>(
+			this IParameter<T[]> parameter,
+			Func<IParameterInfo<T[]>, Exception> buildException)
+			where T : class
+		{
+			return parameter.None(x => x == null, buildException);
+		}
+
 		#endregion
 
 		#region HasLengthWithinRange
@@ -567,17 +752,15 @@ namespace Paravaly
 		/// <exception cref="ArgumentOutOfRangeException">
 		/// <paramref name="min"/> is greater than <paramref name="max"/>.
 		/// </exception>
-		public static IValidatingParameter<T[]> HasLengthWithinRange<T>(this IParameter<T[]> parameter, int min, int max)
+		public static IValidatingParameter<T[]> HasLengthWithinRange<T>(
+			this IParameter<T[]> parameter,
+			int min,
+			int max)
 		{
 			return parameter.HasLengthWithinRange(
 				min,
 				max,
-				p => string.Format(
-					CultureInfo.CurrentCulture,
-					ErrorMessage.ForHasLengthWithinRange,
-					min,
-					max,
-					p.Value?.Length.ToPrettyString()));
+				p => BuildHasLengthWithinRangeErrorMessage(p, min, max));
 		}
 
 		/// <summary>
@@ -639,9 +822,102 @@ namespace Paravaly
 			int max,
 			Func<IParameterInfo<T[]>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.HasLengthWithinRange(
+				min,
+				max,
+				p => new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value's length is within the specified range.
+		/// </summary>
+		/// <typeparam name="T">The type of the array.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="min">The minimum valid length.</param>
+		/// <param name="max">The maximum valid length.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
+		/// </exception>
+		public static IValidatingParameter<T[]> HasLengthWithinRange<T>(
+			this IParameter<T[]> parameter,
+			int min,
+			int max,
+			Func<IParameterInfo<T[]>, Exception> buildException)
+		{
+			return parameter.HasLengthWithinRange(
+				min,
+				max,
+				p => string.Empty,
+				(p, e) => buildException(p));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value's length is within the specified range.
+		/// </summary>
+		/// <typeparam name="T">The type of the array.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="min">The minimum valid length.</param>
+		/// <param name="max">The maximum valid length.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}"/> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <paramref name="min"/> is greater than <paramref name="max"/>.
+		/// </exception>
+		public static IValidatingParameter<T[]> HasLengthWithinRange<T>(
+			this IParameter<T[]> parameter,
+			int min,
+			int max,
+			Func<IParameterInfo<T[]>, string, Exception> buildException)
+		{
+			return parameter.HasLengthWithinRange(
+				min,
+				max,
+				p => BuildHasLengthWithinRangeErrorMessage(p, min, max),
+				buildException);
+		}
+
+		private static IValidatingParameter<T[]> HasLengthWithinRange<T>(
+			this IParameter<T[]> parameter,
+			int min,
+			int max,
+			Func<IParameterInfo<T[]>, string> buildErrorMessage,
+			Func<IParameterInfo<T[]>, string, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (SafeComparer.Compare(min, max) > 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(min));
 			}
 
 			if (buildErrorMessage == null)
@@ -649,9 +925,9 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(buildErrorMessage));
 			}
 
-			if (SafeComparer.Compare(min, max) > 0)
+			if (buildException == null)
 			{
-				throw new ArgumentOutOfRangeException(nameof(min));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -660,9 +936,22 @@ namespace Paravaly
 					if (p.Value != null
 						&& (p.Value.Length < min || p.Value.Length > max))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p, buildErrorMessage(p)));
 					}
 				});
+		}
+
+		private static string BuildHasLengthWithinRangeErrorMessage<T>(
+			IParameterInfo<T[]> parameter,
+			int min,
+			int max)
+		{
+			return string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForHasLengthWithinRange,
+					min,
+					max,
+					parameter.Value?.Length.ToPrettyString());
 		}
 
 		#endregion

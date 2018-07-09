@@ -36,11 +36,26 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotNull_can_be_used_for_nullables_with_custom_error_message()
+		public void IsNotNull_for_nullables_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				(int?)null,
 				ParameterExtensions.IsNotNull);
+		}
+
+		[Fact]
+		public void IsNotNull_for_nullables_can_be_used_with_custom_exception()
+		{
+			// Given
+			int? invalidValue = (int?)null;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsNotNull(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -90,6 +105,21 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				(CultureInfo)null,
 				ParameterExtensions.IsNotNull);
+		}
+
+		[Fact]
+		public void IsNotNull_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = (CultureInfo)null;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsNotNull(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -147,6 +177,21 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				CultureInfo.CurrentCulture,
 				(p, e) => p.Is(typeof(string), e));
+		}
+
+		[Fact]
+		public void Is_can_be_used_with_custom_exception()
+		{
+			// Given
+			CultureInfo invalidValue = CultureInfo.CurrentCulture;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).Is(typeof(string), p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -218,6 +263,21 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				CultureInfo.CurrentCulture,
 				(p, e) => p.IsAssignableTo(typeof(string), e));
+		}
+
+		[Fact]
+		public void IsAssignableTo_can_be_used_with_custom_exception()
+		{
+			// Given
+			CultureInfo invalidValue = CultureInfo.CurrentCulture;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsAssignableTo(typeof(string), p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]

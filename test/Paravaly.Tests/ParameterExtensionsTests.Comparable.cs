@@ -244,6 +244,21 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsWithinRange_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = 0;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsWithinRange(1, 2, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsWithinRange_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsWithinRange(1, 2));
@@ -319,6 +334,23 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsLessThan_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = 2;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsLessThan(1, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsLessThan_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsLessThan(1));
@@ -379,6 +411,23 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				2,
 				(p, e) => p.IsLessThanOrEqualTo(1, e));
+		}
+
+		[Fact]
+		public void IsLessThanOrEqualTo_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = 2;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsLessThanOrEqualTo(1, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -445,6 +494,23 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsGreaterThan_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = 0;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsGreaterThan(1, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsGreaterThan_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<int>(p => p.IsGreaterThan(1));
@@ -505,6 +571,23 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				0,
 				(p, e) => p.IsGreaterThanOrEqualTo(1, e));
+		}
+
+		[Fact]
+		public void IsGreaterThanOrEqualTo_can_be_used_with_custom_exception()
+		{
+			// Given
+			int invalidValue = 0;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsGreaterThanOrEqualTo(1, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]

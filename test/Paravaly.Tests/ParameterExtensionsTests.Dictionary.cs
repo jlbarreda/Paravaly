@@ -70,7 +70,7 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void ContainsKey_Can_use_with_custom_error_message()
+		public void ContainsKey_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage<IDictionary<int, string>>(
 				new Dictionary<int, string>(2)
@@ -79,6 +79,27 @@ namespace Paravaly.Tests
 					[2] = "Two"
 				},
 				(p, e) => p.ContainsKey(3, e));
+		}
+
+		[Fact]
+		public void ContainsKey_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = new Dictionary<int, string>(2)
+			{
+				[1] = "One",
+				[2] = "Two"
+			};
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.ContainsKey(3, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]

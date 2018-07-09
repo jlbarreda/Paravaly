@@ -1,5 +1,6 @@
 ﻿using System;
 using Paravaly.Tests.Helpers;
+using Shouldly;
 using Xunit;
 
 namespace Paravaly.Tests
@@ -96,6 +97,23 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				(StringComparison)1313,
 				ParameterExtensions.IsValidEnumValue);
+		}
+
+		[Fact]
+		public void IsValidEnumValue_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = (StringComparison)1313;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsValidEnumValue(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]

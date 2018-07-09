@@ -1,5 +1,6 @@
 ﻿using System;
 using Paravaly.Tests.Helpers;
+using Shouldly;
 using Xunit;
 
 namespace Paravaly.Tests
@@ -42,11 +43,26 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void IsNotEmpty_for_string_Can_use_with_custom_error_message()
+		public void IsNotEmpty_for_string_can_be_used_with_custom_error_message()
 		{
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
 				ParameterExtensions.IsNotEmpty);
+		}
+
+		[Fact]
+		public void IsNotEmpty_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = string.Empty;
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsNotEmpty(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -113,6 +129,21 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
 				ParameterExtensions.IsNotNullOrEmpty);
+		}
+
+		[Fact]
+		public void IsNotNullOrEmpty_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = string.Empty;
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsNotNullOrEmpty(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -199,6 +230,21 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsNotNullOrWhiteSpace_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = string.Empty;
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsNotNullOrWhiteSpace(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsNotNullOrWhiteSpace_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsNotNullOrWhiteSpace());
@@ -269,6 +315,21 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				"XYZ",
 				(p, e) => p.StartsWith("y", e));
+		}
+
+		[Fact]
+		public void StartsWith_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = "XYZ";
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).StartsWith("y", p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -345,6 +406,21 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void DoesNotStartWith_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = "XYZ";
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).DoesNotStartWith("X", p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void DoesNotStartWith_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotStartWith("X"));
@@ -402,6 +478,21 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void Contains_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = string.Empty;
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).Contains("X", p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void Contains_for_string_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.Contains("X"));
@@ -456,6 +547,21 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				"X",
 				(p, e) => p.DoesNotContain("X", e));
+		}
+
+		[Fact]
+		public void DoesNotContain_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = "X";
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).DoesNotContain("X", p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -532,6 +638,21 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void EndsWith_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = "XYZ";
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).EndsWith("y", p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void EndsWith_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.EndsWith("X"));
@@ -605,6 +726,21 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void DoesNotEndWith_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = "XYZ";
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).DoesNotEndWith("Z", p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void DoesNotEndWith_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotEndWith("X"));
@@ -662,6 +798,21 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsMatch_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = string.Empty;
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsMatch("X{1}", p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsMatch_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.IsMatch("X{1}"));
@@ -716,6 +867,21 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				"A",
 				(p, e) => p.IsNotEqualTo("A", StringComparison.Ordinal, e));
+		}
+
+		[Fact]
+		public void IsNotEqualTo_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = "A";
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).IsNotEqualTo("A", p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -777,6 +943,21 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void HasLengthWithinRange_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = string.Empty;
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).HasLengthWithinRange(1, 1, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void HasLengthWithinRange_for_string_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(
@@ -833,6 +1014,21 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				string.Empty,
 				(p, e) => p.HasLength(1, e));
+		}
+
+		[Fact]
+		public void HasLength_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = string.Empty;
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require.Parameter(nameof(invalidValue), invalidValue).HasLength(1, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]

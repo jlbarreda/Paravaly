@@ -1,5 +1,6 @@
 ﻿using System;
 using Paravaly.Tests.Helpers;
+using Shouldly;
 using Xunit;
 
 namespace Paravaly.Tests
@@ -39,6 +40,23 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				float.NaN,
 				ParameterExtensions.IsNotNaN);
+		}
+
+		[Fact]
+		public void IsNotNaN_for_float_can_be_used_with_custom_exception()
+		{
+			// Given
+			float invalidValue = float.NaN;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsNotNaN(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]
@@ -93,6 +111,23 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsNotInfinity_for_float_can_be_used_with_custom_exception()
+		{
+			// Given
+			float invalidValue = float.PositiveInfinity;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsNotInfinity(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsNotInfinity_for_float_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<float>(
@@ -144,6 +179,23 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
+		public void IsNotNegativeInfinity_for_float_can_be_used_with_custom_exception()
+		{
+			// Given
+			float invalidValue = float.NegativeInfinity;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsNotNegativeInfinity(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
 		public void IsNotNegativeInfinity_for_float_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<float>(
@@ -192,6 +244,23 @@ namespace Paravaly.Tests
 			CommonValidationTests.CanUseCustomErrorMessage(
 				float.PositiveInfinity,
 				ParameterExtensions.IsNotPositiveInfinity);
+		}
+
+		[Fact]
+		public void IsNotPositiveInfinity_for_float_can_be_used_with_custom_exception()
+		{
+			// Given
+			float invalidValue = float.PositiveInfinity;
+			var exception = new Exception();
+
+			// When
+			Exception result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.IsNotPositiveInfinity(p => exception));
+
+			// Then
+			result.ShouldBe(exception);
 		}
 
 		[Fact]

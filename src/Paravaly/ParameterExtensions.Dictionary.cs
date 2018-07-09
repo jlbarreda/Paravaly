@@ -90,6 +90,41 @@ namespace Paravaly
 			TKey key,
 			Func<IParameterInfo<IDictionary<TKey, TValue>>, string> buildErrorMessage)
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.ContainsKey(
+				key,
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value contains the specified key.
+		/// </summary>
+		/// <typeparam name="TKey">The type of the dictionary keys.</typeparam>
+		/// <typeparam name="TValue">The type of the dictionary values.</typeparam>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="key">The key to search for.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="key"/> or
+		/// <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<IDictionary<TKey, TValue>> ContainsKey<TKey, TValue>(
+			this IParameter<IDictionary<TKey, TValue>> parameter,
+			TKey key,
+			Func<IParameterInfo<IDictionary<TKey, TValue>>, Exception> buildException)
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -100,9 +135,9 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(key));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -110,7 +145,7 @@ namespace Paravaly
 				{
 					if (p.Value != null && !p.Value.ContainsKey(key))
 					{
-						p.Handle(new ArgumentException(buildErrorMessage(p), p.Name));
+						p.Handle(buildException(p));
 					}
 				});
 		}

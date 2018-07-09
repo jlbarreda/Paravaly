@@ -89,6 +89,39 @@ namespace Paravaly
 			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IEquatable<T>
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsIn(
+				validValues,
+				p => new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is one of a list of valid values.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="validValues">The accepted list of valid values.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="validValues"/> or
+		/// <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsIn<T>(
+			this IParameter<T> parameter,
+			IEnumerable<T> validValues,
+			Func<IParameterInfo<T>, Exception> buildException)
+			where T : IEquatable<T>
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -99,9 +132,9 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(validValues));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -109,7 +142,7 @@ namespace Paravaly
 				{
 					if (!validValues.Any(x => EqualityComparer<T>.Default.Equals(x, p.Value)))
 					{
-						p.Handle(new ArgumentOutOfRangeException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -193,6 +226,39 @@ namespace Paravaly
 			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IEquatable<T>
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotIn(
+				invalidValues,
+				p => new ArgumentException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not one of a list of invalid values.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="invalidValues">The list of invalid values.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="invalidValues"/> or
+		/// <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotIn<T>(
+			this IParameter<T> parameter,
+			IEnumerable<T> invalidValues,
+			Func<IParameterInfo<T>, Exception> buildException)
+			where T : IEquatable<T>
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
@@ -203,9 +269,9 @@ namespace Paravaly
 				throw new ArgumentNullException(nameof(invalidValues));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -213,7 +279,7 @@ namespace Paravaly
 				{
 					if (invalidValues.Any(x => EqualityComparer<T>.Default.Equals(x, p.Value)))
 					{
-						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -288,14 +354,43 @@ namespace Paravaly
 			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : struct, IEquatable<T>
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotDefault(
+				p => new ArgumentException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not equal to its default value.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotDefault<T>(
+			this IParameter<T> parameter,
+			Func<IParameterInfo<T>, Exception> buildException)
+			where T : struct, IEquatable<T>
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -303,7 +398,7 @@ namespace Paravaly
 				{
 					if (EqualityComparer<T>.Default.Equals(p.Value, default))
 					{
-						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p));
 					}
 				});
 		}
@@ -384,14 +479,46 @@ namespace Paravaly
 			Func<IParameterInfo<T>, string> buildErrorMessage)
 			where T : IEquatable<T>
 		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.IsNotEqualTo(
+				invalidValue,
+				p => new ArgumentException(p.Name, buildErrorMessage(p)));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value is not equal to the specified value.
+		/// </summary>
+		/// <typeparam name="T">The parameter type.</typeparam>
+		/// <param name="parameter">The parameter.</param>
+		/// <param name="invalidValue">The invalid value.</param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<T> IsNotEqualTo<T>(
+			this IParameter<T> parameter,
+			T invalidValue,
+			Func<IParameterInfo<T>, Exception> buildException)
+			where T : IEquatable<T>
+		{
 			if (parameter == null)
 			{
 				throw new ArgumentNullException(nameof(parameter));
 			}
 
-			if (buildErrorMessage == null)
+			if (buildException == null)
 			{
-				throw new ArgumentNullException(nameof(buildErrorMessage));
+				throw new ArgumentNullException(nameof(buildException));
 			}
 
 			return parameter.IsValid(
@@ -399,7 +526,7 @@ namespace Paravaly
 				{
 					if (EqualityComparer<T>.Default.Equals(p.Value, invalidValue))
 					{
-						p.Handle(new ArgumentException(p.Name, buildErrorMessage(p)));
+						p.Handle(buildException(p));
 					}
 				});
 		}
