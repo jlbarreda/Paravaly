@@ -1,4 +1,3 @@
-# Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
 trigger:
@@ -11,13 +10,4 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: |
-    dotnet build --configuration $(buildConfiguration)
-    dotnet test test\Paravaly.Tests\Paravaly.Tests.csproj --configuration $(buildConfiguration) --logger trx
-    dotnet pack src\Paravaly
-
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+- template: 'azure-pipelines.build-steps.yml'
