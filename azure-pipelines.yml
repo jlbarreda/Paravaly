@@ -28,5 +28,6 @@ steps:
     command: push
     nuGetFeedType: external
     publishFeedCredentials: 'Paravaly-NuGet'
+    packagesToPush: '**/Paravaly*.nupkg'
     versioningScheme: byEnvVar
     versionEnvVar: version
