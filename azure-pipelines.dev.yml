@@ -2,14 +2,13 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- Dev
 
 pool:
   vmImage: 'vs2017-win2016'
 
 variables:
   buildConfiguration: 'Release'
-  version: '0.8.0'
 
 steps:
 - script: |
@@ -22,11 +21,3 @@ steps:
   inputs:
     testRunner: VSTest
     testResultsFiles: '**/*.trx'
-
-- task: NuGetCommand@2
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: 'Paravaly-NuGet'
-    versioningScheme: byEnvVar
-    versionEnvVar: version
