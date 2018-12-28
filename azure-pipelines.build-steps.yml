@@ -3,9 +3,9 @@
 steps:
 - task: RegexReplace@3
   displayName: 'Set Version'
-  InputSearchPattern: '**/*.csproj'
-  FindRegex: '<VersionPrefix></VersionPrefix>'
-  ReplaceRegex: '<VersionPrefix>$(version)</VersionPrefix>'
+  inputSearchPattern: '**/*.csproj'
+  findRegex: '<VersionPrefix></VersionPrefix>'
+  replaceRegex: '<VersionPrefix>$(version)</VersionPrefix>'
 
 - script: |
     dotnet build --configuration $(buildConfiguration)
