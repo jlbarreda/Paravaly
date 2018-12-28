@@ -1,6 +1,12 @@
 # https://aka.ms/yaml
 
 steps:
+- task: RegexReplace@3
+  displayName: 'Set Version'
+  InputSearchPattern: '**/*.csproj'
+  FindRegex: '<VersionPrefix></VersionPrefix>'
+  ReplaceRegex: '<VersionPrefix>$(version)</VersionPrefix>'
+
 - script: |
     dotnet build --configuration $(buildConfiguration)
     dotnet test test\Paravaly.Tests\Paravaly.Tests.csproj --configuration $(buildConfiguration) --logger trx --no-build
