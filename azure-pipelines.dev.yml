@@ -7,7 +7,7 @@ pool:
   vmImage: 'vs2017-win2016'
 
 variables:
-- template: 'azure-pipelines.variables.yml'
+  buildConfiguration: 'Release'
 
 steps:
 - template: 'azure-pipelines.build-steps.yml'

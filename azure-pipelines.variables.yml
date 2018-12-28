@@ -1,5 +1,0 @@
-# https://aka.ms/yaml
-
-variables:
-  buildConfiguration: 'Release'
-  version: '0.8.0'
