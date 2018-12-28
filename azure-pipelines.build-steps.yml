@@ -4,7 +4,7 @@ steps:
 - script: |
     dotnet build --configuration $(buildConfiguration)
     dotnet test test\Paravaly.Tests\Paravaly.Tests.csproj --configuration $(buildConfiguration) --logger trx --no-build
-    dotnet pack src\Paravaly --no-build
+    dotnet pack src\Paravaly
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
