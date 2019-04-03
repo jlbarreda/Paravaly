@@ -8,6 +8,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  version: '0.8.0'
 
 steps:
 - template: 'azure-pipelines.build-steps.yml'
