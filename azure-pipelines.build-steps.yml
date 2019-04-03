@@ -3,6 +3,7 @@
 steps:
 - task: knom.regexreplace-task.regex-replace.RegexReplace@3
   displayName: 'Set Version'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     InputSearchPattern: 'src\**\*.csproj'
     FindRegex: '<VersionPrefix></VersionPrefix>'
