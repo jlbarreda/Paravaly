@@ -1,11 +1,12 @@
 # https://aka.ms/yaml
 
 steps:
-- task: RegexReplace@3
+- task: knom.regexreplace-task.regex-replace.RegexReplace@3
   displayName: 'Set Version'
-  inputSearchPattern: '**/*.csproj'
-  findRegex: '<VersionPrefix></VersionPrefix>'
-  replaceRegex: '<VersionPrefix>$(version)</VersionPrefix>'
+  inputs:
+    InputSearchPattern: 'src\**\*.csproj'
+    FindRegex: '<VersionPrefix></VersionPrefix>'
+    ReplaceRegex: '<VersionPrefix>$(version)</VersionPrefix>'
 
 - script: |
     dotnet build --configuration $(buildConfiguration)
