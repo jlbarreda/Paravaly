@@ -9,7 +9,6 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  skipNuGet: false
   version: '0.8.0'
 
 steps:
