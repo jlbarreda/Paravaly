@@ -1,0 +1,41 @@
+# https://aka.ms/yaml
+
+trigger:
+- master
+- Dev
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+variables:
+  buildConfiguration: 'Release'
+  version: '0.8.0'
+
+steps:
+- task: knom.regexreplace-task.regex-replace.RegexReplace@3
+  displayName: 'Set Version'
+  inputs:
+    InputSearchPattern: '**\*.csproj'
+    FindRegex: '<VersionPrefix></VersionPrefix>'
+    ReplaceRegex: '<VersionPrefix>$(version)</VersionPrefix>'
+
+- script: |
+    dotnet build --configuration $(buildConfiguration)
+    dotnet test test\Paravaly.Tests\Paravaly.Tests.csproj --configuration $(buildConfiguration) --logger trx --no-build
+    dotnet pack src\Paravaly
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
+
+- task: NuGetCommand@2
+  condition: and(succeeded(), not(variables['skipNuGet']), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: 'Paravaly-NuGet'
+    packagesToPush: '**/Paravaly*.nupkg'
+    versioningScheme: byEnvVar
+    versionEnvVar: version

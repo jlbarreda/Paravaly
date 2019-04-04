@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5CECB1B-01EF-4754-B38D-2126A499E65D}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
+		azure-pipelines.yml = azure-pipelines.yml
 		build.cake = build.cake
 		build.cmd = build.cmd
 		build.ps1 = build.ps1
@@ -60,5 +61,8 @@ Global
 		{C122D924-9C22-4637-8131-E2B597942A57} = {5CDE6B7E-33A1-4231-BB50-B9149201317E}
 		{EE16475F-D5F1-4EE8-829C-EA951B4DD320} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
 		{F5796C80-F403-4320-BB37-29C550B3B66E} = {9AF1E4A3-9E68-47AE-8BDD-4773C0DB8F09}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF4E422C-9FFB-4FBE-A7C4-4A468E735475}
 	EndGlobalSection
 EndGlobal

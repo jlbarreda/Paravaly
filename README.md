@@ -3,6 +3,8 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/elwd4rq970vk9l6r?svg=true)](https://ci.appveyor.com/project/jlbarreda/paravaly)
 
+[![Build Status](https://dev.azure.com/jlbg/Paravaly/_apis/build/status/jlbarreda.Paravaly?branchName=master)](https://dev.azure.com/jlbg/Paravaly/_build/latest?definitionId=2?branchName=master)
+
 [![NuGet version](https://badge.fury.io/nu/Paravaly.svg)](https://www.nuget.org/packages/Paravaly)
 
 A simple but flexible parameter validation library for .NET.
