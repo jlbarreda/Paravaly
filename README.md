@@ -82,6 +82,15 @@ public void SomeMethod(string text)
         .IsNotNull(p => string.Format(Resources.SomeCustomErrorMessage, p.Name, p.Value));
 }
 ```
+You can even use any exception you want.
+```csharp
+public void SomeMethod(string text)
+{
+    Require
+        .Parameter(nameof(text), text)
+        .IsNotNull(p => new ArgumentNullException(nameof(text)));
+}
+```
 ### Can I add my own custom validations?
 Yes you can. You can create a new extension if you plan on reusing your validation logic. This is
 a sample custom rule for integer types.
