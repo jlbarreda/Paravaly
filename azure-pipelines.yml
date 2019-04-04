@@ -32,7 +32,7 @@ steps:
     testResultsFiles: '**/*.trx'
 
 - task: NuGetCommand@2
-  condition: and(succeeded(), variables['skipNuGet'], eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded(), not(variables['skipNuGet']), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: push
     nuGetFeedType: external
