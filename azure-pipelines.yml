@@ -9,6 +9,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  skipNuGet: false
   version: '0.8.0'
 
 steps:
@@ -31,7 +32,7 @@ steps:
     testResultsFiles: '**/*.trx'
 
 - task: NuGetCommand@2
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded(), variables['skipNuGet'], eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: push
     nuGetFeedType: external
