@@ -147,11 +147,75 @@ namespace Paravaly.Tests
 		}
 
 		[Fact]
-		public void Is_works_with_null_values()
+		public void Is_works_with_value_type_valid_values()
+		{
+			CommonValidationTests.IsValid(
+				1,
+				p => p.Is(typeof(int)));
+		}
+
+		[Fact]
+		public void Is_works_with_actual_valid_value_types()
+		{
+			CommonValidationTests.IsValid(
+				(object)CultureInfo.CurrentCulture,
+				p => p.Is(typeof(CultureInfo)));
+		}
+
+		[Fact]
+		public void Is_works_with_boxed_valid_values()
+		{
+			CommonValidationTests.IsValid(
+				(object)1,
+				p => p.Is(typeof(int)));
+		}
+
+		[Fact]
+		public void Is_works_with_boxed_nullable_valid_value_types()
+		{
+			CommonValidationTests.IsValid(
+				(object)(int?)1,
+				p => p.Is(typeof(int?)));
+		}
+
+		[Fact]
+		public void Is_works_with_nullable_valid_values()
+		{
+			CommonValidationTests.IsValid(
+				(int?)0,
+				p => p.Is(typeof(int?)));
+		}
+
+		[Fact]
+		public void Is_considers_underlying_type_a_valid_nullable_type()
+		{
+			CommonValidationTests.IsValid(
+				0,
+				p => p.Is(typeof(int?)));
+		}
+
+		[Fact]
+		public void Is_considers_nullable_type_a_valid_underlying_type()
+		{
+			CommonValidationTests.IsValid(
+				(int?)0,
+				p => p.Is(typeof(int)));
+		}
+
+		[Fact]
+		public void Is_ignores_null_nullable_values()
+		{
+			CommonValidationTests.IsValid(
+				(int?)null,
+				p => p.Is(typeof(string)));
+		}
+
+		[Fact]
+		public void Is_ignores_null_values()
 		{
 			CommonValidationTests.IsValid(
 				(CultureInfo)null,
-				p => p.Is(typeof(CultureInfo)));
+				p => p.Is(typeof(string)));
 		}
 
 		[Fact]
@@ -160,6 +224,38 @@ namespace Paravaly.Tests
 			CommonValidationTests.IsNotValid(
 				CultureInfo.CurrentCulture,
 				p => p.Is(typeof(string)));
+		}
+
+		[Fact]
+		public void Is_works_with_value_type_invalid_values()
+		{
+			CommonValidationTests.IsNotValid(
+				1F,
+				p => p.Is(typeof(int)));
+		}
+
+		[Fact]
+		public void Is_works_with_actual_invalid_value_types()
+		{
+			CommonValidationTests.IsNotValid(
+				(object)CultureInfo.CurrentCulture,
+				p => p.Is(typeof(object)));
+		}
+
+		[Fact]
+		public void Is_works_with_boxed_invalid_values()
+		{
+			CommonValidationTests.IsNotValid(
+				(object)1F,
+				p => p.Is(typeof(int)));
+		}
+
+		[Fact]
+		public void Is_works_with_nullable_invalid_values()
+		{
+			CommonValidationTests.IsNotValid(
+				(float?)0,
+				p => p.Is(typeof(int?)));
 		}
 
 		[Fact]

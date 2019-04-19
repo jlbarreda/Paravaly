@@ -266,6 +266,7 @@ namespace Paravaly
 
 		/// <summary>
 		/// Validates whether the parameter value is of the specified type.
+		/// Nullable types are considered equal to their underlying type (e.g. int? == int).
 		/// </summary>
 		/// <typeparam name="T">The parameter type.</typeparam>
 		/// <param name="parameter">The parameter.</param>
@@ -290,6 +291,7 @@ namespace Paravaly
 
 		/// <summary>
 		/// Validates whether the parameter value is of the specified type.
+		/// Nullable types are considered equal to their underlying type (e.g. int? == int).
 		/// </summary>
 		/// <typeparam name="T">The parameter type.</typeparam>
 		/// <param name="parameter">The parameter.</param>
@@ -311,6 +313,7 @@ namespace Paravaly
 
 		/// <summary>
 		/// Validates whether the parameter value is of the specified type.
+		/// Nullable types are considered equal to their underlying type (e.g. int? == int).
 		/// </summary>
 		/// <typeparam name="T">The parameter type.</typeparam>
 		/// <param name="parameter">The parameter.</param>
@@ -343,6 +346,7 @@ namespace Paravaly
 
 		/// <summary>
 		/// Validates whether the parameter value is of the specified type.
+		/// Nullable types are considered equal to their underlying type (e.g. int? == int).
 		/// </summary>
 		/// <typeparam name="T">The parameter type.</typeparam>
 		/// <param name="parameter">The parameter.</param>
@@ -381,9 +385,17 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
-					if (p.Value != null && p.Value.GetType() != type)
+					var typeOfValue = p.Value?.GetType();
+
+					if (p.Value != null && typeOfValue != type)
 					{
-						p.Handle(buildException(p));
+						var underlyingTypeOfType = Nullable.GetUnderlyingType(type);
+
+						// If not a valid nullable type.
+						if (underlyingTypeOfType == null || underlyingTypeOfType != typeOfValue)
+						{
+							p.Handle(buildException(p));
+						}
 					}
 				});
 		}
