@@ -1,9 +1,10 @@
 ![](https://raw.github.com/jlbarreda/Paravaly/master/ParavalyIcon.png)
 # Paravaly
 
-[![Build status](https://ci.appveyor.com/api/projects/status/elwd4rq970vk9l6r?svg=true)](https://ci.appveyor.com/project/jlbarreda/paravaly)
-
-[![Build Status](https://dev.azure.com/jlbg/Paravaly/_apis/build/status/jlbarreda.Paravaly?branchName=master)](https://dev.azure.com/jlbg/Paravaly/_build/latest?definitionId=2?branchName=master)
+|master|dev|
+|:----:|:-:|
+|[![Build Status](https://dev.azure.com/jlbg/Paravaly/_apis/build/status/jlbarreda.Paravaly?branchName=master)](https://dev.azure.com/jlbg/Paravaly/_build/latest?definitionId=2?branchName=master)|[![Build Status](https://dev.azure.com/jlbg/Paravaly/_apis/build/status/jlbarreda.Paravaly?branchName=master)](https://dev.azure.com/jlbg/Paravaly/_build/latest?definitionId=2?branchName=Dev)|
+|![Tests summary](https://img.shields.io/azure-devops/tests/jlbg/paravaly/2/master.svg?logo=azure-devops&style=plastic)|![Tests summary](https://img.shields.io/azure-devops/tests/jlbg/paravaly/2/Dev.svg?logo=azure-devops&style=plastic)|
 
 [![NuGet version](https://badge.fury.io/nu/Paravaly.svg)](https://www.nuget.org/packages/Paravaly)
 
