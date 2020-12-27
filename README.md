@@ -10,6 +10,8 @@
 
 A simple but flexible parameter validation library for .NET.
 
+## Important
+Starting with version 1.0.0 Silverlight is no longer supported.
 ## How do I use it?
 ### A simple example
 This will throw an `ArgumentException` if `text` is empty or whitespace; an `ArgumentNullException` if
