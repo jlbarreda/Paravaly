@@ -13,9 +13,9 @@
     <AssemblyName>Paravaly</AssemblyName>
     <PackageId>Paravaly</PackageId>
     <PackageTags>paravaly;parameter;input;validation;contract</PackageTags>
-    <PackageIconUrl>https://raw.github.com/jlbarreda/Paravaly/master/ParavalyIcon.png</PackageIconUrl>
+    <PackageIcon>ParavalyIcon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/jlbarreda/Paravaly</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/jlbarreda/Paravaly.git</RepositoryUrl>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
@@ -25,6 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\ParavalyIcon.png" Pack="true" Visible="false" PackagePath="\" />
     <AdditionalFiles Include="..\..\tools\CodeAnalysis\StyleCop.json" />
   </ItemGroup>
 
