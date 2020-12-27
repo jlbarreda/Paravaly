@@ -5,11 +5,11 @@ trigger:
 - Dev
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'windows-2019'
 
 variables:
   buildConfiguration: 'Release'
-  version: '0.9.1'
+  version: '1.0.0'
 
 steps:
 - task: knom.regexreplace-task.regex-replace.RegexReplace@3
