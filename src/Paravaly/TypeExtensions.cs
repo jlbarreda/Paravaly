@@ -8,23 +8,25 @@ namespace Paravaly
 	{
 		public static IEnumerable<PropertyInfo> GetProps(this Type type)
 		{
-#if NETSTANDARD1_0
+#if NETSTANDARD1_0 || NETSTANDARD1_3
 			return type.GetTypeInfo().DeclaredProperties;
 #else
 			return type.GetProperties();
 #endif
 		}
 
-#if !NETSTANDARD1_0
+#if !HAS_GET_TYPE_INFO
+
 		public static Type GetTypeInfo(this Type type)
 		{
 			return type;
 		}
+
 #endif
 
 		public static bool IsNullableType(this Type type)
 		{
-			return Nullable.GetUnderlyingType(type) != null;
+			return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 		}
 	}
 }

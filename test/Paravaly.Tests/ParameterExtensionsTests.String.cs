@@ -504,6 +504,78 @@ namespace Paravaly.Tests
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.Contains("X", "Error"));
 		}
 
+		[Fact]
+		public void Contains_with_comparison_parameter_for_string_works_with_valid_strings()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.Contains("Y", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void Contains_with_comparison_parameter_for_string_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.Contains("Y", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void Contains_with_comparison_parameter_for_string_works_with_invalid_strings()
+		{
+			CommonValidationTests.IsNotValid(
+				string.Empty,
+				p => p.Contains("X", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void Contains_with_comparison_parameter_for_string_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				"YZ",
+				typeof(ArgumentException),
+				p => p.Contains("X", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void Contains_with_comparison_parameter_for_string_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				string.Empty,
+				(p, e) => p.Contains("X", StringComparison.Ordinal, e));
+		}
+
+		[Fact]
+		public void Contains_with_comparison_parameter_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = string.Empty;
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.Contains("X", StringComparison.Ordinal, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
+		public void Contains_with_comparison_parameter_for_string_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(
+				p => p.Contains("X", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void Contains_with_comparison_parameter_for_string_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(
+				p => p.Contains("X", StringComparison.Ordinal, "Error"));
+		}
+
 		#endregion
 
 		#region DoesNotContain
@@ -574,6 +646,78 @@ namespace Paravaly.Tests
 		public void DoesNotContain_for_string_with_error_message_throws_if_parameter_is_null()
 		{
 			CommonValidationTests.ThrowsIfParameterIsNull<string>(p => p.DoesNotContain("X", "Error"));
+		}
+
+		[Fact]
+		public void DoesNotContain_with_comparison_parameter_for_string_works_with_valid_strings()
+		{
+			CommonValidationTests.IsValid(
+				"XYZ",
+				p => p.DoesNotContain("A", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void DoesNotContain_with_comparison_parameter_for_string_works_with_null_strings()
+		{
+			CommonValidationTests.IsValid(
+				(string)null,
+				p => p.DoesNotContain("Y", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void DoesNotContain_with_comparison_parameter_for_string_works_with_invalid_strings()
+		{
+			CommonValidationTests.IsNotValid(
+				"X",
+				p => p.DoesNotContain("X", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void DoesNotContain_with_comparison_parameter_for_string_adds_an_ArgumentException_if_parameter_value_is_invalid()
+		{
+			CommonValidationTests.AddsCorrectExceptionWhenInvalid(
+				"XYZ",
+				typeof(ArgumentException),
+				p => p.DoesNotContain("X", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void DoesNotContain_with_comparison_parameter_for_string_can_be_used_with_custom_error_message()
+		{
+			CommonValidationTests.CanUseCustomErrorMessage(
+				"X",
+				(p, e) => p.DoesNotContain("X", StringComparison.Ordinal, e));
+		}
+
+		[Fact]
+		public void DoesNotContain_with_comparison_parameter_for_string_can_be_used_with_custom_exception()
+		{
+			// Given
+			var invalidValue = "X";
+			var exception = new Exception();
+
+			// When
+			var result = Should.Throw<Exception>(
+				() => Require
+					.Parameter(nameof(invalidValue), invalidValue)
+					.DoesNotContain("X", StringComparison.Ordinal, p => exception));
+
+			// Then
+			result.ShouldBe(exception);
+		}
+
+		[Fact]
+		public void DoesNotContain_with_comparison_parameter_for_string_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(
+				p => p.DoesNotContain("X", StringComparison.Ordinal));
+		}
+
+		[Fact]
+		public void DoesNotContain_with_comparison_parameter_for_string_with_error_message_throws_if_parameter_is_null()
+		{
+			CommonValidationTests.ThrowsIfParameterIsNull<string>(
+				p => p.DoesNotContain("X", StringComparison.Ordinal, "Error"));
 		}
 
 		#endregion

@@ -951,7 +951,10 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter" /> is null.
 		/// </exception>
-		public static IValidatingParameter<string> Contains(this IParameter<string> parameter, string text, string errorMessage)
+		public static IValidatingParameter<string> Contains(
+			this IParameter<string> parameter,
+			string text,
+			string errorMessage)
 		{
 			return parameter.Contains(text, p => errorMessage);
 		}
@@ -1023,12 +1026,164 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
+#if HAS_CONTAINS_WITH_STRING_COMPARISON
+					if (p.Value != null && !p.Value.Contains(text, StringComparison.Ordinal))
+#else
 					if (p.Value != null && !p.Value.Contains(text))
+#endif
 					{
 						p.Handle(buildException(p));
 					}
 				});
 		}
+
+#if HAS_CONTAINS_WITH_STRING_COMPARISON
+
+		/// <summary>
+		/// Validates whether the parameter value contains the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="stringComparison">
+		/// One of the enumeration values that specifies the rules to use in the comparison.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> Contains(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison stringComparison)
+		{
+			return parameter.Contains(
+				text,
+				stringComparison,
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForContains,
+					text.ToPrettyString(),
+					p.Value.ToPrettyString()));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value contains the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="stringComparison">
+		/// One of the enumeration values that specifies the rules to use in the comparison.
+		/// </param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> Contains(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison stringComparison,
+			string errorMessage)
+		{
+			return parameter.Contains(text, stringComparison, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value contains the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="stringComparison">
+		/// One of the enumeration values that specifies the rules to use in the comparison.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<string> Contains(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison stringComparison,
+			Func<IParameterInfo<string>, string> buildErrorMessage)
+		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.Contains(
+				text,
+				stringComparison,
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates whether the parameter value contains the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="stringComparison">
+		/// One of the enumeration values that specifies the rules to use in the comparison.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<string> Contains(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison stringComparison,
+			Func<IParameterInfo<string>, Exception> buildException)
+		{
+			if (parameter == null)
+			{
+				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildException == null)
+			{
+				throw new ArgumentNullException(nameof(buildException));
+			}
+
+			return parameter.IsValid(
+				p =>
+				{
+					if (p.Value != null && !p.Value.Contains(text, stringComparison))
+					{
+						p.Handle(buildException(p));
+					}
+				});
+		}
+
+#endif
 
 		#endregion
 
@@ -1076,7 +1231,10 @@ namespace Paravaly
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="parameter" /> is null.
 		/// </exception>
-		public static IValidatingParameter<string> DoesNotContain(this IParameter<string> parameter, string text, string errorMessage)
+		public static IValidatingParameter<string> DoesNotContain(
+			this IParameter<string> parameter,
+			string text,
+			string errorMessage)
 		{
 			return parameter.DoesNotContain(text, p => errorMessage);
 		}
@@ -1148,12 +1306,164 @@ namespace Paravaly
 			return parameter.IsValid(
 				p =>
 				{
+#if HAS_CONTAINS_WITH_STRING_COMPARISON
+					if (p.Value != null && p.Value.Contains(text, StringComparison.Ordinal))
+#else
 					if (p.Value != null && p.Value.Contains(text))
+#endif
 					{
 						p.Handle(buildException(p));
 					}
 				});
 		}
+
+#if HAS_CONTAINS_WITH_STRING_COMPARISON
+
+		/// <summary>
+		/// Validates that the parameter value does not contain the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="stringComparison">
+		/// One of the enumeration values that specifies the rules to use in the comparison.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotContain(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison stringComparison)
+		{
+			return parameter.DoesNotContain(
+				text,
+				stringComparison,
+				p => string.Format(
+					CultureInfo.CurrentCulture,
+					ErrorMessage.ForContains,
+					text.ToPrettyString(),
+					p.Value.ToPrettyString()));
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not contain the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="stringComparison">
+		/// One of the enumeration values that specifies the rules to use in the comparison.
+		/// </param>
+		/// <param name="errorMessage">
+		/// The error message used for the exception thrown if the validation fails.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter" /> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotContain(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison stringComparison,
+			string errorMessage)
+		{
+			return parameter.DoesNotContain(text, stringComparison, p => errorMessage);
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not contain the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="stringComparison">
+		/// One of the enumeration values that specifies the rules to use in the comparison.
+		/// </param>
+		/// <param name="buildErrorMessage">
+		/// A function that builds an error message.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildErrorMessage"/> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotContain(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison stringComparison,
+			Func<IParameterInfo<string>, string> buildErrorMessage)
+		{
+			if (buildErrorMessage == null)
+			{
+				throw new ArgumentNullException(nameof(buildErrorMessage));
+			}
+
+			return parameter.DoesNotContain(
+				text,
+				stringComparison,
+				p => new ArgumentException(buildErrorMessage(p), p.Name));
+		}
+
+		/// <summary>
+		/// Validates that the parameter value does not contain the specified text.
+		/// </summary>
+		/// <param name="parameter">
+		/// The parameter holding the state of the current validation.
+		/// </param>
+		/// <param name="text">The text.</param>
+		/// <param name="stringComparison">
+		/// One of the enumeration values that specifies the rules to use in the comparison.
+		/// </param>
+		/// <param name="buildException">
+		/// A function that builds an exception.
+		/// </param>
+		/// <returns>
+		/// An object implementing <see cref="IValidatingParameter{T}" /> used to continue the
+		/// validation of the parameter in a fluent way.
+		/// </returns>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="parameter"/> or <paramref name="buildException"/> is null.
+		/// </exception>
+		public static IValidatingParameter<string> DoesNotContain(
+			this IParameter<string> parameter,
+			string text,
+			StringComparison stringComparison,
+			Func<IParameterInfo<string>, Exception> buildException)
+		{
+			if (parameter == null)
+			{
+				throw new ArgumentNullException(nameof(parameter));
+			}
+
+			if (buildException == null)
+			{
+				throw new ArgumentNullException(nameof(buildException));
+			}
+
+			return parameter.IsValid(
+				p =>
+				{
+					if (p.Value != null && p.Value.Contains(text, stringComparison))
+					{
+						p.Handle(buildException(p));
+					}
+				});
+		}
+
+#endif
 
 		#endregion
 
