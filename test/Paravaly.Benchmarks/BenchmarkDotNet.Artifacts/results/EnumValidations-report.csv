@@ -1,4 +1,0 @@
-Type;Method;Mode;Platform;Jit;Toolchain;Runtime;GcMode;LaunchCount;WarmupCount;TargetCount;Affinity;Median;StdDev
-EnumValidations;IsValidEnumValue;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;97.2921 ns;0.5499 ns
-EnumValidations;IsNotValidEnumValue;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;7,392.7837 ns;68.1151 ns
-

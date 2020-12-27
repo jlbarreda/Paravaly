@@ -1,5 +1,0 @@
-Type;Method;Mode;Platform;Jit;Toolchain;Runtime;GcMode;LaunchCount;WarmupCount;TargetCount;Affinity;Median;StdDev
-StringValidations;IsNotEmpty;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;33.8763 ns;2.9750 ns
-StringValidations;IsNotWhiteSpace;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;35.4394 ns;1.5822 ns
-StringValidations;IsNotNullOrEmpty;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;69.4131 ns;3.2140 ns
-StringValidations;IsNotNullOrWhiteSpace;Throughput;Host;Host;Host;Host;Host;Auto;Auto;Auto;Auto;111.9479 ns;16.0094 ns
